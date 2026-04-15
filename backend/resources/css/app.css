@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply bg-slate-50 text-slate-900 antialiased;
+    }
+}
+
+@layer components {
+    .glass-card {
+        @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-glass;
+    }
+    
+    .btn-premium {
+        @apply px-6 py-3 rounded-2xl font-bold transition-all duration-300 active:scale-95 shadow-lg;
+    }
+    
+    .btn-teal {
+        @apply bg-teal-600 text-white hover:bg-teal-700 hover:shadow-teal-200/50;
+    }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+

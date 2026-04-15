@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Implementation Plan - Sistem Pengarsipan Akta Nikah KUA Tegalrejo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background: #fff;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        @media print {
+            body { padding: 20px; font-size: 11pt; }
+            .page-break { page-break-before: always; }
+            .no-print { display: none; }
+        }
+        
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0f766e;
+            margin-bottom: 8px;
+            border-bottom: 3px solid #0f766e;
+            padding-bottom: 12px;
+        }
+        
+        h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0f766e;
+            margin-top: 28px;
+            margin-bottom: 12px;
+            border-left: 4px solid #14b8a6;
+            padding-left: 12px;
+        }
+        
+        h3 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #374151;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        h4 {
+            font-size: 13px;
+            font-weight: 600;
+            color: #4b5563;
+            margin-top: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
+        
+        p { margin-bottom: 12px; }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 12px;
+        }
+        
+        th, td {
+            border: 1px solid #d1d5db;
+            padding: 10px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background: #f0fdfa;
+            font-weight: 600;
+            color: #0f766e;
+        }
+        
+        tr:nth-child(even) { background: #f9fafb; }
+        
+        code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 11px;
+        }
+        
+        pre {
+            background: #1f2937;
+            color: #e5e7eb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 16px 0;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+        
+        pre code { background: none; padding: 0; color: inherit; }
+        
+        ul, ol { margin: 12px 0; padding-left: 24px; }
+        li { margin-bottom: 6px; }
+        
+        .status-ok { color: #059669; font-weight: 600; }
+        .status-missing { color: #dc2626; font-weight: 600; }
+        
+        .alert {
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+        
+        .alert-important {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+        }
+        
+        .alert-warning {
+            background: #fee2e2;
+            border-left: 4px solid #ef4444;
+        }
+        
+        .erd-container {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 16px 0;
+        }
+        
+        .entity {
+            background: white;
+            border: 2px solid #0f766e;
+            border-radius: 8px;
+            margin: 12px 0;
+            overflow: hidden;
+            display: inline-block;
+            width: 30%;
+            vertical-align: top;
+            margin-right: 2%;
+        }
+        
+        .entity-header {
+            background: #0f766e;
+            color: white;
+            padding: 8px 12px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+        
+        .entity-body {
+            padding: 12px;
+            font-size: 11px;
+        }
+        
+        .entity-body div {
+            padding: 3px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        
+        .entity-body div:last-child { border-bottom: none; }
+        
+        .pk { color: #0f766e; font-weight: 600; }
+        .fk { color: #7c3aed; }
+        
+        .flowchart {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 16px 0;
+            text-align: center;
+        }
+        
+        .flowchart-box {
+            display: inline-block;
+            background: #0f766e;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            margin: 4px;
+            font-size: 12px;
+        }
+        
+        .flowchart-box.secondary { background: #14b8a6; }
+        .flowchart-box.tertiary { background: #5eead4; color: #0f766e; }
+        
+        .arrow { color: #9ca3af; margin: 0 8px; }
+        
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #0f766e;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .print-btn:hover { background: #0d9488; }
+        
+        hr {
+            border: none;
+            border-top: 1px solid #e5e7eb;
+            margin: 24px 0;
+        }
+    </style>
+</head>
+<body>
+    <button class="print-btn no-print" onclick="window.print()">📥 Cetak PDF</button>
+    
+    <h1>Perancangan Sistem Informasi Pengarsipan Akta Nikah</h1>
+    <p class="subtitle">KUA Kemantren Tegalrejo - Laravel 12</p>
+    
+    <h3>Ringkasan Proyek</h3>
+    <p>Sistem web untuk mengelola arsip akta nikah dengan tiga peran pengguna: <strong>Admin</strong>, <strong>Administrator Data</strong>, dan <strong>Kepala KUA</strong>. Sistem sudah memiliki fondasi dari proyek existing, termasuk autentikasi dan modul arsip dasar.</p>
+    
+    <hr>
+    
+    <h2>Hasil Analisis Kondisi Existing</h2>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Komponen</th>
+                <th>Status</th>
+                <th>Keterangan</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Autentikasi (Login/Logout)</td><td class="status-ok">✅ Ada</td><td>Menggunakan Laravel Breeze</td></tr>
+            <tr><td>Tabel Users dengan Role</td><td class="status-ok">✅ Ada</td><td>Roles: admin, pemohon, admin_data, kepala_kua</td></tr>
+            <tr><td>Tabel Arsip</td><td class="status-ok">✅ Ada</td><td>Sudah ada field dasar</td></tr>
+            <tr><td>CRUD Arsip</td><td class="status-ok">✅ Ada</td><td>ArsipController lengkap</td></tr>
+            <tr><td>Pencarian Arsip</td><td class="status-ok">✅ Ada</td><td>Filter di dashboard dan index</td></tr>
+            <tr><td>Middleware Role</td><td class="status-missing">❌ Belum</td><td>Perlu dibuat baru</td></tr>
+            <tr><td>UserController (Admin)</td><td class="status-missing">❌ Belum</td><td>Perlu dibuat baru</td></tr>
+            <tr><td>Modul Laporan</td><td class="status-missing">❌ Belum</td><td>Perlu dibuat baru</td></tr>
+            <tr><td>Log Pencarian</td><td class="status-missing">❌ Belum</td><td>Perlu dibuat baru</td></tr>
+        </tbody>
+    </table>
+    
+    <hr>
+    
+    <h2>Rancangan Database (ERD)</h2>
+    
+    <div class="erd-container">
+        <div class="entity">
+            <div class="entity-header">USERS</div>
+            <div class="entity-body">
+                <div><span class="pk">id</span> - bigint PK</div>
+                <div>name - string</div>
+                <div>email - string UK</div>
+                <div>password - string</div>
+                <div>role - enum</div>
+                <div>is_active - boolean</div>
+                <div>created_at - timestamp</div>
+                <div>updated_at - timestamp</div>
+            </div>
+        </div>
+        
+        <div class="entity">
+            <div class="entity-header">ARSIP</div>
+            <div class="entity-body">
+                <div><span class="pk">id</span> - bigint PK</div>
+                <div>nomor_akta - string UK</div>
+                <div>tanggal_akta - date</div>
+                <div>nama_suami - string</div>
+                <div>nama_istri - string</div>
+                <div>lokasi_kua - string</div>
+                <div>keterangan - text</div>
+                <div>file_path - string</div>
+                <div><span class="fk">user_id</span> - bigint FK</div>
+                <div>created_at, updated_at</div>
+            </div>
+        </div>
+        
+        <div class="entity">
+            <div class="entity-header">LOG_PENCARIAN</div>
+            <div class="entity-body">
+                <div><span class="pk">id</span> - bigint PK</div>
+                <div><span class="fk">user_id</span> - bigint FK</div>
+                <div>kata_kunci - string</div>
+                <div>waktu - timestamp</div>
+            </div>
+        </div>
+        
+        <p style="margin-top: 16px; font-size: 12px; color: #6b7280;">
+            <strong>Relasi:</strong> USERS (1) ─── (∞) ARSIP | USERS (1) ─── (∞) LOG_PENCARIAN
+        </p>
+    </div>
+    
+    <h3>Perubahan Tabel</h3>
+    <ul>
+        <li><strong>users:</strong> Ubah enum role menjadi admin, admin_data, kepala_kua. Tambah kolom is_active.</li>
+        <li><strong>arsip:</strong> Rename tanggal_pernikahan → tanggal_akta, lokasi_fisik → lokasi_kua. Tambah keterangan.</li>
+        <li><strong>log_pencarian:</strong> Tabel baru untuk mencatat histori pencarian.</li>
+    </ul>
+    
+    <div class="page-break"></div>
+    
+    <h2>Struktur Routes per Role</h2>
+    
+    <table>
+        <thead>
+            <tr><th>Route</th><th>Method</th><th>Controller</th><th>Akses</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>/login</code></td><td>GET/POST</td><td>AuthController</td><td>Guest</td></tr>
+            <tr><td><code>/dashboard</code></td><td>GET</td><td>DashboardController</td><td>All authenticated</td></tr>
+            <tr><td><code>/users</code></td><td>Resource</td><td>UserController</td><td>Admin</td></tr>
+            <tr><td><code>/arsip</code></td><td>Resource</td><td>ArsipController</td><td>Admin Data</td></tr>
+            <tr><td><code>/laporan</code></td><td>GET</td><td>LaporanController</td><td>Admin Data, Kepala KUA</td></tr>
+            <tr><td><code>/laporan/bulanan</code></td><td>GET</td><td>LaporanController</td><td>Admin Data, Kepala KUA</td></tr>
+            <tr><td><code>/laporan/export</code></td><td>GET</td><td>LaporanController</td><td>Admin Data, Kepala KUA</td></tr>
+        </tbody>
+    </table>
+    
+    <hr>
+    
+    <h2>Komponen yang Akan Dibuat</h2>
+    
+    <h3>Middleware & Authorization</h3>
+    <ul>
+        <li><strong>[NEW] RoleMiddleware.php</strong> - Membatasi akses berdasarkan role</li>
+        <li><strong>[MODIFY] bootstrap/app.php</strong> - Registrasi middleware alias</li>
+    </ul>
+    
+    <h3>Controllers</h3>
+    <ul>
+        <li><strong>[NEW] UserController.php</strong> - CRUD pengguna (Admin only)</li>
+        <li><strong>[NEW] LaporanController.php</strong> - Laporan arsip bulanan + export PDF</li>
+        <li><strong>[MODIFY] ArsipController.php</strong> - Tambah logging pencarian</li>
+    </ul>
+    
+    <h3>Models</h3>
+    <ul>
+        <li><strong>[MODIFY] User.php</strong> - Tambah helper methods: isAdmin(), isAdminData(), isKepalaKUA()</li>
+        <li><strong>[NEW] LogPencarian.php</strong> - Model log pencarian</li>
+    </ul>
+    
+    <h3>Views</h3>
+    <ul>
+        <li><strong>[NEW] users/index, create, edit</strong> - Halaman manajemen pengguna</li>
+        <li><strong>[NEW] laporan/index, bulanan</strong> - Halaman laporan</li>
+        <li><strong>[MODIFY] layouts/navigation</strong> - Menu berdasarkan role</li>
+    </ul>
+    
+    <hr>
+    
+    <h2>Daftar Halaman per Aktor</h2>
+    
+    <h3>Admin</h3>
+    <table>
+        <thead><tr><th>Halaman</th><th>URL</th><th>Fungsi</th></tr></thead>
+        <tbody>
+            <tr><td>Dashboard</td><td>/dashboard</td><td>Overview sistem</td></tr>
+            <tr><td>Daftar Pengguna</td><td>/users</td><td>Lihat semua pengguna</td></tr>
+            <tr><td>Tambah Pengguna</td><td>/users/create</td><td>Form input pengguna baru</td></tr>
+            <tr><td>Edit Pengguna</td><td>/users/{id}/edit</td><td>Form ubah data pengguna</td></tr>
+        </tbody>
+    </table>
+    
+    <h3>Administrator Data</h3>
+    <table>
+        <thead><tr><th>Halaman</th><th>URL</th><th>Fungsi</th></tr></thead>
+        <tbody>
+            <tr><td>Dashboard</td><td>/dashboard</td><td>Overview + pencarian cepat</td></tr>
+            <tr><td>Daftar Arsip</td><td>/arsip</td><td>Lihat semua arsip</td></tr>
+            <tr><td>Tambah Arsip</td><td>/arsip/create</td><td>Input arsip baru</td></tr>
+            <tr><td>Detail Arsip</td><td>/arsip/{id}</td><td>Lihat detail + download</td></tr>
+            <tr><td>Edit Arsip</td><td>/arsip/{id}/edit</td><td>Ubah metadata arsip</td></tr>
+            <tr><td>Laporan Bulanan</td><td>/laporan/bulanan</td><td>Generate laporan</td></tr>
+        </tbody>
+    </table>
+    
+    <h3>Kepala KUA</h3>
+    <table>
+        <thead><tr><th>Halaman</th><th>URL</th><th>Fungsi</th></tr></thead>
+        <tbody>
+            <tr><td>Dashboard</td><td>/dashboard</td><td>Overview statistik</td></tr>
+            <tr><td>Pencarian Arsip</td><td>/arsip</td><td>Cari arsip (read-only)</td></tr>
+            <tr><td>Laporan Bulanan</td><td>/laporan/bulanan</td><td>Lihat & unduh laporan</td></tr>
+        </tbody>
+    </table>
+    
+    <div class="page-break"></div>
+    
+    <h2>Alur Proses Utama</h2>
+    
+    <div class="flowchart">
+        <div style="margin-bottom: 20px;">
+            <span class="flowchart-box">Landing Page</span>
+            <span class="arrow">→</span>
+            <span class="flowchart-box">Login</span>
+            <span class="arrow">→</span>
+            <span class="flowchart-box secondary">Cek Role</span>
+        </div>
+        
+        <table style="width: 100%; margin-top: 20px;">
+            <tr>
+                <td style="width: 33%; text-align: center; vertical-align: top; border: none;">
+                    <p style="font-weight: 600; color: #0f766e;">Admin</p>
+                    <span class="flowchart-box tertiary">Dashboard Admin</span><br><br>
+                    <span class="flowchart-box tertiary">Kelola Pengguna</span><br><br>
+                    <span class="flowchart-box tertiary">CRUD User</span>
+                </td>
+                <td style="width: 33%; text-align: center; vertical-align: top; border: none;">
+                    <p style="font-weight: 600; color: #0f766e;">Admin Data</p>
+                    <span class="flowchart-box tertiary">Dashboard</span><br><br>
+                    <span class="flowchart-box tertiary">Input/Edit Arsip</span><br><br>
+                    <span class="flowchart-box tertiary">Cari Arsip</span><br><br>
+                    <span class="flowchart-box tertiary">Generate Laporan</span>
+                </td>
+                <td style="width: 33%; text-align: center; vertical-align: top; border: none;">
+                    <p style="font-weight: 600; color: #0f766e;">Kepala KUA</p>
+                    <span class="flowchart-box tertiary">Dashboard</span><br><br>
+                    <span class="flowchart-box tertiary">Lihat Laporan</span><br><br>
+                    <span class="flowchart-box tertiary">Cari (Read-Only)</span><br><br>
+                    <span class="flowchart-box tertiary">Download PDF</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+    <hr>
+    
+    <h2>Catatan Penting</h2>
+    
+    <div class="alert alert-important">
+        <strong>⚠️ Perubahan Schema Database</strong><br>
+        Migration akan mengubah struktur tabel arsip (rename kolom, hapus kolom redundan). Pastikan backup data sebelum menjalankan migration.
+    </div>
+    
+    <div class="alert alert-warning">
+        <strong>🔴 Existing Data</strong><br>
+        Jika ada data arsip existing, kolom <code>tahun_pernikahan</code> dan <code>kategori</code> akan dihapus. Pastikan data sudah di-backup.
+    </div>
+    
+    <hr>
+    
+    <h2>Contoh Seed Data</h2>
+    
+    <pre><code>// Users
+[
+    'name' => 'Administrator',
+    'email' => 'admin@kua-tegalrejo.go.id',
+    'password' => Hash::make('password'),
+    'role' => 'admin'
+],
+[
+    'name' => 'Petugas Arsip',
+    'email' => 'admindata@kua-tegalrejo.go.id',
+    'password' => Hash::make('password'),
+    'role' => 'admin_data'
+],
+[
+    'name' => 'Kepala KUA',
+    'email' => 'kepala@kua-tegalrejo.go.id',
+    'password' => Hash::make('password'),
+    'role' => 'kepala_kua'
+]</code></pre>
+    
+    <hr>
+    
+    <p style="text-align: center; color: #6b7280; font-size: 12px; margin-top: 40px;">
+        <strong>Sistem Informasi Pengarsipan Akta Nikah</strong><br>
+        KUA Kemantren Tegalrejo - Laravel 12<br>
+        Dokumen dibuat: Januari 2026
+    </p>
+</body>
+</html>

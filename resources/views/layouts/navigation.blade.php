@@ -20,6 +20,7 @@
                         $isAdmin = auth()->user()->isAdmin();
                         $isStaf = auth()->user()->isPengelolaData() || auth()->user()->isKepalaKUA();
                         $isKepala = auth()->user()->isKepalaKUA();
+                        $canVerify = auth()->user()->isAdmin() || auth()->user()->isPengelolaData();
                     @endphp
 
                     @if($isPemohon)
@@ -31,6 +32,10 @@
 
                     @if($isAdmin)
                         <x-nav-link-premium :href="route('users.index')" :active="request()->routeIs('users.*')" icon="users">Pengguna</x-nav-link-premium>
+                    @endif
+
+                    @if($canVerify)
+                        <x-nav-link-premium :href="route('admin.verification.index')" :active="request()->routeIs('admin.verification.*')" icon="shield">Verifikasi KTP</x-nav-link-premium>
                     @endif
 
                     @if($isStaf)
@@ -113,6 +118,10 @@
             
             @if($isAdmin)
                 <x-responsive-nav-link-premium :href="route('users.index')" :active="request()->routeIs('users.*')" icon="users">Kelola Pengguna</x-responsive-nav-link-premium>
+            @endif
+
+            @if($canVerify)
+                <x-responsive-nav-link-premium :href="route('admin.verification.index')" :active="request()->routeIs('admin.verification.*')" icon="shield">Verifikasi KTP</x-responsive-nav-link-premium>
             @endif
 
             @if($isStaf)

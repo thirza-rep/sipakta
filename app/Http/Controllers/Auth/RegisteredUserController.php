@@ -47,6 +47,11 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('profil-pemohon.edit', absolute: false));
+        // Generate and send Email OTP code immediately
+        $otpService = app(\App\Services\OtpService::class);
+        $code = $otpService->generateOtp($user->email, 'email', $user->id);
+        $otpService->sendEmailOtp($user->email, $code, $user->name);
+
+        return redirect(route('verification.otp.show'));
     }
 }

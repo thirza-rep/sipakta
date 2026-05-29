@@ -16,9 +16,10 @@ return Application::configure(basePath: dirname(__DIR__))
             'active' => \App\Http\Middleware\CheckActiveUser::class,
         ]);
         
-        // Add CheckActiveUser to web middleware group
+        // Add CheckActiveUser and EnsureEmailVerifiedWithOtp to web middleware group
         $middleware->web(append: [
             \App\Http\Middleware\CheckActiveUser::class,
+            \App\Http\Middleware\EnsureEmailVerifiedWithOtp::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

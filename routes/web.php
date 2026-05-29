@@ -8,15 +8,14 @@ use App\Http\Controllers\PencarianController;
 use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\Auth\EmailVerificationPromptController;
-use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\PasswordController;
-use App\Http\Controllers\Auth\EmailVerificationNotificationController;
+use App\Http\Controllers\Auth\EmailOtpVerificationController;
 use App\Http\Controllers\AktaNikahController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AdminVerificationController;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -55,17 +54,17 @@ Route::middleware('auth')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // Email verification routes
-    Route::get('/verify-email', EmailVerificationPromptController::class)
-        ->name('verification.notice');
+    // Email verification routes (OTP-based)
+    Route::get('/verify-email-otp', [EmailOtpVerificationController::class, 'show'])
+        ->name('verification.otp.show');
 
-    Route::get('/verify-email/{id}/{hash}', VerifyEmailController::class)
-        ->middleware(['signed', 'throttle:6,1'])
-        ->name('verification.verify');
-
-    Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
+    Route::post('/verify-email-otp', [EmailOtpVerificationController::class, 'verify'])
         ->middleware('throttle:6,1')
-        ->name('verification.send');
+        ->name('verification.otp.verify');
+
+    Route::post('/verify-email-otp/resend', [EmailOtpVerificationController::class, 'resend'])
+        ->middleware('throttle:3,1')
+        ->name('verification.otp.resend');
 
     Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])
         ->name('password.confirm');
@@ -106,6 +105,16 @@ Route::middleware('auth')->group(function () {
         Route::get('/akta-nikah/{id}', [AktaNikahController::class, 'show'])->name('akta-nikah.show');
     });
 
+    // ============================================
+    // VERIFIKASI PEMOHON ROUTES - Admin & Pengelola Data
+    // ============================================
+    Route::middleware('role:admin,pengelola_data')->group(function () {
+        Route::get('/admin/verifikasi-pemohon', [AdminVerificationController::class, 'index'])->name('admin.verification.index');
+        Route::get('/admin/verifikasi-pemohon/{id}', [AdminVerificationController::class, 'show'])->name('admin.verification.show');
+        Route::post('/admin/verifikasi-pemohon/{id}/approve', [AdminVerificationController::class, 'approve'])->name('admin.verification.approve');
+        Route::post('/admin/verifikasi-pemohon/{id}/reject', [AdminVerificationController::class, 'reject'])->name('admin.verification.reject');
+    });
+
 
     // ============================================
     // LAPORAN ROUTES - Pengelola Data & Kepala KUA
@@ -133,6 +142,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/profil-pemohon', [ProfilPemohonController::class, 'edit'])->name('profil-pemohon.edit');
         Route::put('/profil-pemohon', [ProfilPemohonController::class, 'update'])->name('profil-pemohon.update');
         Route::get('/profil-pemohon/lihat', [ProfilPemohonController::class, 'show'])->name('profil-pemohon.show');
+        Route::post('/profil-pemohon/send-phone-otp', [ProfilPemohonController::class, 'sendPhoneOtp'])->name('profil-pemohon.send-otp');
+        Route::post('/profil-pemohon/verify-phone-otp', [ProfilPemohonController::class, 'verifyPhoneOtp'])->name('profil-pemohon.verify-otp');
         
         Route::get('/cari-arsip', [PencarianController::class, 'index'])->name('pencarian.index');
         Route::get('/cari-arsip/hasil', [PencarianController::class, 'search'])->name('pencarian.search');

@@ -16,10 +16,9 @@ class PencarianController extends Controller
         /** @var \App\Models\User $user */
         $user = auth()->user();
 
-        // Check if pemohon has completed profile
-        if ($user->isPemohon() && !$user->hasCompletedProfile()) {
-            return redirect()->route('profil-pemohon.edit')
-                ->with('warning', 'Silakan lengkapi profil Anda terlebih dahulu sebelum melakukan pencarian.');
+        // Check if pemohon is verified
+        if ($redirect = $this->checkVerification($user)) {
+            return $redirect;
         }
 
         return view('pencarian.index');
@@ -33,10 +32,9 @@ class PencarianController extends Controller
         /** @var \App\Models\User $user */
         $user = auth()->user();
 
-        // Check if pemohon has completed profile
-        if ($user->isPemohon() && !$user->hasCompletedProfile()) {
-            return redirect()->route('profil-pemohon.edit')
-                ->with('warning', 'Silakan lengkapi profil Anda terlebih dahulu.');
+        // Check if pemohon is verified
+        if ($redirect = $this->checkVerification($user)) {
+            return $redirect;
         }
 
         $keyword = $request->get('keyword', '');
@@ -65,5 +63,39 @@ class PencarianController extends Controller
     {
         $arsip = AktaNikah::findOrFail($id);
         return view('pencarian.detail', compact('arsip'));
+    }
+
+    /**
+     * Helper to verify if pemohon is fully verified by KUA Admin
+     */
+    private function checkVerification($user)
+    {
+        if (!$user->isPemohon()) {
+            return null; // non-pemohon roles are exempted
+        }
+
+        $profil = $user->profilPemohon;
+
+        if (!$profil || $profil->status === 'unverified') {
+            return redirect()->route('profil-pemohon.edit')
+                ->with('warning', 'Silakan lengkapi profil, verifikasi WhatsApp, dan unggah berkas KTP Anda untuk mengajukan verifikasi.');
+        }
+
+        if ($profil->status === 'pending_verification') {
+            return redirect()->route('profil-pemohon.edit')
+                ->with('warning', 'Profil Anda sedang dalam proses verifikasi oleh Admin/Petugas KUA. Harap tunggu persetujuan.');
+        }
+
+        if ($profil->status === 'rejected') {
+            return redirect()->route('profil-pemohon.edit')
+                ->with('warning', 'Pengajuan verifikasi profil Anda ditolak oleh Admin. Alasan: "' . $profil->rejected_reason . '". Silakan perbarui data & foto KTP Anda.');
+        }
+
+        if ($profil->status !== 'verified') {
+            return redirect()->route('profil-pemohon.edit')
+                ->with('warning', 'Akun Anda harus terverifikasi untuk dapat menggunakan fitur pencarian.');
+        }
+
+        return null; // OK
     }
 }

@@ -158,7 +158,21 @@ class User extends Authenticatable
         if (!$this->isPemohon()) {
             return true;
         }
-        return $this->profilPemohon !== null && $this->profilPemohon->nik !== null;
+        return $this->profilPemohon !== null && 
+               $this->profilPemohon->nik !== null && 
+               $this->profilPemohon->foto_ktp !== null &&
+               $this->profilPemohon->phone_verified_at !== null;
+    }
+
+    /**
+     * Check if pemohon is verified by Admin
+     */
+    public function isVerifiedPemohon(): bool
+    {
+        if (!$this->isPemohon()) {
+            return true;
+        }
+        return $this->profilPemohon !== null && $this->profilPemohon->status === 'verified';
     }
 
     /**

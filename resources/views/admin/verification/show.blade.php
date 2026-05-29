@@ -1,140 +1,181 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex items-center gap-6">
-            <a href="{{ route('admin.verification.index') }}" class="text-slate-400 hover:text-slate-900 transition-colors">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+            <a href="{{ route('admin.verification.index') }}" class="w-12 h-12 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500 transition-all">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
             </a>
-            <h2 class="text-2xl font-black text-slate-900 tracking-tight">Detail Pengajuan Verifikasi</h2>
-            <p class="text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em] mt-0.5">Tinjau Dokumen KTP Pemohon</p>
+            <div>
+                <h2 class="text-2xl font-bold text-slate-900">Detail Pengajuan Verifikasi</h2>
+                <p class="text-slate-500 text-sm mt-0.5">Tinjau data dan dokumen KTP pemohon</p>
+            </div>
         </div>
     </x-slot>
 
-    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 space-y-12 pb-32">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            
+    @php
+        $emailVerified = $requestData->user->email_verified_at !== null;
+        $waVerified = $requestData->phone_verified_at !== null;
+        $ktpUploaded = $requestData->foto_ktp !== null;
+        $nikValid = $requestData->nik && strlen($requestData->nik) === 16;
+    @endphp
+
+    <div class="max-w-7xl mx-auto space-y-8 pb-32">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
             {{-- Left Side: Identity Info --}}
-            <div class="lg:col-span-5 space-y-10">
-                <div class="bg-white rounded-[3rem] shadow-xl shadow-slate-100 border border-slate-100 p-8 md:p-10 space-y-8">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-2xl bg-teal-900 text-white flex items-center justify-center font-black text-lg uppercase">
-                            {{ substr($requestData->nama_lengkap, 0, 2) }}
-                        </div>
-                        <div>
-                            <h3 class="font-black text-slate-800 text-lg leading-tight">{{ $requestData->nama_lengkap }}</h3>
-                            <span class="text-xs text-slate-400 mt-1 block">Tipe Akun: Pemohon Publik</span>
-                        </div>
+            <div class="lg:col-span-5 space-y-8">
+
+                {{-- =============================== --}}
+                {{-- CHECKLIST KELENGKAPAN PEMOHON   --}}
+                {{-- =============================== --}}
+                <div class="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
+                    <div class="bg-slate-800 px-6 py-4">
+                        <h4 class="text-white font-bold text-base">📋 Checklist Kelengkapan</h4>
+                        <p class="text-slate-300 text-sm">Ringkasan status verifikasi pemohon</p>
                     </div>
-
-                    <div class="border-t border-slate-50 pt-8 space-y-6">
-                        <div>
-                            <span class="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">NIK (Nomor Induk Kependudukan)</span>
-                            <span class="font-black text-slate-700 text-md tracking-wider">{{ $requestData->nik }}</span>
-                        </div>
-
-                        <div>
-                            <span class="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Nomor WhatsApp</span>
-                            <div class="flex items-center gap-2">
-                                <span class="font-bold text-slate-700">{{ $requestData->no_telepon }}</span>
-                                @if($requestData->phone_verified_at)
-                                    <span class="px-2 py-0.5 bg-emerald-50 text-emerald-600 border border-emerald-100 rounded text-[8px] font-black uppercase tracking-wider">Terverifikasi OTP</span>
-                                @else
-                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-600 border border-amber-100 rounded text-[8px] font-black uppercase tracking-wider">Belum Verifikasi OTP</span>
-                                @endif
+                    <div class="p-5 space-y-3">
+                        {{-- Email --}}
+                        <div class="flex items-center gap-3 p-3 rounded-lg {{ $emailVerified ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200' }}">
+                            <span class="text-xl">{{ $emailVerified ? '✅' : '❌' }}</span>
+                            <div>
+                                <span class="font-bold text-sm {{ $emailVerified ? 'text-green-800' : 'text-red-800' }}">Email {{ $emailVerified ? 'Terverifikasi' : 'Belum Verifikasi' }}</span>
+                                <span class="block text-xs {{ $emailVerified ? 'text-green-600' : 'text-red-600' }}">{{ $requestData->user->email }}</span>
                             </div>
                         </div>
 
-                        <div>
-                            <span class="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Email Terdaftar</span>
-                            <span class="font-bold text-slate-700">{{ $requestData->user->email }}</span>
+                        {{-- WhatsApp --}}
+                        <div class="flex items-center gap-3 p-3 rounded-lg {{ $waVerified ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200' }}">
+                            <span class="text-xl">{{ $waVerified ? '✅' : '❌' }}</span>
+                            <div>
+                                <span class="font-bold text-sm {{ $waVerified ? 'text-green-800' : 'text-red-800' }}">WhatsApp {{ $waVerified ? 'Terverifikasi OTP' : 'Belum Verifikasi OTP' }}</span>
+                                <span class="block text-xs {{ $waVerified ? 'text-green-600' : 'text-red-600' }}">{{ $requestData->no_telepon }}</span>
+                            </div>
                         </div>
 
-                        <div>
-                            <span class="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Alamat Domisili</span>
-                            <p class="font-bold text-slate-600 text-sm leading-relaxed">{{ $requestData->alamat }}</p>
+                        {{-- NIK --}}
+                        <div class="flex items-center gap-3 p-3 rounded-lg {{ $nikValid ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200' }}">
+                            <span class="text-xl">{{ $nikValid ? '✅' : '❌' }}</span>
+                            <div>
+                                <span class="font-bold text-sm {{ $nikValid ? 'text-green-800' : 'text-red-800' }}">NIK {{ $nikValid ? '16 Digit Valid' : 'Tidak Valid' }}</span>
+                                <span class="block text-xs {{ $nikValid ? 'text-green-600' : 'text-red-600' }}">{{ $requestData->nik ?? 'Kosong' }}</span>
+                            </div>
                         </div>
 
+                        {{-- KTP --}}
+                        <div class="flex items-center gap-3 p-3 rounded-lg {{ $ktpUploaded ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200' }}">
+                            <span class="text-xl">{{ $ktpUploaded ? '✅' : '❌' }}</span>
+                            <span class="font-bold text-sm {{ $ktpUploaded ? 'text-green-800' : 'text-red-800' }}">Foto KTP {{ $ktpUploaded ? 'Sudah Diunggah' : 'Belum Diunggah' }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Data Pemohon --}}
+                <div class="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 space-y-5">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-xl bg-teal-600 text-white flex items-center justify-center font-bold text-xl uppercase">
+                            {{ substr($requestData->nama_lengkap, 0, 2) }}
+                        </div>
                         <div>
-                            <span class="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Status Verifikasi</span>
+                            <h3 class="font-bold text-slate-800 text-lg">{{ $requestData->nama_lengkap }}</h3>
+                            <span class="text-sm text-slate-500">Akun Pemohon Publik</span>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-slate-100 pt-5 space-y-4">
+                        <div>
+                            <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">NIK</span>
+                            <span class="font-bold text-slate-700 text-base tracking-wider">{{ $requestData->nik }}</span>
+                        </div>
+                        <div>
+                            <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Email</span>
+                            <span class="font-semibold text-slate-700">{{ $requestData->user->email }}</span>
+                        </div>
+                        <div>
+                            <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Alamat Domisili</span>
+                            <p class="font-semibold text-slate-600 text-sm leading-relaxed">{{ $requestData->alamat }}</p>
+                        </div>
+                        <div>
+                            <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Status Saat Ini</span>
                             @if($requestData->status === 'pending_verification')
-                                <span class="inline-block px-3 py-1.5 bg-blue-50 text-blue-600 border border-blue-100 rounded-lg text-[9px] font-black uppercase tracking-wider">Menunggu Review</span>
+                                <span class="inline-block px-4 py-2 bg-blue-100 text-blue-700 border border-blue-200 rounded-lg text-sm font-bold">⏳ Menunggu Review</span>
                             @elseif($requestData->status === 'verified')
-                                <span class="inline-block px-3 py-1.5 bg-emerald-50 text-emerald-600 border border-emerald-100 rounded-lg text-[9px] font-black uppercase tracking-wider">Disetujui (Aktif)</span>
+                                <span class="inline-block px-4 py-2 bg-green-100 text-green-700 border border-green-200 rounded-lg text-sm font-bold">✅ Disetujui (Aktif)</span>
                             @elseif($requestData->status === 'rejected')
-                                <span class="inline-block px-3 py-1.5 bg-rose-50 text-rose-600 border border-rose-100 rounded-lg text-[9px] font-black uppercase tracking-wider">Ditolak</span>
+                                <span class="inline-block px-4 py-2 bg-red-100 text-red-700 border border-red-200 rounded-lg text-sm font-bold">❌ Ditolak</span>
                             @else
-                                <span class="inline-block px-3 py-1.5 bg-slate-50 text-slate-500 border border-slate-100 rounded-lg text-[9px] font-black uppercase tracking-wider">Belum Diajukan</span>
+                                <span class="inline-block px-4 py-2 bg-slate-100 text-slate-600 border border-slate-200 rounded-lg text-sm font-bold">Belum Diajukan</span>
                             @endif
                         </div>
 
                         @if($requestData->status === 'rejected' && $requestData->rejected_reason)
-                            <div class="p-4 bg-rose-50 border border-rose-100 rounded-2xl">
-                                <span class="block text-[9px] font-black text-rose-500 uppercase tracking-widest mb-1">Alasan Penolakan</span>
-                                <p class="text-xs text-rose-900 font-bold">"{{ $requestData->rejected_reason }}"</p>
+                            <div class="p-4 bg-red-50 border border-red-200 rounded-xl">
+                                <span class="block text-xs font-bold text-red-500 uppercase tracking-wider mb-1">Alasan Penolakan</span>
+                                <p class="text-sm text-red-800 font-bold">"{{ $requestData->rejected_reason }}"</p>
                             </div>
                         @endif
                     </div>
                 </div>
 
-                {{-- Action Panel (Only if Pending) --}}
+                {{-- Action Panel --}}
                 @if($requestData->status === 'pending_verification')
-                    <div class="bg-white rounded-[3rem] shadow-xl shadow-slate-100 border border-slate-100 p-8 md:p-10 space-y-8">
-                        <h4 class="font-black text-slate-800 uppercase tracking-wider text-xs">Persetujuan Berkas</h4>
-                        
-                        <div class="flex gap-4">
-                            <!-- Approve Form -->
-                            <form method="POST" action="{{ route('admin.verification.approve', $requestData->id) }}" class="flex-1" onsubmit="return confirm('Apakah Anda yakin ingin menyetujui verifikasi data diri pemohon ini?');">
+                    <div class="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 space-y-5">
+                        <h4 class="font-bold text-slate-800 text-base">🔑 Keputusan Verifikasi</h4>
+
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <form method="POST" action="{{ route('admin.verification.approve', $requestData->id) }}" class="flex-1" onsubmit="return confirm('Yakin ingin MENYETUJUI dan mengaktifkan akun pemohon ini?');">
                                 @csrf
-                                <button type="submit" class="w-full py-4 bg-emerald-600 text-white font-black text-[10px] uppercase tracking-widest rounded-2xl hover:bg-emerald-700 active:scale-95 transition-all shadow-lg shadow-emerald-600/20">
-                                    Setujui Verifikasi
+                                <button type="submit" class="w-full py-4 bg-green-600 text-white font-bold text-sm rounded-xl hover:bg-green-700 active:scale-95 transition-all shadow-lg">
+                                    ✅ Setujui & Aktifkan
                                 </button>
                             </form>
-                            
-                            <button type="button" onclick="document.getElementById('reject-form-container').classList.toggle('hidden')" class="flex-1 py-4 bg-rose-600 text-white font-black text-[10px] uppercase tracking-widest rounded-2xl hover:bg-rose-700 active:scale-95 transition-all shadow-lg shadow-rose-600/20">
-                                Tolak Verifikasi
+
+                            <button type="button" onclick="document.getElementById('reject-form-container').classList.toggle('hidden')" class="flex-1 py-4 bg-red-600 text-white font-bold text-sm rounded-xl hover:bg-red-700 active:scale-95 transition-all shadow-lg">
+                                ❌ Tolak Verifikasi
                             </button>
                         </div>
 
-                        <!-- Reject Reason Box (Hidden initially) -->
-                        <div id="reject-form-container" class="hidden border-t border-slate-100 pt-6 animate-fade-in">
+                        <div id="reject-form-container" class="hidden border-t border-slate-100 pt-5">
                             <form method="POST" action="{{ route('admin.verification.reject', $requestData->id) }}" class="space-y-4">
                                 @csrf
                                 <div>
-                                    <label for="rejected_reason" class="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">Alasan Penolakan</label>
-                                    <textarea name="rejected_reason" id="rejected_reason" rows="3" required placeholder="Contoh: Foto KTP tidak jelas, NIK tidak sesuai dengan KTP asli, dll."
-                                              class="w-full p-4 bg-slate-50 border-slate-200 rounded-xl focus:ring-4 focus:ring-rose-500/10 focus:border-rose-500 font-bold text-slate-700 text-xs resize-none"></textarea>
+                                    <label for="rejected_reason" class="block text-sm font-bold text-slate-700 mb-2">Alasan Penolakan:</label>
+                                    <textarea name="rejected_reason" id="rejected_reason" rows="3" required placeholder="Contoh: Foto KTP buram, NIK tidak cocok, dll."
+                                              class="w-full p-4 bg-slate-50 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 font-semibold text-slate-700 text-sm resize-none"></textarea>
                                 </div>
-                                <button type="submit" class="w-full py-3 bg-slate-900 text-white font-black text-[9px] uppercase tracking-widest rounded-xl hover:bg-slate-800 transition-colors">
+                                <button type="submit" class="w-full py-3 bg-slate-800 text-white font-bold text-sm rounded-xl hover:bg-slate-700 transition-colors">
                                     Kirim Penolakan
                                 </button>
                             </form>
                         </div>
                     </div>
                 @endif
+
+                {{-- Cetak PDF Button --}}
+                <a href="{{ route('admin.verification.cetak-pdf', $requestData->id) }}" target="_blank"
+                   class="block w-full py-4 bg-slate-100 text-slate-700 font-bold text-sm rounded-xl hover:bg-slate-200 transition-all text-center border border-slate-200">
+                    🖨️ Cetak Salinan Data Pemohon (PDF)
+                </a>
             </div>
 
-            {{-- Right Side: Document Image --}}
-            <div class="lg:col-span-7 space-y-6">
-                <div class="bg-white rounded-[3.5rem] shadow-2xl shadow-slate-200/50 border border-slate-100 p-8 md:p-12 space-y-6">
-                    <div class="flex items-center justify-between border-b border-slate-50 pb-6">
-                        <h4 class="font-black text-slate-800 uppercase tracking-wider text-xs">Foto KTP / Kartu Identitas</h4>
+            {{-- Right Side: KTP Image --}}
+            <div class="lg:col-span-7">
+                <div class="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 space-y-4 sticky top-24">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                        <h4 class="font-bold text-slate-800 text-base">🪪 Foto KTP / Kartu Identitas</h4>
                         @if($requestData->foto_ktp)
-                            <a href="{{ asset('storage/' . $requestData->foto_ktp) }}" target="_blank" class="text-xs text-indigo-600 hover:underline font-bold flex items-center gap-1">
-                                Buka di Tab Baru
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                            <a href="{{ asset('storage/' . $requestData->foto_ktp) }}" target="_blank" class="text-sm text-indigo-600 hover:underline font-bold">
+                                Buka Tab Baru ↗
                             </a>
                         @endif
                     </div>
 
                     @if($requestData->foto_ktp)
-                        <div class="rounded-[2rem] overflow-hidden border border-slate-200 shadow-inner bg-slate-900/5 flex items-center justify-center p-4">
-                            <img src="{{ asset('storage/' . $requestData->foto_ktp) }}" alt="KTP Pemohon" class="max-w-full max-h-[500px] object-contain rounded-xl shadow-lg">
+                        <div class="rounded-xl overflow-hidden border-2 border-slate-200 bg-slate-100 flex items-center justify-center p-4">
+                            <img src="{{ asset('storage/' . $requestData->foto_ktp) }}" alt="KTP Pemohon" class="max-w-full max-h-[500px] object-contain rounded-lg shadow-lg">
                         </div>
                     @else
-                        <div class="py-20 text-center border-2 border-dashed border-slate-200 rounded-[2.5rem] bg-slate-50">
-                            <div class="w-12 h-12 bg-slate-100 text-slate-400 flex items-center justify-center rounded-xl mx-auto mb-3">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                            </div>
-                            <p class="text-slate-400 text-sm font-bold">Foto KTP Tidak Tersedia</p>
+                        <div class="py-20 text-center border-2 border-dashed border-slate-200 rounded-xl bg-slate-50">
+                            <span class="text-4xl block mb-3">🪪</span>
+                            <p class="text-slate-500 font-bold">Foto KTP Tidak Tersedia</p>
                         </div>
                     @endif
                 </div>

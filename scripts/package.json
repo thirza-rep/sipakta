@@ -1,0 +1,22 @@
+{
+  "name": "sipakta-wa-gateway",
+  "version": "2.0.0",
+  "description": "Self-hosted WhatsApp OTP Gateway untuk SIPAKTA KUA",
+  "main": "whatsapp-helper.js",
+  "scripts": {
+    "start": "node whatsapp-helper.js",
+    "dev": "node --watch whatsapp-helper.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "express": "^4.19.2",
+    "qrcode": "^1.5.4",
+    "qrcode-terminal": "^0.12.0",
+    "whatsapp-web.js": "^1.23.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": "SIPAKTA",
+  "license": "MIT"
+}

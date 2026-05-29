@@ -13,6 +13,9 @@ services:
       - "5173:5173"
     volumes:
       - ./:/var/www
+    # Agar container bisa akses host Mac (WhatsApp gateway NodeJS)
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     networks:
       - sipakta-net
 

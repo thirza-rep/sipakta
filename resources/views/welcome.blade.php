@@ -5,172 +5,114 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name', 'SIPAKTA') }}</title>
     <link rel="icon" href="{{ asset('images/logo-kua.jpg') }}" type="image/jpeg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>body { font-family: 'Outfit', sans-serif; }</style>
 </head>
-<body class="antialiased selection:bg-teal-500/30">
-    <div class="min-h-screen bg-slate-50 relative overflow-hidden flex flex-col items-center justify-center font-sans">
-        {{-- Decorative Background --}}
-        <div class="absolute top-0 left-0 w-full h-full -z-10 pointer-events-none">
-            {{-- Subtle Islamic Geometric Overlay Pattern --}}
-            <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%230f766e\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
-            
-            {{-- Ambient Glowing Orbs --}}
-            <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-teal-500/15 blur-[120px] rounded-full animate-pulse"></div>
-            <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-indigo-500/15 blur-[150px] rounded-full animate-float"></div>
-            <div class="absolute top-[20%] right-[10%] w-[30%] h-[30%] bg-amber-500/10 blur-[100px] rounded-full animate-pulse" style="animation-delay: 2s;"></div>
-
-            {{-- Minimalist Mosque Silhouette Graphic (Inline SVG) --}}
-            <div class="absolute bottom-0 left-0 w-full opacity-5">
-                <svg viewBox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto min-h-[200px]" preserveAspectRatio="none">
-                    {{-- Base Ground & Hills --}}
-                    <path fill="#0f766e" d="M0 300h1200v-80c-40-10-80-5-120 10s-90 30-140 30-100-20-150-30-110 0-160 15-90 30-140 30-100-20-150-30-110 0-160 15-90 30-140 30-40 0-40 0v-20z" />
-                    {{-- Grand Mosque Center --}}
-                    <path fill="#0f766e" d="M600 240c0-60-45-110-100-110s-100 50-100 110v10h200v-10z" />
-                    <path fill="#0f766e" d="M500 130l-3 40h6l-3-40z" />
-                    {{-- Small Domes Left & Right --}}
-                    <path fill="#0f766e" d="M350 250c0-40-25-70-55-70s-55 30-55 70v10h110v-10z" />
-                    <path fill="#0f766e" d="M295 180l-2 30h4l-2-30z" />
-                    <path fill="#0f766e" d="M850 250c0-40-25-70-55-70s-55 30-55 70v10h110v-10z" />
-                    <path fill="#0f766e" d="M795 180l-2 30h4l-2-30z" />
-                    {{-- Minarets --}}
-                    <path fill="#0f766e" d="M430 250v-120h10v120h-10z M435 130l-5 20h10l-5-20z" />
-                    <path fill="#0f766e" d="M760 250v-120h10v120h-10z M765 130l-5 20h10l-5-20z" />
-                </svg>
-            </div>
-        </div>
-
-        {{-- Main Hero Container --}}
-        <main class="max-w-7xl w-full px-6 py-12 lg:py-20 flex flex-col items-center animate-fade-in relative z-10">
-            
-            <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center mb-16">
-                
-                {{-- Left Column: Text & Branding --}}
-                <div class="flex flex-col items-center lg:items-start text-center lg:text-left space-y-8">
-                    {{-- Floating Badge --}}
-                    <div class="px-6 py-2 bg-teal-600/5 border border-teal-600/10 rounded-full inline-flex items-center gap-2 group cursor-default transition-all duration-500 hover:bg-teal-600/10">
-                        <span class="w-2 h-2 bg-teal-500 rounded-full animate-ping"></span>
-                        <span class="text-[10px] font-black text-teal-700 uppercase tracking-[0.2em]">Sistem Informasi Terpadu KUA</span>
+<body class="antialiased bg-slate-50 text-slate-800">
+    <div class="min-h-screen flex flex-col">
+        
+        {{-- Header / Navigation --}}
+        <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <img src="{{ asset('images/logo-kua.jpg') }}" alt="Logo KUA" class="w-12 h-12 rounded-xl object-cover">
+                    <div>
+                        <h1 class="text-xl md:text-2xl font-bold text-teal-800 leading-tight">SIPAKTA</h1>
+                        <p class="text-xs md:text-sm font-semibold text-slate-500 hidden sm:block">KUA Kemantren Tegalrejo</p>
                     </div>
+                </div>
+                <div>
+                    @auth
+                        <a href="{{ route('dashboard') }}" class="px-6 py-3 bg-teal-600 text-white rounded-xl font-bold text-base hover:bg-teal-700 transition">Dashboard</a>
+                    @else
+                        <a href="{{ route('login') }}" class="px-6 py-3 bg-slate-100 text-teal-800 border border-slate-300 rounded-xl font-bold text-base hover:bg-slate-200 transition">Masuk</a>
+                    @endauth
+                </div>
+            </div>
+        </header>
 
-                    {{-- Title Area --}}
-                    <div class="relative">
-                        <div class="flex items-center justify-center lg:justify-start gap-4 mb-6">
-                            <div class="w-16 h-16 rounded-2xl bg-white p-1 shadow-lg shadow-teal-600/10 rotate-3 transition-transform hover:rotate-0">
-                                <img src="{{ asset('images/logo-kua.jpg') }}" alt="Logo KUA" class="w-full h-full rounded-xl object-cover">
-                            </div>
-                            <h1 class="text-5xl md:text-7xl font-black text-slate-900 tracking-tighter leading-none">
-                                SIPA<span class="text-teal-600">KTA</span>
-                            </h1>
+        {{-- Main Hero Section --}}
+        <main class="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-20 flex flex-col items-center text-center">
+            
+            <div class="max-w-3xl space-y-8">
+                <span class="inline-block px-5 py-2 bg-teal-100 text-teal-800 rounded-full font-bold text-sm border border-teal-200">
+                    Sistem Informasi Kearsipan Digital
+                </span>
+
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                    Layanan Pencarian <br> <span class="text-teal-600">Arsip Akta Nikah</span>
+                </h2>
+
+                <p class="text-lg md:text-xl font-medium text-slate-600 leading-relaxed">
+                    Selamat datang di layanan pencarian arsip akta nikah KUA Kemantren Tegalrejo, Kota Yogyakarta. Kini Anda dapat mencari dan melihat salinan digital dokumen pernikahan keluarga dengan mudah dan cepat.
+                </p>
+
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-xl border border-slate-200 mt-10">
+                    <h3 class="text-xl font-bold text-slate-800 mb-4">Mulai Pencarian Arsip</h3>
+                    @auth
+                        <a href="{{ route('pencarian.index') }}" class="block w-full px-8 py-5 bg-teal-600 text-white rounded-xl font-bold text-lg md:text-xl shadow-lg hover:bg-teal-700 transition active:scale-95">
+                            🔍 Cari Arsip Sekarang
+                        </a>
+                    @else
+                        <p class="text-slate-600 font-medium mb-6 text-base">Silakan daftar atau masuk terlebih dahulu untuk mengakses layanan pencarian.</p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="{{ route('register') }}" class="flex-1 px-8 py-4 bg-teal-600 text-white rounded-xl font-bold text-lg shadow-lg hover:bg-teal-700 transition">
+                                📝 Daftar Akun Baru
+                            </a>
+                            <a href="{{ route('login') }}" class="flex-1 px-8 py-4 bg-white text-teal-700 border-2 border-teal-200 rounded-xl font-bold text-lg hover:bg-teal-50 transition">
+                                🔑 Masuk ke Akun
+                            </a>
                         </div>
-                        <p class="text-lg md:text-2xl font-bold text-slate-400 max-w-xl leading-relaxed">
-                            Sistem Informasi Pencarian dan <span class="text-slate-900">Pengarsipan Digital</span> Akta Nikah Kemantren Tegalrejo.
-                        </p>
-                    </div>
-
-                    {{-- Glass Card Description --}}
-                    <div class="glass-card rounded-3xl p-6 md:p-8 max-w-xl w-full shadow-xl border border-white/50 bg-white/40 backdrop-blur-sm">
-                        <p class="text-slate-600 font-medium leading-relaxed text-sm md:text-base">
-                            Layanan terpadu kearsipan digital untuk mempermudah akses dan pengelolaan data pernikahan di lingkungan KUA Kemantren Tegalrejo, Kota Yogyakarta. Aman, Cepat, dan Akurat.
-                        </p>
-                    </div>
-
-            {{-- CTA Grid & Promo --}}
-            <div class="flex flex-col items-center lg:items-start w-full max-w-xl">
-                @auth
-                    <a href="{{ route('dashboard') }}" class="btn-premium btn-teal w-full text-lg shadow-teal-500/20 py-5">
-                        🏠 Buka Dashboard
-                    </a>
-                @else
-                    {{-- Promo Registration Box --}}
-                    <div class="w-full bg-white/60 backdrop-blur-md border border-teal-200/50 p-6 rounded-3xl shadow-xl shadow-teal-500/5 relative overflow-hidden group">
-                        <div class="absolute inset-0 bg-gradient-to-r from-teal-500/10 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        <div class="relative z-10 flex flex-col text-center lg:text-left space-y-4">
-                            <h3 class="text-slate-800 font-bold text-lg md:text-xl">Butuh Salinan Akta Nikah Keluarga?</h3>
-                            <p class="text-slate-500 text-sm md:text-base leading-relaxed">
-                                Masyarakat kini dapat melakukan pencarian digital untuk dokumen pernikahan keluarga secara mandiri. Daftar sekarang untuk mendapatkan akses pemohon.
-                            </p>
-                            <div class="flex flex-col sm:flex-row gap-4 w-full pt-2">
-                                <a href="{{ route('login') }}" class="w-full sm:w-1/3 px-6 py-4 rounded-2xl bg-white text-teal-700 border border-teal-100 font-bold hover:bg-teal-50 hover:-translate-y-1 transition-all duration-300 shadow-sm flex justify-center items-center">
-                                    🔑 Masuk
-                                </a>
-                                <a href="{{ route('register') }}" class="w-full sm:w-2/3 px-6 py-4 rounded-2xl bg-gradient-to-r from-teal-600 to-teal-500 text-white font-bold hover:shadow-lg hover:shadow-teal-500/30 hover:-translate-y-1 transition-all duration-300 flex justify-center items-center gap-2">
-                                    <span>📝 Daftar Pencari Akta</span>
-                                    <svg class="w-5 h-5 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                @endauth
+                    @endauth
+                </div>
             </div>
-            
-            </div> {{-- End of Left Column --}}
 
-            {{-- Right Column: Beautiful Illustration --}}
-            <div class="hidden lg:flex justify-center items-center relative w-full h-full">
-                <div class="absolute inset-0 bg-gradient-to-tr from-teal-200/40 to-indigo-200/40 blur-[80px] rounded-full -z-10 animate-float opacity-60"></div>
-                <div class="relative w-[110%] max-w-lg aspect-square transform hover:scale-105 transition-transform duration-700 ease-out">
-                    <img src="{{ asset('images/kua-hero.png') }}" alt="Ilustrasi KUA" class="w-full h-full object-contain drop-shadow-2xl">
+            {{-- Info Cards --}}
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20 w-full text-left">
+                <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                    <div class="text-4xl mb-4">📂</div>
+                    <h4 class="text-xl font-bold text-slate-800 mb-2">Arsip Digital</h4>
+                    <p class="text-base text-slate-600 leading-relaxed">Data pernikahan tersimpan aman dalam format digital yang mudah diakses kapan saja dibutuhkan.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                    <div class="text-4xl mb-4">🔍</div>
+                    <h4 class="text-xl font-bold text-slate-800 mb-2">Pencarian Mudah</h4>
+                    <p class="text-base text-slate-600 leading-relaxed">Cukup masukkan nama suami/istri atau nomor akta nikah untuk menemukan dokumen yang dicari.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                    <div class="text-4xl mb-4">🖨️</div>
+                    <h4 class="text-xl font-bold text-slate-800 mb-2">Salinan Cetak</h4>
+                    <p class="text-base text-slate-600 leading-relaxed">Anda dapat mencetak salinan hasil pencarian sebagai bukti awal arsip telah ditemukan.</p>
                 </div>
             </div>
             
-            </div> {{-- End of Grid --}}
-
-            {{-- Feature Grid --}}
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 mt-24 w-full">
-                <div class="group p-8 rounded-[2.5rem] bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500">
-                    <div class="w-14 h-14 rounded-2xl bg-teal-50 flex items-center justify-center text-3xl mb-6 group-hover:bg-teal-600 group-hover:text-white transition-all duration-500">📂</div>
-                    <h3 class="text-slate-900 font-black text-sm uppercase tracking-widest mb-2">Arsip Digital</h3>
-                    <p class="text-slate-400 text-[11px] font-bold leading-relaxed">Akses dan pengelolaan ribuan data akta nikah terintegrasi.</p>
-                </div>
-                <div class="group p-8 rounded-[2.5rem] bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500">
-                    <div class="w-14 h-14 rounded-2xl bg-indigo-50 flex items-center justify-center text-3xl mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-500">🔍</div>
-                    <h3 class="text-slate-900 font-black text-sm uppercase tracking-widest mb-2">Pencarian Cerdas</h3>
-                    <p class="text-slate-400 text-[11px] font-bold leading-relaxed">Temukan data berdasarkan nama, nomor akta, atau tahun pernikahan.</p>
-                </div>
-                <div class="col-span-2 md:col-span-1 group p-8 rounded-[2.5rem] bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500">
-                    <div class="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center text-3xl mb-6 group-hover:bg-amber-500 group-hover:text-white transition-all duration-500">⚡</div>
-                    <h3 class="text-slate-900 font-black text-sm uppercase tracking-widest mb-2">Layanan Cepat</h3>
-                    <p class="text-slate-400 text-[11px] font-bold leading-relaxed">Stonished dengan kecepatan proses kearsipan digital kami.</p>
-                </div>
-            </div>
         </main>
 
-        {{-- Minimal Footer --}}
-        <footer class="py-12 mt-auto relative z-10 w-full">
-            <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6 opacity-40">
-                <p class="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em]">
-                    &copy; {{ date('Y') }} SIPAKTA &bull; KUA KEMANTREN TEGALREJO
+        {{-- Footer --}}
+        <footer class="bg-slate-900 py-10 text-center mt-auto">
+            <div class="max-w-7xl mx-auto px-4">
+                <p class="text-slate-400 font-bold text-sm md:text-base">
+                    &copy; {{ date('Y') }} KUA Kemantren Tegalrejo &bull; Kementerian Agama Republik Indonesia
                 </p>
-                <div class="flex items-center gap-8">
-                    <span class="text-[10px] font-black text-slate-500 uppercase tracking-widest">KEMENTRIAN AGAMA RI</span>
-                    <span class="text-[10px] font-black text-slate-500 uppercase tracking-widest">KOTA YOGYAKARTA</span>
-                </div>
+                <p class="text-slate-500 font-medium text-sm mt-2">
+                    Jl. Magelang KM 4,5 No.03, Tegalrejo, Kota Yogyakarta
+                </p>
             </div>
         </footer>
     </div>
 
-    {{-- Floating WhatsApp Button --}}
-    <a href="https://wa.me/6285171739541?text=Halo%20Admin%20SIPAKTA,%20saya%20membutuhkan%20bantuan%20mengenai%20pencarian%20akta%20nikah." 
+    {{-- Floating WhatsApp --}}
+    <a href="https://wa.me/6285171739541?text=Halo%20Admin%20SIPAKTA,%20saya%20membutuhkan%20bantuan." 
        target="_blank" 
        rel="noopener noreferrer" 
-       class="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 flex items-center justify-center w-14 h-14 md:w-16 md:h-16 bg-[#25D366] text-white rounded-full shadow-2xl hover:scale-110 hover:shadow-emerald-500/50 transition-all duration-300 group"
-       aria-label="Hubungi via WhatsApp">
-        <span class="absolute right-full mr-4 bg-white text-slate-800 text-xs font-bold px-3 py-2 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap">
-            Hubungi Admin
-        </span>
-        <svg class="w-7 h-7 md:w-8 md:h-8" fill="currentColor" viewBox="0 0 24 24">
+       class="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 flex items-center justify-center w-16 h-16 bg-[#25D366] text-white rounded-full shadow-xl hover:scale-110 transition-transform"
+       title="Hubungi Admin KUA">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
         </svg>
     </a>
-
-    <style>
-        @keyframes fade-in {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in {
-            animation: fade-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-    </style>
 </body>
 </html>

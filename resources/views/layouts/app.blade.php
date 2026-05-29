@@ -7,23 +7,15 @@
     <title>{{ config('app.name', 'SIPAKTA') }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <style>
-        body { font-family: 'Outfit', sans-serif; }
-        .glass-nav {
-            background: rgba(15, 118, 110, 0.95);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-    </style>
+    <style>body { font-family: 'Outfit', sans-serif; }</style>
 </head>
-<body class="font-sans antialiased text-slate-900 bg-slate-50/50 selection:bg-teal-500/30">
+<body class="font-sans antialiased text-slate-800 bg-slate-50 selection:bg-teal-500/30">
     <div class="min-h-screen flex flex-col relative overflow-x-hidden">
-        {{-- Decorative Background Elements --}}
-        <div class="fixed top-0 right-0 -z-10 w-[500px] h-[500px] bg-teal-500/5 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2"></div>
-        <div class="fixed bottom-0 left-0 -z-10 w-[400px] h-[400px] bg-indigo-500/5 blur-[100px] rounded-full -translate-x-1/2 translate-y-1/2"></div>
+        {{-- Decorative Background --}}
+        <div class="fixed top-0 right-0 -z-10 w-[400px] h-[400px] bg-teal-500/5 blur-[100px] rounded-full translate-x-1/2 -translate-y-1/2"></div>
 
         @include('layouts.navigation')
 
@@ -35,23 +27,23 @@
             </div>
         @endif
 
-        <main class="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <main class="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             @isset($slot)
                 {{ $slot }}
             @endisset
             @yield('content')
         </main>
-        
-        <footer class="bg-white border-t border-slate-100 py-10">
+
+        <footer class="bg-white border-t border-slate-200 py-8">
             <div class="max-w-7xl mx-auto px-4">
-                <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-                    <div class="flex items-center gap-3 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition duration-500">
-                        <img src="{{ asset('images/logo-kua.jpg') }}" alt="Logo KUA" class="w-6 h-6 rounded">
-                        <span class="text-xs font-black tracking-widest text-slate-900 uppercase">SIPAKTA</span>
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="flex items-center gap-3">
+                        <img src="{{ asset('images/logo-kua.jpg') }}" alt="Logo KUA" class="w-8 h-8 rounded-lg">
+                        <span class="text-sm font-bold text-slate-700">SIPAKTA</span>
                     </div>
                     <div class="text-center md:text-right">
-                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">&copy; {{ date('Y') }} KUA Kemantren Tegalrejo</p>
-                        <p class="text-[9px] text-slate-400 mt-1">Kementerian Agama Republik Indonesia</p>
+                        <p class="text-xs font-semibold text-slate-500">&copy; {{ date('Y') }} KUA Kemantren Tegalrejo</p>
+                        <p class="text-xs text-slate-400 mt-0.5">Kementerian Agama Republik Indonesia</p>
                     </div>
                 </div>
             </div>
@@ -59,15 +51,14 @@
     </div>
 
     {{-- Floating WhatsApp Button --}}
-    <a href="https://wa.me/6285171739541?text=Halo%20Admin%20SIPAKTA,%20saya%20membutuhkan%20bantuan%20mengenai%20pencarian%20akta%20nikah." 
-       target="_blank" 
-       rel="noopener noreferrer" 
-       class="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[9999] flex items-center justify-center w-14 h-14 md:w-16 md:h-16 bg-[#25D366] text-white rounded-full shadow-2xl hover:scale-110 hover:shadow-emerald-500/50 transition-all duration-300 group"
+    <a href="https://wa.me/6285171739541?text=Halo%20Admin%20SIPAKTA,%20saya%20membutuhkan%20bantuan%20mengenai%20pencarian%20akta%20nikah."
+       target="_blank" rel="noopener noreferrer"
+       class="fixed bottom-5 right-5 z-[9999] flex items-center justify-center w-16 h-16 bg-[#25D366] text-white rounded-full shadow-xl hover:scale-110 transition-all duration-300 group"
        aria-label="Hubungi via WhatsApp">
-        <span class="absolute right-full mr-4 bg-white text-slate-800 text-xs font-bold px-3 py-2 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap">
+        <span class="absolute right-full mr-3 bg-white text-slate-800 text-sm font-bold px-4 py-2 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap">
             Hubungi Admin
         </span>
-        <svg class="w-7 h-7 md:w-8 md:h-8" fill="currentColor" viewBox="0 0 24 24">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
         </svg>
     </a>

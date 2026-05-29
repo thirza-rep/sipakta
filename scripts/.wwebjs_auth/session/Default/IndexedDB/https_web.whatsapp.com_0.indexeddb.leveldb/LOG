@@ -1,0 +1,22 @@
+2026/05/29-14:55:14.711 297fad Reusing MANIFEST /Users/macbookpro/Project/sipakta/scripts/.wwebjs_auth/session/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/05/29-14:55:14.711 297fad Recovering log #73
+2026/05/29-14:55:14.711 297fad Reusing old log /Users/macbookpro/Project/sipakta/scripts/.wwebjs_auth/session/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000073.log 
+2026/05/29-14:55:14.711 297fad Delete type=2 #70
+2026/05/29-14:55:14.711 297fad Delete type=2 #71
+2026/05/29-14:55:14.711 297fad Delete type=2 #72
+2026/05/29-14:55:14.711 297fad Delete type=2 #69
+2026/05/29-14:55:18.713 297fad Level-0 table #81: started
+2026/05/29-14:55:18.727 297fad Level-0 table #81: 1137986 bytes OK
+2026/05/29-14:55:18.729 297fad Delete type=0 #73
+2026/05/29-14:55:18.790 297fad Compacting 1@1 + 4@2 files
+2026/05/29-14:55:18.814 297fad Generated table #82@1: 30874 keys, 2154250 bytes
+2026/05/29-14:55:18.852 297fad Generated table #83@1: 90514 keys, 2239759 bytes
+2026/05/29-14:55:18.883 297fad Generated table #84@1: 63328 keys, 2222603 bytes
+2026/05/29-14:55:18.891 297fad Generated table #85@1: 8169 keys, 511871 bytes
+2026/05/29-14:55:18.891 297fad Compacted 1@1 + 4@2 files => 7128483 bytes
+2026/05/29-14:55:18.892 297fad compacted to: files[ 0 0 4 0 0 0 0 ]
+2026/05/29-14:55:18.892 297fad Delete type=2 #76
+2026/05/29-14:55:18.892 297fad Delete type=2 #77
+2026/05/29-14:55:18.892 297fad Delete type=2 #75
+2026/05/29-14:55:18.892 297fad Delete type=2 #81
+2026/05/29-14:55:18.892 297fad Delete type=2 #78

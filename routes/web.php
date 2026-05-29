@@ -16,6 +16,7 @@ use App\Http\Controllers\Auth\EmailOtpVerificationController;
 use App\Http\Controllers\AktaNikahController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminVerificationController;
+use App\Http\Controllers\PdfController;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -113,6 +114,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/admin/verifikasi-pemohon/{id}', [AdminVerificationController::class, 'show'])->name('admin.verification.show');
         Route::post('/admin/verifikasi-pemohon/{id}/approve', [AdminVerificationController::class, 'approve'])->name('admin.verification.approve');
         Route::post('/admin/verifikasi-pemohon/{id}/reject', [AdminVerificationController::class, 'reject'])->name('admin.verification.reject');
+        Route::get('/admin/verifikasi-pemohon/{id}/cetak-pdf', [PdfController::class, 'exportProfilPemohon'])->name('admin.verification.cetak-pdf');
     });
 
 
@@ -148,5 +150,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/cari-arsip', [PencarianController::class, 'index'])->name('pencarian.index');
         Route::get('/cari-arsip/hasil', [PencarianController::class, 'search'])->name('pencarian.search');
         Route::get('/cari-arsip/{arsip}', [PencarianController::class, 'show'])->name('pencarian.detail');
+        Route::get('/cari-arsip/{arsip}/cetak-pdf', [PdfController::class, 'exportAktaNikah'])->name('pencarian.cetak-pdf');
     });
 });

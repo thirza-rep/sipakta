@@ -16,36 +16,42 @@
         </div>
 
         {{-- Main Hero Container --}}
-        <main class="max-w-5xl w-full px-6 py-12 flex flex-col items-center text-center animate-fade-in relative z-10">
-            {{-- Floating Badge --}}
-            <div class="mb-10 px-6 py-2 bg-teal-600/5 border border-teal-600/10 rounded-full inline-flex items-center gap-2 group cursor-default transition-all duration-500 hover:bg-teal-600/10">
-                <span class="w-2 h-2 bg-teal-500 rounded-full animate-ping"></span>
-                <span class="text-[10px] font-black text-teal-700 uppercase tracking-[0.2em]">Sistem Informasi Terpadu KUA</span>
-            </div>
+        <main class="max-w-7xl w-full px-6 py-12 lg:py-20 flex flex-col items-center animate-fade-in relative z-10">
+            
+            <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center mb-16">
+                
+                {{-- Left Column: Text & Branding --}}
+                <div class="flex flex-col items-center lg:items-start text-center lg:text-left space-y-8">
+                    {{-- Floating Badge --}}
+                    <div class="px-6 py-2 bg-teal-600/5 border border-teal-600/10 rounded-full inline-flex items-center gap-2 group cursor-default transition-all duration-500 hover:bg-teal-600/10">
+                        <span class="w-2 h-2 bg-teal-500 rounded-full animate-ping"></span>
+                        <span class="text-[10px] font-black text-teal-700 uppercase tracking-[0.2em]">Sistem Informasi Terpadu KUA</span>
+                    </div>
 
-            {{-- Brand Section --}}
-            <div class="mb-12 relative">
-                <div class="absolute inset-0 bg-teal-600/20 blur-[60px] rounded-full -z-10 animate-float opacity-50"></div>
-                <div class="relative w-32 h-32 md:w-40 md:h-40 mx-auto rounded-[2.5rem] bg-white p-1 shadow-2xl shadow-teal-600/20 rotate-3 transition-transform duration-700 hover:rotate-0 hover:scale-105">
-                    <img src="{{ asset('images/logo-kua.jpg') }}" alt="Logo KUA" class="w-full h-full rounded-[2.3rem] object-cover">
-                </div>
-                <h1 class="mt-10 text-6xl md:text-8xl font-black text-slate-900 tracking-tighter leading-none mb-6">
-                    SIPA<span class="text-teal-600">KTA</span>
-                </h1>
-                <p class="text-lg md:text-2xl font-bold text-slate-400 max-w-2xl mx-auto leading-relaxed">
-                    Sistem Informasi Pencarian dan <span class="text-slate-900">Pengarsipan Digital</span> Akta Nikah Kemantren Tegalrejo.
-                </p>
-            </div>
+                    {{-- Title Area --}}
+                    <div class="relative">
+                        <div class="flex items-center justify-center lg:justify-start gap-4 mb-6">
+                            <div class="w-16 h-16 rounded-2xl bg-white p-1 shadow-lg shadow-teal-600/10 rotate-3 transition-transform hover:rotate-0">
+                                <img src="{{ asset('images/logo-kua.jpg') }}" alt="Logo KUA" class="w-full h-full rounded-xl object-cover">
+                            </div>
+                            <h1 class="text-5xl md:text-7xl font-black text-slate-900 tracking-tighter leading-none">
+                                SIPA<span class="text-teal-600">KTA</span>
+                            </h1>
+                        </div>
+                        <p class="text-lg md:text-2xl font-bold text-slate-400 max-w-xl leading-relaxed">
+                            Sistem Informasi Pencarian dan <span class="text-slate-900">Pengarsipan Digital</span> Akta Nikah Kemantren Tegalrejo.
+                        </p>
+                    </div>
 
-            {{-- Glass Card Description --}}
-            <div class="glass-card rounded-[2.5rem] p-8 md:p-10 mb-12 max-w-2xl w-full translate-y-4 shadow-2xl">
-                <p class="text-slate-500 font-medium leading-loose text-sm md:text-base">
-                    Layanan terpadu kearsipan digital untuk mempermudah akses dan pengelolaan data pernikahan di lingkungan KUA Kemantren Tegalrejo, Kota Yogyakarta. Aman, Cepat, dan Akurat.
-                </p>
-            </div>
+                    {{-- Glass Card Description --}}
+                    <div class="glass-card rounded-3xl p-6 md:p-8 max-w-xl w-full shadow-xl border border-white/50 bg-white/40 backdrop-blur-sm">
+                        <p class="text-slate-600 font-medium leading-relaxed text-sm md:text-base">
+                            Layanan terpadu kearsipan digital untuk mempermudah akses dan pengelolaan data pernikahan di lingkungan KUA Kemantren Tegalrejo, Kota Yogyakarta. Aman, Cepat, dan Akurat.
+                        </p>
+                    </div>
 
             {{-- CTA Grid & Promo --}}
-            <div class="flex flex-col items-center gap-6 w-full max-w-xl">
+            <div class="flex flex-col items-center lg:items-start w-full max-w-xl">
                 @auth
                     <a href="{{ route('dashboard') }}" class="btn-premium btn-teal w-full text-lg shadow-teal-500/20 py-5">
                         🏠 Buka Dashboard
@@ -54,7 +60,7 @@
                     {{-- Promo Registration Box --}}
                     <div class="w-full bg-white/60 backdrop-blur-md border border-teal-200/50 p-6 rounded-3xl shadow-xl shadow-teal-500/5 relative overflow-hidden group">
                         <div class="absolute inset-0 bg-gradient-to-r from-teal-500/10 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        <div class="relative z-10 flex flex-col items-center text-center space-y-4">
+                        <div class="relative z-10 flex flex-col text-center lg:text-left space-y-4">
                             <h3 class="text-slate-800 font-bold text-lg md:text-xl">Butuh Salinan Akta Nikah Keluarga?</h3>
                             <p class="text-slate-500 text-sm md:text-base leading-relaxed">
                                 Masyarakat kini dapat melakukan pencarian digital untuk dokumen pernikahan keluarga secara mandiri. Daftar sekarang untuk mendapatkan akses pemohon.
@@ -72,6 +78,18 @@
                     </div>
                 @endauth
             </div>
+            
+            </div> {{-- End of Left Column --}}
+
+            {{-- Right Column: Beautiful Illustration --}}
+            <div class="hidden lg:flex justify-center items-center relative w-full h-full">
+                <div class="absolute inset-0 bg-gradient-to-tr from-teal-200/40 to-indigo-200/40 blur-[80px] rounded-full -z-10 animate-float opacity-60"></div>
+                <div class="relative w-[110%] max-w-lg aspect-square transform hover:scale-105 transition-transform duration-700 ease-out">
+                    <img src="{{ asset('images/kua-hero.png') }}" alt="Ilustrasi KUA" class="w-full h-full object-contain drop-shadow-2xl">
+                </div>
+            </div>
+            
+            </div> {{-- End of Grid --}}
 
             {{-- Feature Grid --}}
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 mt-24 w-full">

@@ -7,8 +7,7 @@
 Sistem web berbasis **Laravel 12** untuk pengelolaan arsip akta nikah dengan fitur role-based access control.
 
 ```
-kua-arsip/
-└── backend/          # Laravel Web Application
+kua-arsip/          # Laravel Web Application
 ```
 
 ---
@@ -36,12 +35,7 @@ kua-arsip/
 
 ## 🚀 Instalasi & Menjalankan
 
-1. **Masuk ke direktori backend**
-   ```bash
-   cd backend
-   ```
-
-2. **Install dependencies**
+1. **Install dependencies**
    ```bash
    composer install
    npm install
@@ -98,7 +92,7 @@ Akses aplikasi di: `http://localhost:8000`
 ## 📁 Struktur Proyek
 
 ```
-backend/
+sipakta/
 ├── app/
 │   ├── Http/
 │   │   ├── Controllers/

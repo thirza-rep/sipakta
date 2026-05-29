@@ -10,9 +10,33 @@
 <body class="antialiased selection:bg-teal-500/30">
     <div class="min-h-screen bg-slate-50 relative overflow-hidden flex flex-col items-center justify-center font-sans">
         {{-- Decorative Background --}}
-        <div class="absolute top-0 left-0 w-full h-full -z-10">
-            <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-teal-500/10 blur-[120px] rounded-full animate-pulse"></div>
-            <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-indigo-500/10 blur-[150px] rounded-full animate-float"></div>
+        <div class="absolute top-0 left-0 w-full h-full -z-10 pointer-events-none">
+            {{-- Subtle Islamic Geometric Overlay Pattern --}}
+            <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%230f766e\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+            
+            {{-- Ambient Glowing Orbs --}}
+            <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-teal-500/15 blur-[120px] rounded-full animate-pulse"></div>
+            <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-indigo-500/15 blur-[150px] rounded-full animate-float"></div>
+            <div class="absolute top-[20%] right-[10%] w-[30%] h-[30%] bg-amber-500/10 blur-[100px] rounded-full animate-pulse" style="animation-delay: 2s;"></div>
+
+            {{-- Minimalist Mosque Silhouette Graphic (Inline SVG) --}}
+            <div class="absolute bottom-0 left-0 w-full opacity-5">
+                <svg viewBox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto min-h-[200px]" preserveAspectRatio="none">
+                    {{-- Base Ground & Hills --}}
+                    <path fill="#0f766e" d="M0 300h1200v-80c-40-10-80-5-120 10s-90 30-140 30-100-20-150-30-110 0-160 15-90 30-140 30-100-20-150-30-110 0-160 15-90 30-140 30-40 0-40 0v-20z" />
+                    {{-- Grand Mosque Center --}}
+                    <path fill="#0f766e" d="M600 240c0-60-45-110-100-110s-100 50-100 110v10h200v-10z" />
+                    <path fill="#0f766e" d="M500 130l-3 40h6l-3-40z" />
+                    {{-- Small Domes Left & Right --}}
+                    <path fill="#0f766e" d="M350 250c0-40-25-70-55-70s-55 30-55 70v10h110v-10z" />
+                    <path fill="#0f766e" d="M295 180l-2 30h4l-2-30z" />
+                    <path fill="#0f766e" d="M850 250c0-40-25-70-55-70s-55 30-55 70v10h110v-10z" />
+                    <path fill="#0f766e" d="M795 180l-2 30h4l-2-30z" />
+                    {{-- Minarets --}}
+                    <path fill="#0f766e" d="M430 250v-120h10v120h-10z M435 130l-5 20h10l-5-20z" />
+                    <path fill="#0f766e" d="M760 250v-120h10v120h-10z M765 130l-5 20h10l-5-20z" />
+                </svg>
+            </div>
         </div>
 
         {{-- Main Hero Container --}}

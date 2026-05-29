@@ -277,9 +277,8 @@
                             ℹ️ Pastikan semua data sesuai KTP asli. Setelah diajukan, data akan diperiksa oleh Admin KUA.
                         </p>
                         @if(!$isPending && !$isVerified)
-                            <button type="submit"
-                                    class="w-full sm:w-auto px-10 py-4 bg-teal-600 text-white rounded-xl font-bold text-base shadow-lg hover:bg-teal-700 active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
-                                    {{ !$allComplete ? 'disabled title=Lengkapi semua checklist di atas terlebih dahulu' : '' }}>
+                            <button type="submit" id="btn-submit-form"
+                                    class="w-full sm:w-auto px-10 py-4 bg-teal-600 text-white rounded-xl font-bold text-base shadow-lg hover:bg-teal-700 active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed">
                                 📤 Ajukan Verifikasi Profil
                             </button>
                         @elseif($isPending)

@@ -124,10 +124,7 @@ class User extends Authenticatable
     /**
      * Get user's arsip entries
      */
-    public function arsip()
-    {
-        return $this->hasMany(Arsip::class);
-    }
+
 
     /**
      * Get user's akta nikah entries

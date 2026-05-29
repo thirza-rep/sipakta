@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "367d2c24a9d8e3e5a3ae00df20a9323c",
+    "content-hash": "b850cc1d7af078f6a6d40a92f3e41be2",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -1623,16 +1623,16 @@
         },
         {
             "name": "laravel/scout",
-            "version": "v10.24.0",
+            "version": "v11.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/scout.git",
-                "reference": "f9864d9a727a0c0d6b95e08ed92df8c301ae6d2c"
+                "reference": "5a267813fe0d7bca58b993c3bae592b2c814591e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/scout/zipball/f9864d9a727a0c0d6b95e08ed92df8c301ae6d2c",
-                "reference": "f9864d9a727a0c0d6b95e08ed92df8c301ae6d2c",
+                "url": "https://api.github.com/repos/laravel/scout/zipball/5a267813fe0d7bca58b993c3bae592b2c814591e",
+                "reference": "5a267813fe0d7bca58b993c3bae592b2c814591e",
                 "shasum": ""
             },
             "require": {
@@ -1671,7 +1671,7 @@
                     ]
                 },
                 "branch-alias": {
-                    "dev-master": "10.x-dev"
+                    "dev-master": "11.x-dev"
                 }
             },
             "autoload": {
@@ -1699,7 +1699,7 @@
                 "issues": "https://github.com/laravel/scout/issues",
                 "source": "https://github.com/laravel/scout"
             },
-            "time": "2026-02-10T18:44:39+00:00"
+            "time": "2026-05-13T15:50:06+00:00"
         },
         {
             "name": "laravel/serializable-closure",

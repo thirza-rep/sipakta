@@ -367,7 +367,54 @@
                         const result = await response.json();
 
                         if (response.ok && result.success) {
-                            window.location.reload();
+                            // Update UI instead of reloading to prevent data loss
+                            otpPanel.classList.add('hidden');
+                            inputPhone.setAttribute('readonly', 'true');
+                            
+                            if (btnSendOtp && btnSendOtp.parentNode) {
+                                const badge = document.createElement('span');
+                                badge.id = 'wa-verified-badge';
+                                badge.className = 'inline-flex items-center gap-2 px-5 py-4 bg-green-100 text-green-800 border-2 border-green-300 rounded-xl font-bold text-sm whitespace-nowrap';
+                                badge.textContent = '✓ Terverifikasi';
+                                btnSendOtp.parentNode.replaceChild(badge, btnSendOtp);
+                            }
+                            phoneMeta.innerHTML = '✅ Nomor terverifikasi via OTP WhatsApp.';
+                            
+                            // Enable submit button
+                            const submitBtn = document.querySelector('button[type="submit"]');
+                            if(submitBtn) {
+                                submitBtn.disabled = false;
+                                submitBtn.removeAttribute('title');
+                            }
+
+                            // Update Checklist UI visually
+                            const waChecklist = document.querySelectorAll('.rounded-xl.bg-amber-50')[0]; // Find first amber checklist, usually WA if email is done
+                            if(waChecklist && waChecklist.innerHTML.includes('WhatsApp')) {
+                                waChecklist.classList.remove('bg-amber-50', 'border-amber-200');
+                                waChecklist.classList.add('bg-green-50', 'border-green-200');
+                                
+                                const waIcon = waChecklist.querySelector('.rounded-full');
+                                if(waIcon) {
+                                    waIcon.classList.remove('bg-amber-400');
+                                    waIcon.classList.add('bg-green-500');
+                                    waIcon.textContent = '✓';
+                                }
+                                
+                                const waTitle = waChecklist.querySelector('h4');
+                                if(waTitle) {
+                                    waTitle.classList.remove('text-amber-800');
+                                    waTitle.classList.add('text-green-800');
+                                }
+                                
+                                const waDesc = waChecklist.querySelector('p');
+                                if(waDesc) {
+                                    waDesc.classList.remove('text-amber-700');
+                                    waDesc.classList.add('text-green-700');
+                                    waDesc.innerHTML = 'Nomor <strong>' + phone + '</strong> sudah terverifikasi via OTP WhatsApp.';
+                                }
+                            }
+                            
+                            alert('Nomor WhatsApp berhasil diverifikasi! Silakan lanjutkan melengkapi form dan klik "Ajukan Verifikasi Profil".');
                         } else {
                             btnVerifyOtp.textContent = 'Verifikasi OTP'; btnVerifyOtp.disabled = false;
                             showMsg(result.message || 'Kode OTP salah.', 'text-red-600');

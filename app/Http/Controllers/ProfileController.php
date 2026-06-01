@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -33,7 +34,7 @@ class ProfileController extends Controller
             $request->user()->email_verified_at = null;
         }
 
-        if ($request->hasFile('foto_profil')) {
+        if ($request->filled('foto_profil') && str_starts_with($request->foto_profil, 'data:image')) {
             $user = $request->user();
             
             // Delete old photo if exists
@@ -41,9 +42,17 @@ class ProfileController extends Controller
                 Storage::disk('public')->delete($user->foto_profil);
             }
             
+            // Decode base64
+            $image_parts = explode(";base64,", $request->foto_profil);
+            $image_type_aux = explode("image/", $image_parts[0]);
+            $image_type = $image_type_aux[1];
+            $image_base64 = base64_decode($image_parts[1]);
+            
+            $fileName = 'profile_photos/' . Str::uuid() . '.' . $image_type;
+            
             // Store new photo
-            $path = $request->file('foto_profil')->store('profile_photos', 'public');
-            $user->foto_profil = $path;
+            Storage::disk('public')->put($fileName, $image_base64);
+            $user->foto_profil = $fileName;
         }
 
         $request->user()->save();

@@ -39,18 +39,40 @@
         <div class="bg-slate-50 rounded-[2rem] p-8 border border-slate-100 flex flex-col items-center justify-center text-center">
             <div class="w-32 h-32 rounded-full overflow-hidden shadow-xl shadow-slate-200 flex items-center justify-center text-4xl font-black text-slate-900 mb-4 border-4 border-white bg-white">
                 @if($user->foto_profil)
-                    <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="w-full h-full object-cover">
+                    <img id="avatar-preview" src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="w-full h-full object-cover">
                 @else
-                    {{ strtoupper(substr($user->name, 0, 1)) }}
+                    <div id="avatar-initials">{{ strtoupper(substr($user->name, 0, 1)) }}</div>
+                    <img id="avatar-preview" src="" class="hidden w-full h-full object-cover">
                 @endif
             </div>
             
-            <div class="w-full max-w-xs mt-2 mb-6">
-                <label for="foto_profil" class="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 cursor-pointer hover:text-indigo-600 transition">
-                    Ubah Foto Profil (Opsional)
+            <div class="w-full max-w-xs mt-2 mb-6" x-data="cameraCapture()">
+                <label class="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 cursor-pointer hover:text-indigo-600 transition">
+                    Ubah Foto Profil (Kamera Langsung)
                 </label>
-                <input id="foto_profil" name="foto_profil" type="file" accept="image/jpeg,image/png,image/jpg"
-                       class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 cursor-pointer">
+                
+                <input type="hidden" name="foto_profil" x-model="fotoBase64">
+                
+                <template x-if="!isCameraOpen">
+                    <button type="button" @click="openCamera()" class="w-full px-4 py-3 bg-indigo-50 text-indigo-700 text-sm font-bold rounded-xl hover:bg-indigo-100 transition shadow-sm border border-indigo-100 flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        Buka Kamera
+                    </button>
+                </template>
+                
+                <template x-if="isCameraOpen">
+                    <div class="relative w-full rounded-2xl overflow-hidden shadow-lg border border-slate-200 mt-2 bg-slate-900">
+                        <video x-ref="video" autoplay playsinline class="w-full aspect-[3/4] object-cover transform -scale-x-100"></video>
+                        <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-4">
+                            <button type="button" @click="capturePhoto()" class="w-14 h-14 bg-white/80 backdrop-blur-sm rounded-full border-4 border-indigo-500 shadow-xl active:scale-95 transition"></button>
+                            <button type="button" @click="closeCamera()" class="absolute right-4 bottom-2 w-10 h-10 bg-red-500/80 backdrop-blur-sm text-white rounded-full font-bold active:scale-95 flex items-center justify-center shadow-lg">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            </button>
+                        </div>
+                        <canvas x-ref="canvas" class="hidden"></canvas>
+                    </div>
+                </template>
+
                 @error('foto_profil')<p class="text-red-500 text-[10px] font-bold mt-2 uppercase tracking-wider">{{ $message }}</p>@enderror
             </div>
 
@@ -59,3 +81,65 @@
         </div>
     </form>
 </section>
+
+<script>
+function cameraCapture() {
+    return {
+        isCameraOpen: false,
+        fotoBase64: '',
+        stream: null,
+        
+        async openCamera() {
+            try {
+                this.stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { facingMode: 'user', width: { ideal: 720 }, height: { ideal: 960 } } 
+                });
+                this.isCameraOpen = true;
+                this.$nextTick(() => {
+                    this.$refs.video.srcObject = this.stream;
+                });
+            } catch (err) {
+                alert('Tidak dapat mengakses kamera: ' + err.message + '. Pastikan Anda memberi izin kamera pada browser.');
+            }
+        },
+        
+        capturePhoto() {
+            const video = this.$refs.video;
+            const canvas = this.$refs.canvas;
+            
+            // Set canvas size for compression (400px width)
+            canvas.width = 400;
+            canvas.height = 400 * (video.videoHeight / video.videoWidth);
+            
+            const ctx = canvas.getContext('2d');
+            // Mirror image horizontally to match mirrored video
+            ctx.translate(canvas.width, 0);
+            ctx.scale(-1, 1);
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            
+            // Compress with 0.8 quality
+            this.fotoBase64 = canvas.toDataURL('image/jpeg', 0.8);
+            
+            // Update preview image directly
+            const imgPreview = document.getElementById('avatar-preview');
+            const initials = document.getElementById('avatar-initials');
+            
+            if (imgPreview) {
+                imgPreview.src = this.fotoBase64;
+                imgPreview.classList.remove('hidden');
+                if(initials) initials.classList.add('hidden');
+            }
+            
+            this.closeCamera();
+        },
+        
+        closeCamera() {
+            if (this.stream) {
+                this.stream.getTracks().forEach(track => track.stop());
+                this.stream = null;
+            }
+            this.isCameraOpen = false;
+        }
+    }
+}
+</script>

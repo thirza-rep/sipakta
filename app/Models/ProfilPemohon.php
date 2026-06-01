@@ -21,6 +21,10 @@ class ProfilPemohon extends Model
         'alamat',
         'no_telepon',
         'keperluan',
+        'foto_ktp',
+        'status',
+        'rejected_reason',
+        'phone_verified_at'
     ];
 
     protected $casts = [

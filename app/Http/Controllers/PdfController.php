@@ -6,19 +6,20 @@ use App\Models\ProfilPemohon;
 use App\Models\AktaNikah;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PdfController extends Controller
 {
     /**
      * Export PDF salinan data pemohon (untuk Admin)
      */
-    public function exportProfilPemohon($id)
+    public function exportProfilPemohon(string $id)
     {
         $profil = ProfilPemohon::with('user')->findOrFail($id);
 
         $pdf = Pdf::loadView('pdf.profil-pemohon-pdf', [
             'profil' => $profil,
-            'petugasNama' => auth()->user()->name,
+            'petugasNama' => Auth::user()?->name ?? 'Admin',
             'tanggalCetak' => now()->translatedFormat('d F Y, H:i'),
         ]);
 
@@ -30,10 +31,11 @@ class PdfController extends Controller
     /**
      * Export PDF salinan arsip akta nikah (untuk Pemohon)
      */
-    public function exportAktaNikah($id)
+    public function exportAktaNikah(string $id)
     {
         $akta = AktaNikah::findOrFail($id);
-        $user = auth()->user();
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
         $profil = $user->profilPemohon;
 
         $pdf = Pdf::loadView('pdf.akta-nikah-pdf', [

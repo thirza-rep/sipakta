@@ -31,6 +31,7 @@ class User extends Authenticatable
         'password',
         'role',
         'is_active',
+        'foto_profil',
     ];
 
     /**
@@ -187,5 +188,19 @@ class User extends Authenticatable
             self::ROLE_PEMOHON => 'Pemohon',
             default => ucfirst($this->role),
         };
+    }
+
+    /**
+     * Get user's avatar URL
+     */
+    public function getAvatarUrlAttribute(): string
+    {
+        if ($this->foto_profil) {
+            return asset('storage/' . $this->foto_profil);
+        }
+        
+        // Default UI avatar based on name
+        $name = urlencode($this->name);
+        return "https://ui-avatars.com/api/?name={$name}&color=7F9CF5&background=EBF4FF";
     }
 }

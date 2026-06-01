@@ -1,7 +1,7 @@
 <section>
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">@csrf</form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <form method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data" class="grid grid-cols-1 md:grid-cols-2 gap-8">
         @csrf
         @method('patch')
 
@@ -37,10 +37,24 @@
         </div>
         
         <div class="bg-slate-50 rounded-[2rem] p-8 border border-slate-100 flex flex-col items-center justify-center text-center">
-            <div class="w-20 h-20 rounded-full bg-white shadow-xl shadow-slate-100 flex items-center justify-center text-3xl font-black text-slate-900 mb-4 border-4 border-white">
-                {{ strtoupper(substr($user->name, 0, 1)) }}
+            <div class="w-32 h-32 rounded-full overflow-hidden shadow-xl shadow-slate-200 flex items-center justify-center text-4xl font-black text-slate-900 mb-4 border-4 border-white bg-white">
+                @if($user->foto_profil)
+                    <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="w-full h-full object-cover">
+                @else
+                    {{ strtoupper(substr($user->name, 0, 1)) }}
+                @endif
             </div>
-            <h4 class="font-black text-slate-900">{{ $user->name }}</h4>
+            
+            <div class="w-full max-w-xs mt-2 mb-6">
+                <label for="foto_profil" class="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 cursor-pointer hover:text-indigo-600 transition">
+                    Ubah Foto Profil (Opsional)
+                </label>
+                <input id="foto_profil" name="foto_profil" type="file" accept="image/jpeg,image/png,image/jpg"
+                       class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 cursor-pointer">
+                @error('foto_profil')<p class="text-red-500 text-[10px] font-bold mt-2 uppercase tracking-wider">{{ $message }}</p>@enderror
+            </div>
+
+            <h4 class="font-black text-slate-900 text-xl">{{ $user->name }}</h4>
             <p class="text-xs font-bold text-slate-400 mt-1 uppercase tracking-widest">{{ $user->role_display }}</p>
         </div>
     </form>

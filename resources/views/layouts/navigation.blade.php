@@ -58,8 +58,12 @@
                                 <div class="text-xs font-black text-slate-900 leading-tight group-hover:text-teal-700 transition">{{ Auth::user()->name }}</div>
                                 <div class="text-[9px] text-slate-400 font-bold uppercase tracking-wider mt-0.5 group-hover:text-teal-400 transition">{{ Auth::user()->role_display }}</div>
                             </div>
-                            <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center text-white shadow-lg shadow-teal-600/20 group-hover:scale-105 transition duration-300 uppercase font-black text-sm">
-                                {{ substr(Auth::user()->name, 0, 1) }}
+                            <div class="h-10 w-10 rounded-xl overflow-hidden bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center text-white shadow-lg shadow-teal-600/20 group-hover:scale-105 transition duration-300 uppercase font-black text-sm">
+                                @if(Auth::user()->foto_profil)
+                                    <img src="{{ Auth::user()->avatar_url }}" alt="{{ Auth::user()->name }}" class="w-full h-full object-cover">
+                                @else
+                                    {{ substr(Auth::user()->name, 0, 1) }}
+                                @endif
                             </div>
                             <svg class="w-4 h-4 mx-2 text-slate-400 group-hover:text-teal-600 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -135,8 +139,12 @@
 
             <div class="pt-6 mt-6 border-t border-slate-100">
                 <div class="flex items-center px-4 mb-6">
-                    <div class="h-12 w-12 rounded-2xl bg-teal-600 flex items-center justify-center text-white shadow-lg font-black uppercase">
-                        {{ substr(Auth::user()->name, 0, 1) }}
+                    <div class="h-12 w-12 rounded-2xl overflow-hidden bg-teal-600 flex items-center justify-center text-white shadow-lg font-black uppercase">
+                        @if(Auth::user()->foto_profil)
+                            <img src="{{ Auth::user()->avatar_url }}" alt="{{ Auth::user()->name }}" class="w-full h-full object-cover">
+                        @else
+                            {{ substr(Auth::user()->name, 0, 1) }}
+                        @endif
                     </div>
                     <div class="ml-4">
                         <div class="text-base font-black text-slate-900 leading-tight">{{ Auth::user()->name }}</div>

@@ -4,3 +4,27 @@
 2026/05/30-02:55:20.377 297fad Level-0 table #5: started
 2026/05/30-02:55:20.388 297fad Level-0 table #5: 18384 bytes OK
 2026/05/30-02:55:20.392 297fad Delete type=0 #3
+2026/05/30-14:19:46.948 297fad Level-0 table #7: started
+2026/05/30-14:19:46.966 297fad Level-0 table #7: 16022 bytes OK
+2026/05/30-14:19:46.971 297fad Delete type=0 #4
+2026/05/30-17:15:21.730 297fad Level-0 table #9: started
+2026/05/30-17:15:21.749 297fad Level-0 table #9: 18092 bytes OK
+2026/05/30-17:15:21.752 297fad Delete type=0 #6
+2026/05/30-19:52:50.369 297fad Level-0 table #11: started
+2026/05/30-19:52:50.385 297fad Level-0 table #11: 17917 bytes OK
+2026/05/30-19:52:50.389 297fad Delete type=0 #8
+2026/05/31-07:56:44.392 297fad Level-0 table #13: started
+2026/05/31-07:56:44.410 297fad Level-0 table #13: 15297 bytes OK
+2026/05/31-07:56:44.415 297fad Delete type=0 #10
+2026/06/01-11:05:24.988 297fad Level-0 table #15: started
+2026/06/01-11:05:25.005 297fad Level-0 table #15: 14316 bytes OK
+2026/06/01-11:05:25.009 297fad Delete type=0 #12
+2026/06/01-11:05:25.010 297fad Compacting 4@0 + 1@1 files
+2026/06/01-11:05:25.033 297fad Generated table #16@0: 12 keys, 2042 bytes
+2026/06/01-11:05:25.033 297fad Compacted 4@0 + 1@1 files => 2042 bytes
+2026/06/01-11:05:25.034 297fad compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/06/01-11:05:25.035 297fad Delete type=2 #15
+2026/06/01-11:05:25.035 297fad Delete type=2 #7
+2026/06/01-11:05:25.035 297fad Delete type=2 #13
+2026/06/01-11:05:25.035 297fad Delete type=2 #11
+2026/06/01-11:05:25.035 297fad Delete type=2 #9

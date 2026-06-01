@@ -32,6 +32,14 @@ class AktaNikah extends Model
     }
 
     /**
+     * Check if the document has a digital file uploaded.
+     */
+    public function hasDocument(): bool
+    {
+        return !empty($this->file_path);
+    }
+
+    /**
      * Get the indexable data array for the model.
      *
      * @return array<string, mixed>

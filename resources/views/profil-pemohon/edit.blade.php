@@ -9,7 +9,7 @@
     @php
         $emailVerified = $user->email_verified_at !== null;
         $dataLengkap = $profil && $profil->nik && $profil->nama_lengkap && $profil->alamat;
-        $waVerified = $profil && $profil->phone_verified_at !== null;
+        $waVerified = ($profil && $profil->phone_verified_at !== null) || session()->has('verified_phone_number');
         $ktpUploaded = $profil && $profil->foto_ktp !== null;
         $allComplete = $emailVerified && $dataLengkap && $waVerified && $ktpUploaded;
         $isPending = $profil && $profil->status === 'pending_verification';
@@ -142,6 +142,19 @@
             <div class="bg-amber-50 border-2 border-amber-300 p-5 rounded-2xl flex items-center gap-4">
                 <span class="text-2xl">⚠️</span>
                 <p class="text-amber-900 font-bold">{{ session('warning') }}</p>
+            </div>
+        @endif
+        @if($errors->any())
+            <div class="bg-red-50 border-2 border-red-300 p-5 rounded-2xl flex flex-col gap-2">
+                <div class="flex items-center gap-4">
+                    <span class="text-2xl">❌</span>
+                    <p class="text-red-900 font-bold">Gagal menyimpan profil. Silakan periksa pesan error di bawah ini:</p>
+                </div>
+                <ul class="list-disc list-inside text-sm text-red-700 ml-10 font-bold">
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
         @endif
 

@@ -64,11 +64,12 @@ class ProfilPemohonController extends Controller
         // Either the phone number hasn't changed from a previously verified number,
         // or the new number is verified in the session.
         $phoneVerified = false;
-        $phoneNumber = $validated['no_telepon'];
+        $phoneNumber = trim($validated['no_telepon']);
+        $sessionPhone = session('verified_phone_number');
 
         if ($profil && $profil->phone_verified_at && $profil->no_telepon === $phoneNumber) {
             $phoneVerified = true;
-        } elseif (session('verified_phone_number') === $phoneNumber) {
+        } elseif ($sessionPhone && trim($sessionPhone) === $phoneNumber) {
             $phoneVerified = true;
         }
 

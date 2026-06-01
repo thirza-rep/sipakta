@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 
 class ProfilPemohonController extends Controller
 {
-    protected $otpService;
+    protected OtpService $otpService;
 
     public function __construct(OtpService $otpService)
     {
@@ -22,6 +22,7 @@ class ProfilPemohonController extends Controller
      */
     public function edit()
     {
+        /** @var \App\Models\User $user */
         $user = auth()->user();
         $profil = $user->profilPemohon ?? new ProfilPemohon(['user_id' => $user->id, 'nama_lengkap' => $user->name]);
 
@@ -33,6 +34,7 @@ class ProfilPemohonController extends Controller
      */
     public function update(Request $request)
     {
+        /** @var \App\Models\User $user */
         $user = auth()->user();
         $profil = $user->profilPemohon;
 
@@ -125,6 +127,7 @@ class ProfilPemohonController extends Controller
      */
     public function show()
     {
+        /** @var \App\Models\User $user */
         $user = auth()->user();
         $profil = $user->profilPemohon;
 
@@ -148,8 +151,10 @@ class ProfilPemohonController extends Controller
 
             $phone = $request->no_telepon;
             
+            /** @var \App\Models\User $currentUser */
+            $currentUser = auth()->user();
             // Generate OTP
-            $code = $this->otpService->generateOtp($phone, 'phone', auth()->id());
+            $code = $this->otpService->generateOtp($phone, 'phone', $currentUser->id);
             
             // Send OTP
             $sent = $this->otpService->sendWhatsAppOtp($phone, $code);
@@ -196,6 +201,7 @@ class ProfilPemohonController extends Controller
                 session(['verified_phone_number' => $phone]);
 
                 // If user already has profile database record, update it immediately
+                /** @var \App\Models\User $user */
                 $user = auth()->user();
                 if ($user->profilPemohon) {
                     $user->profilPemohon->update([

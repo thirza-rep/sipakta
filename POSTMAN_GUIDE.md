@@ -47,16 +47,78 @@ Karena ini adalah aplikasi Web (menggunakan sesi bawaan Laravel, bukan Token API
 1. Buka koleksi Sipakta di Postman.
 2. Cari kelompok *routes* untuk autentikasi (biasanya di Auth atau AuthenticatedSessionController).
 3. Buka tab untuk **POST `/login`**.
-4. Di bagian tab **Body**, masukkan email dan password dari salah satu akun seeder (misal: `admin@kua.go.id`).
+4. Di tab **Body**, pilih tipe **raw** lalu ganti format teks dari **Text** menjadi **JSON**. Masukkan format *raw* untuk login (lihat panduan Payload di bawah).
 5. Klik **Send**.
 6. Jika login berhasil, **Postman akan secara otomatis menyimpan Cookies sesi (Session Cookie)** dari Laravel.
 7. Sekarang Anda bebas memanggil *endpoint* lain (seperti `/profil-pemohon` atau `/arsip`) dan Postman akan menyertakan *cookie* tersebut secara otomatis!
 
 ---
 
-## 4. Pengaturan Lanjutan (Opsional)
+## 4. Contoh Format "Raw" JSON (Payload) untuk Pengujian
 
-Jika Anda ingin mengubah format ekspor (misalnya menambahkan penjelasan khusus, mengekspor *route* tertentu saja, atau menyalakan fungsi data *form*), Anda dapat memodifikasi berkas konfigurasi di:
+Saat Anda ingin mengirimkan data dari Postman ke *endpoint* spesifik, gunakan tab **Body** -> pilih **raw** -> pilih tipe **JSON**. Berikut adalah daftar *raw JSON* yang diperlukan untuk masing-masing fungsi utama di Sipakta:
+
+### 🔑 A. Autentikasi (Login & Register)
+
+**1. POST `/login`** (Untuk mendapatkan akses/Cookie)
+```json
+{
+    "email": "admin@kua.go.id",
+    "password": "password"
+}
+```
+
+**2. POST `/register`** (Membuat akun pemohon baru)
+```json
+{
+    "name": "Budi Santoso",
+    "email": "budi.pemohon@example.com",
+    "password": "password123",
+    "password_confirmation": "password123"
+}
+```
+
+### 📱 B. Modul Verifikasi WhatsApp (Profil Pemohon)
+
+Pastikan Anda sudah **Login sebagai Pemohon** sebelum memanggil *endpoint* ini.
+
+**1. POST `/profil-pemohon/send-otp`** (Meminta pengiriman OTP ke WA)
+```json
+{
+    "no_telepon": "081234567890"
+}
+```
+*Catatan: Nomor telepon minimal 9 digit dan maksimal 16 digit.*
+
+**2. POST `/profil-pemohon/verify-otp`** (Memverifikasi OTP yang dikirim ke WA)
+```json
+{
+    "no_telepon": "081234567890",
+    "otp": "123456"
+}
+```
+*Catatan: OTP wajib tepat 6 digit (berupa string).*
+
+### 📋 C. Modul Profil Pemohon
+
+**POST `/profil-pemohon/update`** (Melengkapi NIK, Alamat, dan KTP)
+⚠️ **PERHATIAN KHUSUS:** Karena *endpoint* ini mensyaratkan unggahan *file* foto KTP, Anda **TIDAK BISA** menggunakan tipe *raw JSON*. 
+
+Untuk *endpoint* ini, buka tab **Body** di Postman dan pilih tipe **form-data**. Lalu isi kolom berikut secara manual:
+
+| Key | Value (Contoh) | Tipe Kolom (Pilih di Postman) |
+| :--- | :--- | :--- |
+| `nik` | `3201234567890123` | Text (Wajib 16 digit angka) |
+| `nama_lengkap` | `Budi Santoso` | Text |
+| `alamat` | `Jl. Merdeka No. 10` | Text |
+| `no_telepon` | `081234567890` | Text (Wajib sama dengan yang diverifikasi) |
+| `foto_ktp` | *(Pilih file gambar KTP dari komputer)* | **File** |
+
+---
+
+## 5. Pengaturan Lanjutan Konfigurasi Ekspor (Opsional)
+
+Jika Anda ingin mengubah format ekspor (misalnya mengekspor *route* tertentu saja atau menyalakan fungsi data *form* *dummy* bawaan *package*), Anda dapat memodifikasi berkas konfigurasi di:
 
 📂 `config/api-postman.php`
 

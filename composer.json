@@ -15,6 +15,7 @@
         "meilisearch/meilisearch-php": "^1.16"
     },
     "require-dev": {
+        "andreaselia/laravel-api-to-postman": "^2.3",
         "fakerphp/faker": "^1.23",
         "laravel/breeze": "^2.3",
         "laravel/pail": "^1.2.2",

@@ -25,3 +25,14 @@ Thumbs.db
 
 .npm
 /storage/app/public/arsip/*.pdf
+
+# WhatsApp Web JS Cache
+.wwebjs_auth/
+.wwebjs_cache/
+
+# User Uploaded KTP & Arsip
+/storage/app/public/ktp/
+/storage/app/public/arsip/
+
+# Postman Exports
+/storage/app/private/postman/

@@ -1,158 +1,152 @@
-# KUA Arsip - Sistem Pengarsipan Akta Nikah
+# Sipakta - Sistem Informasi Pengarsipan Akta Nikah
 
-> Sistem Informasi Pengarsipan Akta Nikah Berbasis Web untuk Kantor Urusan Agama Kemantren Tegalrejo
+Sistem Informasi Pengarsipan Akta Nikah (Sipakta) adalah aplikasi berbasis web yang dikembangkan untuk Kantor Urusan Agama (KUA). Sistem ini memfasilitasi pengarsipan, pencarian, dan pelaporan akta nikah, serta pendaftaran profil pemohon secara mandiri dengan verifikasi WhatsApp OTP otomatis.
 
-## 📋 Overview
+## Arsitektur Sistem
 
-Sistem web berbasis **Laravel 12** untuk pengelolaan arsip akta nikah dengan fitur role-based access control.
+Aplikasi ini dibangun menggunakan arsitektur modern untuk memastikan performa dan keandalan tinggi:
 
-```
-kua-arsip/          # Laravel Web Application
-```
+- **Web Framework:** Laravel 12 (PHP 8.2+)
+- **Database:** MySQL
+- **Messaging/OTP:** Node.js (whatsapp-web.js) terintegrasi dengan Puppeteer
+- **Containerization:** Docker & Docker Compose (Nginx, PHP-FPM, MySQL)
+- **Styling:** Tailwind CSS & Alpine.js
 
----
+## Hak Akses (Role-Based Access Control)
 
-## 🔐 Role & Hak Akses
+Sistem ini mendukung pembatasan akses berbasis peran (Role) sebagai berikut:
 
-| Role | Hak Akses |
-|------|-----------|
-| **Admin** | Kelola pengguna (CRUD, activate/deactivate) |
-| **Administrator Data** | Input, edit, upload arsip akta nikah, generate laporan |
-| **Kepala KUA** | Lihat arsip (read-only), lihat & download laporan |
+1. **Pemohon**
+   - Melakukan pendaftaran profil.
+   - Melakukan verifikasi nomor telepon melalui WhatsApp OTP (Real-time).
+   - Mengunggah foto KTP dan melengkapi data pribadi.
+   - Mengambil foto profil secara langsung melalui WebRTC Camera.
 
----
+2. **Pengelola Data (Administrator Data)**
+   - Mengelola (Input, Edit, Hapus) arsip akta nikah.
+   - Mengunggah salinan dokumen fisik (PDF/Gambar).
+   - Menyetujui atau menolak profil pemohon yang baru mendaftar.
+   - Menghasilkan laporan bulanan dan rekapitulasi tahunan.
 
-## 🔧 Teknologi Stack
+3. **Kepala KUA**
+   - Melihat dan memantau arsip akta nikah (Read-only).
+   - Mengunduh dan mencetak laporan operasional.
 
-- **Framework**: Laravel 12
-- **PHP Version**: 8.2+
-- **Database**: MySQL / SQLite
-- **Authentication**: Laravel Breeze
-- **PDF Export**: DomPDF
-- **Styling**: Tailwind CSS
+4. **Admin Sistem**
+   - Mengelola akun pengguna (CRUD).
+   - Mengaktifkan atau menonaktifkan pengguna.
 
----
+## Panduan Instalasi (Development)
 
-## 🚀 Instalasi & Menjalankan
+Proyek ini telah dikonfigurasi sepenuhnya menggunakan Docker untuk mempermudah proses pengembangan lokal.
 
-1. **Install dependencies**
+### Prasyarat
+- Docker Desktop terinstal dan berjalan.
+- Node.js (Minimal v18 LTS) terinstal di mesin lokal (untuk modul WhatsApp).
+- Composer terinstal di mesin lokal.
+
+### Langkah Instalasi
+
+1. **Kloning Repositori**
+   ```bash
+   git clone https://github.com/thirza-rep/sipakta.git
+   cd sipakta
+   ```
+
+2. **Instalasi Dependensi PHP & Node.js**
    ```bash
    composer install
    npm install
    ```
 
-3. **Setup environment**
+3. **Konfigurasi Environment**
+   Salin file konfigurasi bawaan.
    ```bash
    cp .env.example .env
-   php artisan key:generate
    ```
-
-4. **Konfigurasi database** - Edit file `.env`:
+   Pastikan pengaturan basis data pada `.env` sudah mengarah ke kontainer Docker:
    ```env
    DB_CONNECTION=mysql
-   DB_HOST=127.0.0.1
+   DB_HOST=sipakta-db
    DB_PORT=3306
-   DB_DATABASE=kua_arsip
+   DB_DATABASE=sipakta
    DB_USERNAME=root
-   DB_PASSWORD=
+   DB_PASSWORD=root
    ```
 
-5. **Jalankan migrasi & seeder**
+4. **Menjalankan Kontainer Docker**
    ```bash
-   php artisan migrate
-   php artisan db:seed
-   php artisan storage:link
+   docker-compose -f backend/docker-compose.yml up -d
    ```
 
-6. **Jalankan server**
+5. **Migrasi dan Penyemaian Data (Seeding)**
+   Eksekusi perintah artisan di dalam kontainer aplikasi.
    ```bash
-   php artisan serve
-   npm run dev
+   docker exec -it sipakta-app php artisan migrate:fresh --seed
+   docker exec -it sipakta-app php artisan storage:link
    ```
 
-   Atau sekaligus:
+6. **Menjalankan Modul WhatsApp OTP**
+   Jalankan modul Node.js di terminal terpisah.
    ```bash
-   composer dev
+   node scripts/whatsapp-helper.js
    ```
+   *Catatan: Anda perlu memindai kode QR yang muncul di terminal (atau melalui URL /wa-qr.png) untuk menghubungkan akun WhatsApp pengirim OTP.*
 
-Akses aplikasi di: `http://localhost:8000`
+7. **Akses Aplikasi**
+   Aplikasi dapat diakses melalui peramban di: `http://localhost:8000`
 
----
+## Kredensial Pengujian Dasar
 
-## 👤 Kredensial Login
+Gunakan kredensial berikut untuk masuk sebagai pengguna percobaan (Seeder):
 
-| Role | Email | Password |
-|------|-------|----------|
-| Admin | admin@kua-tegalrejo.go.id | password |
-| Administrator Data | admindata@kua-tegalrejo.go.id | password |
-| Kepala KUA | kepala@kua-tegalrejo.go.id | password |
+| Peran | Email | Kata Sandi |
+|-------|-------|------------|
+| Admin | admin@kua.go.id | password |
+| Pengelola Data | pengelola@kua.go.id | password |
+| Kepala KUA | kepala@kua.go.id | password |
+| Pemohon | pemohon@example.com | password |
 
----
+## Struktur Proyek Utama
 
-## 📁 Struktur Proyek
-
-```
+```text
 sipakta/
 ├── app/
-│   ├── Http/
-│   │   ├── Controllers/
-│   │   │   ├── ArsipController.php
-│   │   │   ├── UserController.php
-│   │   │   └── LaporanController.php
-│   │   └── Middleware/
-│   │       └── RoleMiddleware.php
-│   └── Models/
-│       ├── Arsip.php
-│       ├── User.php
-│       └── LogPencarian.php
-├── database/
-│   ├── migrations/
-│   └── seeders/
-├── resources/views/
-│   ├── arsip/
-│   ├── users/
-│   ├── laporan/
-│   └── layouts/
-└── storage/app/public/arsip/
+│   ├── Http/Controllers/   # Logika bisnis (Arsip, Laporan, ProfilPemohon)
+│   ├── Models/             # Model ORM (AktaNikah, ProfilPemohon, User)
+│   └── Services/           # Layanan Eksternal (OtpService)
+├── backend/
+│   └── docker-compose.yml  # Konfigurasi orkestrasi kontainer
+├── docker/
+│   ├── nginx/              # Konfigurasi Web Server
+│   └── php/                # Konfigurasi PHP-FPM dan ekstensi
+├── resources/
+│   └── views/              # Berkas antarmuka Blade Templates
+├── scripts/
+│   └── whatsapp-helper.js  # Microservice Node.js untuk integrasi WhatsApp
+└── storage/
+    ├── app/private/        # Penyimpanan berkas privat (Koleksi Postman)
+    └── app/public/         # Penyimpanan berkas publik (Arsip, KTP, Avatar)
 ```
 
----
+## Troubleshooting
 
-## ✅ Fitur Utama
+1. **Galat Koneksi Basis Data (Connection Refused)**
+   Pastikan kontainer Docker berjalan dengan perintah `docker ps`. Jika belum, jalankan ulang `docker-compose up -d`.
 
-- **Authentication & Authorization** - Login dengan role-based access
-- **Kelola Pengguna** - CRUD user, toggle active/inactive (Admin)
-- **Arsip Akta Nikah** - Input, edit, upload dokumen (PDF/JPG/PNG)
-- **Pencarian** - Filter arsip berdasarkan nama, nomor akta, tahun
-- **Laporan Bulanan** - Generate & export PDF laporan arsip
-- **Rekap Tahunan** - Statistik arsip per bulan
+2. **QR Code WhatsApp Tidak Muncul / Sesi Usang**
+   Jika sesi WhatsApp tidak valid, hentikan skrip Node.js, hapus folder sesi, dan jalankan kembali:
+   ```bash
+   rm -rf .wwebjs_auth
+   node scripts/whatsapp-helper.js
+   ```
 
----
+3. **Gambar KTP / Arsip PDF Tidak Muncul**
+   Pastikan symlink penyimpanan sudah terbuat di dalam kontainer:
+   ```bash
+   docker exec -it sipakta-app php artisan storage:link
+   ```
 
-## 🐛 Troubleshooting
+## Lisensi
 
-**Error: Connection refused**
-- Pastikan `php artisan serve` berjalan
-- Check port 8000 tidak digunakan aplikasi lain
-
-**Error: Storage link not found**
-```bash
-php artisan storage:link
-```
-
-**Error: Permission denied**
-```bash
-chmod -R 775 storage bootstrap/cache
-```
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
----
-
-**Happy Coding! 🚀**
-
-# sipakta
+Proyek ini menggunakan lisensi eksklusif instansi. Penggunaan dan modifikasi terbatas hanya untuk keperluan internal KUA.

@@ -14,15 +14,14 @@
     @php
         $emailVerified = $requestData->user->email_verified_at !== null;
         $waVerified = $requestData->phone_verified_at !== null;
-        $ktpUploaded = $requestData->foto_ktp !== null;
         $nikValid = $requestData->nik && strlen($requestData->nik) === 16;
     @endphp
 
     <div class="max-w-7xl mx-auto space-y-8 pb-32">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
 
-            {{-- Left Side: Identity Info --}}
-            <div class="lg:col-span-5 space-y-8">
+            {{-- Identity Info --}}
+            <div class="lg:col-span-8 lg:col-start-3 space-y-8">
 
                 {{-- =============================== --}}
                 {{-- CHECKLIST KELENGKAPAN PEMOHON   --}}
@@ -60,12 +59,7 @@
                             </div>
                         </div>
 
-                        {{-- KTP --}}
-                        <div class="flex items-center gap-3 p-3 rounded-lg {{ $ktpUploaded ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200' }}">
-                            <span class="text-xl">{{ $ktpUploaded ? '✅' : '❌' }}</span>
-                            <span class="font-bold text-sm {{ $ktpUploaded ? 'text-green-800' : 'text-red-800' }}">Foto KTP {{ $ktpUploaded ? 'Sudah Diunggah' : 'Belum Diunggah' }}</span>
                         </div>
-                    </div>
                 </div>
 
                 {{-- Data Pemohon --}}
@@ -156,29 +150,6 @@
                 </a>
             </div>
 
-            {{-- Right Side: KTP Image --}}
-            <div class="lg:col-span-7">
-                <div class="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 space-y-4 sticky top-24">
-                    <div class="flex items-center justify-between border-b border-slate-100 pb-4">
-                        <h4 class="font-bold text-slate-800 text-base">🪪 Foto KTP / Kartu Identitas</h4>
-                        @if($requestData->foto_ktp)
-                            <a href="{{ asset('storage/' . $requestData->foto_ktp) }}" target="_blank" class="text-sm text-indigo-600 hover:underline font-bold">
-                                Buka Tab Baru ↗
-                            </a>
-                        @endif
-                    </div>
-
-                    @if($requestData->foto_ktp)
-                        <div class="rounded-xl overflow-hidden border-2 border-slate-200 bg-slate-100 flex items-center justify-center p-4">
-                            <img src="{{ asset('storage/' . $requestData->foto_ktp) }}" alt="KTP Pemohon" class="max-w-full max-h-[500px] object-contain rounded-lg shadow-lg">
-                        </div>
-                    @else
-                        <div class="py-20 text-center border-2 border-dashed border-slate-200 rounded-xl bg-slate-50">
-                            <span class="text-4xl block mb-3">🪪</span>
-                            <p class="text-slate-500 font-bold">Foto KTP Tidak Tersedia</p>
-                        </div>
-                    @endif
-                </div>
             </div>
 
         </div>

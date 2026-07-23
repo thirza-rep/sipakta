@@ -60,9 +60,7 @@
         <div class="checklist-item {{ $profil->phone_verified_at ? 'ok' : 'fail' }}">
             {{ $profil->phone_verified_at ? '✔' : '✘' }} WhatsApp: {{ $profil->phone_verified_at ? 'Terverifikasi OTP' : 'Belum Verifikasi OTP' }}
         </div>
-        <div class="checklist-item {{ $profil->foto_ktp ? 'ok' : 'fail' }}">
-            {{ $profil->foto_ktp ? '✔' : '✘' }} Foto KTP: {{ $profil->foto_ktp ? 'Sudah Diunggah' : 'Belum Diunggah' }}
-        </div>
+
         <div class="checklist-item {{ $profil->nik && strlen($profil->nik) === 16 ? 'ok' : 'fail' }}">
             {{ $profil->nik && strlen($profil->nik) === 16 ? '✔' : '✘' }} NIK: {{ $profil->nik && strlen($profil->nik) === 16 ? '16 Digit Valid' : 'Tidak Valid' }}
         </div>

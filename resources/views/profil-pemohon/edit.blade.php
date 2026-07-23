@@ -10,8 +10,7 @@
         $emailVerified = $user->email_verified_at !== null;
         $dataLengkap = $profil && $profil->nik && $profil->nama_lengkap && $profil->alamat;
         $waVerified = ($profil && $profil->phone_verified_at !== null) || session()->has('verified_phone_number');
-        $ktpUploaded = $profil && $profil->foto_ktp !== null;
-        $allComplete = $emailVerified && $dataLengkap && $waVerified && $ktpUploaded;
+        $allComplete = $emailVerified && $dataLengkap && $waVerified;
         $isPending = $profil && $profil->status === 'pending_verification';
         $isVerified = $profil && $profil->status === 'verified';
         $isRejected = $profil && $profil->status === 'rejected';
@@ -79,22 +78,6 @@
                     </div>
                 </div>
 
-                {{-- Step 4: KTP --}}
-                <div class="flex items-start gap-4 p-4 rounded-xl {{ $ktpUploaded ? 'bg-green-50 border border-green-200' : 'bg-amber-50 border border-amber-200' }}">
-                    <div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-lg {{ $ktpUploaded ? 'bg-green-500 text-white' : 'bg-amber-400 text-white' }}">
-                        @if($ktpUploaded) ✓ @else 4 @endif
-                    </div>
-                    <div class="flex-1">
-                        <h4 class="font-bold text-base {{ $ktpUploaded ? 'text-green-800' : 'text-amber-800' }}">Unggah Foto KTP</h4>
-                        <p class="text-sm {{ $ktpUploaded ? 'text-green-700' : 'text-amber-700' }} mt-0.5">
-                            @if($ktpUploaded)
-                                Foto KTP sudah diunggah. Anda bisa mengganti jika diperlukan.
-                            @else
-                                Unggah foto KTP asli Anda (format JPG/PNG, maks 2MB).
-                            @endif
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -127,7 +110,7 @@
                     <p class="text-red-700 text-sm mt-1">
                         Alasan penolakan: <strong class="block bg-white p-3 rounded-lg border border-red-200 mt-2">"{{ $profil->rejected_reason }}"</strong>
                     </p>
-                    <p class="text-red-700 text-sm mt-2">Silakan perbaiki data/foto KTP Anda lalu ajukan ulang.</p>
+                    <p class="text-red-700 text-sm mt-2">Silakan perbaiki data Anda lalu ajukan ulang.</p>
                 </div>
             </div>
         @endif
@@ -255,39 +238,13 @@
                         </div>
                     </div>
 
-                    {{-- Section: Upload KTP --}}
-                    <div>
-                        <h3 class="text-lg font-bold text-slate-800 border-b-2 border-amber-500 pb-3 mb-6">🪪 Foto Kartu Identitas (KTP)</h3>
-                        <div class="space-y-4">
-                            @if($ktpUploaded)
-                                <div class="rounded-xl overflow-hidden border-2 border-slate-200 max-w-sm">
-                                    <img src="{{ asset('storage/' . $profil->foto_ktp) }}" alt="Foto KTP" class="w-full h-48 object-cover">
-                                    <div class="p-3 bg-slate-50 text-center">
-                                        <a href="{{ asset('storage/' . $profil->foto_ktp) }}" target="_blank" class="text-sm text-indigo-600 font-bold hover:underline">Lihat Ukuran Penuh</a>
-                                    </div>
-                                </div>
-                            @endif
-
-                            @if(!$isPending)
-                                <input type="file" name="foto_ktp" id="foto_ktp" {{ !$ktpUploaded ? 'required' : '' }}
-                                       class="w-full px-4 py-4 bg-slate-50 border-2 border-dashed border-slate-300 rounded-xl text-base font-semibold text-slate-600 cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-teal-600 file:text-white file:font-bold file:cursor-pointer">
-                                <p class="text-sm text-slate-500 mt-1">Format: JPG, JPEG, PNG — Ukuran maks. 2MB</p>
-                            @else
-                                <div class="p-4 bg-slate-100 border-2 border-slate-200 text-slate-500 text-sm font-bold rounded-xl text-center">
-                                    🔒 Foto KTP terkunci — sedang dalam proses verifikasi
-                                </div>
-                            @endif
-
-                            @error('foto_ktp')<p class="mt-2 text-sm font-bold text-red-600">{{ $message }}</p>@enderror
-                        </div>
-                    </div>
                 </div>
 
                 {{-- Submit Area --}}
                 <div class="bg-slate-50 border-t-2 border-slate-200 px-6 sm:px-8 py-6">
                     <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
                         <p class="text-sm text-slate-500 text-center sm:text-left">
-                            ℹ️ Pastikan semua data sesuai KTP asli. Setelah diajukan, data akan diperiksa oleh Admin KUA.
+                            ℹ️ Pastikan semua data asli. Setelah diajukan, data akan diperiksa oleh Admin KUA.
                         </p>
                         @if(!$isPending && !$isVerified)
                             <button type="submit" id="btn-submit-form"

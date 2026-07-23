@@ -53,12 +53,7 @@ class ProfilPemohonController extends Controller
         }
         $rules['nik'][] = $nikUniqueRule;
 
-        // Foto KTP is required for new registration, optional on update
-        if (!$profil || !$profil->foto_ktp) {
-            $rules['foto_ktp'] = ['required', 'image', 'mimes:jpg,jpeg,png', 'max:2048'];
-        } else {
-            $rules['foto_ktp'] = ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:2048'];
-        }
+
 
         $validated = $request->validate($rules);
 
@@ -81,19 +76,7 @@ class ProfilPemohonController extends Controller
             ]);
         }
 
-        // Handle KTP Upload
-        $fotoKtpPath = $profil ? $profil->foto_ktp : null;
-        if ($request->hasFile('foto_ktp')) {
-            // Delete old photo if exists
-            if ($fotoKtpPath) {
-                Storage::disk('public')->delete($fotoKtpPath);
-            }
-            
-            // Store new file in 'ktp' directory on the public disk
-            $file = $request->file('foto_ktp');
-            $filename = time() . '_' . $user->id . '.' . $file->getClientOriginalExtension();
-            $fotoKtpPath = $file->storeAs('ktp', $filename, 'public');
-        }
+
 
         // Update or create profile
         $newProfil = ProfilPemohon::updateOrCreate(
@@ -103,7 +86,6 @@ class ProfilPemohonController extends Controller
                 'nama_lengkap' => $validated['nama_lengkap'],
                 'alamat' => $validated['alamat'],
                 'no_telepon' => $validated['no_telepon'],
-                'foto_ktp' => $fotoKtpPath,
                 'status' => 'pending_verification', // set status to pending review
                 'rejected_reason' => null, // clear old rejection reason
                 'phone_verified_at' => $profil && $profil->phone_verified_at && $profil->no_telepon === $phoneNumber
@@ -119,7 +101,7 @@ class ProfilPemohonController extends Controller
         session()->forget(['verified_phone_number']);
 
         return redirect()->route('profil-pemohon.edit')
-            ->with('success', 'Data profil dan berkas KTP berhasil diajukan untuk verifikasi! Harap tunggu persetujuan Admin.');
+            ->with('success', 'Data profil berhasil diajukan untuk verifikasi! Harap tunggu persetujuan Admin.');
     }
 
     /**

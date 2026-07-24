@@ -144,8 +144,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/profil-pemohon', [ProfilPemohonController::class, 'edit'])->name('profil-pemohon.edit');
         Route::put('/profil-pemohon', [ProfilPemohonController::class, 'update'])->name('profil-pemohon.update');
         Route::get('/profil-pemohon/lihat', [ProfilPemohonController::class, 'show'])->name('profil-pemohon.show');
-        Route::post('/profil-pemohon/send-phone-otp', [ProfilPemohonController::class, 'sendPhoneOtp'])->name('profil-pemohon.send-otp');
-        Route::post('/profil-pemohon/verify-phone-otp', [ProfilPemohonController::class, 'verifyPhoneOtp'])->name('profil-pemohon.verify-otp');
+
         
         Route::get('/cari-arsip', [PencarianController::class, 'index'])->name('pencarian.index');
         Route::get('/cari-arsip/hasil', [PencarianController::class, 'search'])->name('pencarian.search');

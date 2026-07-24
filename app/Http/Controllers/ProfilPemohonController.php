@@ -57,24 +57,7 @@ class ProfilPemohonController extends Controller
 
         $validated = $request->validate($rules);
 
-        // Verify Phone Number Check:
-        // Either the phone number hasn't changed from a previously verified number,
-        // or the new number is verified in the session.
-        $phoneVerified = false;
-        $phoneNumber = trim($validated['no_telepon']);
-        $sessionPhone = session('verified_phone_number');
 
-        if ($profil && $profil->phone_verified_at && $profil->no_telepon === $phoneNumber) {
-            $phoneVerified = true;
-        } elseif ($sessionPhone && trim($sessionPhone) === $phoneNumber) {
-            $phoneVerified = true;
-        }
-
-        if (!$phoneVerified) {
-            return back()->withInput()->withErrors([
-                'no_telepon' => 'Nomor telepon harus diverifikasi melalui OTP WhatsApp terlebih dahulu.'
-            ]);
-        }
 
 
 
@@ -88,9 +71,7 @@ class ProfilPemohonController extends Controller
                 'no_telepon' => $validated['no_telepon'],
                 'status' => 'pending_verification', // set status to pending review
                 'rejected_reason' => null, // clear old rejection reason
-                'phone_verified_at' => $profil && $profil->phone_verified_at && $profil->no_telepon === $phoneNumber
-                    ? $profil->phone_verified_at
-                    : now(),
+                'phone_verified_at' => now(), // automatically verified without OTP
             ]
         );
 
@@ -121,94 +102,5 @@ class ProfilPemohonController extends Controller
         return view('profil-pemohon.show', compact('profil', 'user'));
     }
 
-    /**
-     * AJAX endpoint to send phone OTP via WhatsApp
-     */
-    public function sendPhoneOtp(Request $request)
-    {
-        try {
-            $request->validate([
-                'no_telepon' => ['required', 'string', 'min:9', 'max:16'],
-            ]);
 
-            $phone = $request->no_telepon;
-            
-            /** @var \App\Models\User $currentUser */
-            $currentUser = auth()->user();
-            // Generate OTP
-            $code = $this->otpService->generateOtp($phone, 'phone', $currentUser->id);
-            
-            // Send OTP
-            $sent = $this->otpService->sendWhatsAppOtp($phone, $code);
-
-            if ($sent) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Kode OTP berhasil dikirim ke nomor WhatsApp Anda.'
-                ]);
-            }
-
-            return response()->json([
-                'success' => false,
-                'message' => 'Gagal mengirim OTP. Harap hubungi Admin atau coba sesaat lagi.'
-            ], 500);
-
-        } catch (\Exception $e) {
-            Log::error("AJAX Send OTP Error: " . $e->getMessage());
-            return response()->json([
-                'success' => false,
-                'message' => 'Gagal memproses permintaan: ' . $e->getMessage()
-            ], 422);
-        }
-    }
-
-    /**
-     * AJAX endpoint to verify phone OTP
-     */
-    public function verifyPhoneOtp(Request $request)
-    {
-        try {
-            $request->validate([
-                'no_telepon' => ['required', 'string'],
-                'otp' => ['required', 'string', 'size:6'],
-            ]);
-
-            $phone = $request->no_telepon;
-            $code = $request->otp;
-
-            $isVerified = $this->otpService->verifyOtp($phone, 'phone', $code);
-
-            if ($isVerified) {
-                // Save verified status in session
-                session(['verified_phone_number' => $phone]);
-
-                // If user already has profile database record, update it immediately
-                /** @var \App\Models\User $user */
-                $user = auth()->user();
-                if ($user->profilPemohon) {
-                    $user->profilPemohon->update([
-                        'no_telepon' => $phone,
-                        'phone_verified_at' => now(),
-                    ]);
-                }
-
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Nomor WhatsApp Anda berhasil diverifikasi!'
-                ]);
-            }
-
-            return response()->json([
-                'success' => false,
-                'message' => 'Kode OTP salah atau telah kedaluwarsa.'
-            ], 422);
-
-        } catch (\Exception $e) {
-            Log::error("AJAX Verify OTP Error: " . $e->getMessage());
-            return response()->json([
-                'success' => false,
-                'message' => 'Gagal memproses verifikasi.'
-            ], 422);
-        }
-    }
 }

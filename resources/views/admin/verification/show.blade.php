@@ -13,7 +13,7 @@
 
     @php
         $emailVerified = $requestData->user->email_verified_at !== null;
-        $waVerified = $requestData->phone_verified_at !== null;
+        $waFilled = !empty($requestData->no_telepon);
         $nikValid = $requestData->nik && strlen($requestData->nik) === 16;
     @endphp
 
@@ -42,11 +42,11 @@
                         </div>
 
                         {{-- WhatsApp --}}
-                        <div class="flex items-center gap-3 p-3 rounded-lg {{ $waVerified ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200' }}">
-                            <span class="text-xl">{{ $waVerified ? '✅' : '❌' }}</span>
+                        <div class="flex items-center gap-3 p-3 rounded-lg {{ $waFilled ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200' }}">
+                            <span class="text-xl">{{ $waFilled ? '✅' : '❌' }}</span>
                             <div>
-                                <span class="font-bold text-sm {{ $waVerified ? 'text-green-800' : 'text-red-800' }}">WhatsApp {{ $waVerified ? 'Terverifikasi OTP' : 'Belum Verifikasi OTP' }}</span>
-                                <span class="block text-xs {{ $waVerified ? 'text-green-600' : 'text-red-600' }}">{{ $requestData->no_telepon }}</span>
+                                <span class="font-bold text-sm {{ $waFilled ? 'text-green-800' : 'text-red-800' }}">WhatsApp {{ $waFilled ? 'Sudah Diisi' : 'Belum Diisi' }}</span>
+                                <span class="block text-xs {{ $waFilled ? 'text-green-600' : 'text-red-600' }}">{{ $requestData->no_telepon }}</span>
                             </div>
                         </div>
 

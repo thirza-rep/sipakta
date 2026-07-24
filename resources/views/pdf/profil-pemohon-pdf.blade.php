@@ -57,8 +57,8 @@
         <div class="checklist-item {{ $profil->user->email_verified_at ? 'ok' : 'fail' }}">
             {{ $profil->user->email_verified_at ? '✔' : '✘' }} Email: {{ $profil->user->email_verified_at ? 'Terverifikasi' : 'Belum Verifikasi' }}
         </div>
-        <div class="checklist-item {{ $profil->phone_verified_at ? 'ok' : 'fail' }}">
-            {{ $profil->phone_verified_at ? '✔' : '✘' }} WhatsApp: {{ $profil->phone_verified_at ? 'Terverifikasi OTP' : 'Belum Verifikasi OTP' }}
+        <div class="checklist-item {{ $profil->no_telepon ? 'ok' : 'fail' }}">
+            {{ $profil->no_telepon ? '✔' : '✘' }} WhatsApp: {{ $profil->no_telepon ? 'Sudah Diisi' : 'Belum Diisi' }}
         </div>
 
         <div class="checklist-item {{ $profil->nik && strlen($profil->nik) === 16 ? 'ok' : 'fail' }}">

@@ -9,8 +9,8 @@
     @php
         $emailVerified = $user->email_verified_at !== null;
         $dataLengkap = $profil && $profil->nik && $profil->nama_lengkap && $profil->alamat;
-        $waVerified = ($profil && $profil->phone_verified_at !== null) || session()->has('verified_phone_number');
-        $allComplete = $emailVerified && $dataLengkap && $waVerified;
+        $waFilled = $profil && !empty($profil->no_telepon);
+        $allComplete = $emailVerified && $dataLengkap && $waFilled;
         $isPending = $profil && $profil->status === 'pending_verification';
         $isVerified = $profil && $profil->status === 'verified';
         $isRejected = $profil && $profil->status === 'rejected';
@@ -62,17 +62,17 @@
                 </div>
 
                 {{-- Step 3: WhatsApp --}}
-                <div class="flex items-start gap-4 p-4 rounded-xl {{ $waVerified ? 'bg-green-50 border border-green-200' : 'bg-amber-50 border border-amber-200' }}">
-                    <div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-lg {{ $waVerified ? 'bg-green-500 text-white' : 'bg-amber-400 text-white' }}">
-                        @if($waVerified) ✓ @else 3 @endif
+                <div class="flex items-start gap-4 p-4 rounded-xl {{ $waFilled ? 'bg-green-50 border border-green-200' : 'bg-amber-50 border border-amber-200' }}">
+                    <div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-lg {{ $waFilled ? 'bg-green-500 text-white' : 'bg-amber-400 text-white' }}">
+                        @if($waFilled) ✓ @else 3 @endif
                     </div>
                     <div class="flex-1">
-                        <h4 class="font-bold text-base {{ $waVerified ? 'text-green-800' : 'text-amber-800' }}">Verifikasi Nomor WhatsApp</h4>
-                        <p class="text-sm {{ $waVerified ? 'text-green-700' : 'text-amber-700' }} mt-0.5">
-                            @if($waVerified)
-                                Nomor <strong>{{ $profil->no_telepon }}</strong> sudah terverifikasi via OTP WhatsApp.
+                        <h4 class="font-bold text-base {{ $waFilled ? 'text-green-800' : 'text-amber-800' }}">Isi Nomor WhatsApp</h4>
+                        <p class="text-sm {{ $waFilled ? 'text-green-700' : 'text-amber-700' }} mt-0.5">
+                            @if($waFilled)
+                                Nomor <strong>{{ $profil->no_telepon }}</strong> sudah tersimpan.
                             @else
-                                Masukkan nomor HP/WhatsApp aktif Anda, lalu tekan "Kirim OTP" untuk verifikasi.
+                                Masukkan nomor HP/WhatsApp aktif Anda pada formulir di bawah.
                             @endif
                         </p>
                     </div>
@@ -189,51 +189,16 @@
                         <div class="space-y-4">
                             <div>
                                 <label for="no_telepon" class="block text-sm font-bold text-slate-700 mb-2">Nomor Telepon / WhatsApp Aktif</label>
-                                <div class="flex flex-col sm:flex-row gap-3">
                                     <input type="text" name="no_telepon" id="no_telepon"
                                            value="{{ old('no_telepon', $profil->no_telepon ?? '') }}" required
                                            class="flex-1 px-4 py-4 text-base bg-slate-50 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500 font-semibold text-slate-800"
                                            placeholder="Contoh: 08123456789"
-                                           {{ ($waVerified || $isPending) ? 'readonly' : '' }}>
-
-                                    @if($waVerified)
-                                        <span id="wa-verified-badge" class="inline-flex items-center gap-2 px-5 py-4 bg-green-100 text-green-800 border-2 border-green-300 rounded-xl font-bold text-sm whitespace-nowrap">
-                                            ✓ Terverifikasi
-                                        </span>
-                                    @else
-                                        <button type="button" id="btn-send-wa-otp"
-                                                class="px-6 py-4 bg-indigo-600 text-white rounded-xl font-bold text-sm hover:bg-indigo-700 active:scale-95 transition-all whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed">
-                                            Kirim OTP
-                                        </button>
-                                    @endif
+                                           {{ $isPending ? 'readonly' : '' }}>
                                 </div>
 
-                                <p class="mt-2 text-sm text-slate-500" id="phone-meta-container">
-                                    @if($waVerified)
-                                        ✅ Nomor terverifikasi via OTP WhatsApp.
-                                        @if(!$isPending)
-                                            <button type="button" id="btn-change-phone" class="text-indigo-600 font-bold ml-1 hover:underline">Ganti Nomor</button>
-                                        @endif
-                                    @else
-                                        Masukkan nomor WhatsApp aktif, lalu tekan "Kirim OTP" untuk verifikasi.
-                                    @endif
+                                <p class="mt-2 text-sm text-slate-500">
+                                    Masukkan nomor WhatsApp aktif Anda.
                                 </p>
-
-                                @error('no_telepon')<p class="mt-2 text-sm font-bold text-red-600">{{ $message }}</p>@enderror
-
-                                {{-- OTP Input Panel --}}
-                                <div id="phone-otp-panel" class="hidden mt-4 bg-indigo-50 border-2 border-indigo-200 p-5 rounded-xl space-y-3">
-                                    <label class="block text-sm font-bold text-indigo-800">Masukkan 6 Digit Kode OTP dari WhatsApp:</label>
-                                    <div class="flex flex-col sm:flex-row gap-3">
-                                        <input type="text" id="phone-otp-code" maxlength="6" placeholder="______"
-                                               class="w-full sm:w-40 text-center tracking-[0.5em] font-bold text-lg py-3 border-2 border-indigo-300 rounded-xl focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500">
-                                        <button type="button" id="btn-verify-wa-otp"
-                                                class="px-6 py-3 bg-slate-800 text-white rounded-xl font-bold text-sm hover:bg-slate-700 transition-all">
-                                            Verifikasi OTP
-                                        </button>
-                                    </div>
-                                    <p id="wa-otp-msg" class="text-sm font-bold hidden"></p>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -268,157 +233,5 @@
         </div>
     </div>
 
-    {{-- Script AJAX untuk OTP WhatsApp --}}
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const btnSendOtp = document.getElementById('btn-send-wa-otp');
-            const btnVerifyOtp = document.getElementById('btn-verify-wa-otp');
-            const btnChangePhone = document.getElementById('btn-change-phone');
-            const inputPhone = document.getElementById('no_telepon');
-            const inputOtp = document.getElementById('phone-otp-code');
-            const otpPanel = document.getElementById('phone-otp-panel');
-            const otpMsg = document.getElementById('wa-otp-msg');
-            const phoneMeta = document.getElementById('phone-meta-container');
 
-            if (btnSendOtp) {
-                btnSendOtp.addEventListener('click', async () => {
-                    const phone = inputPhone.value.trim();
-                    if (!phone) { alert('Masukkan nomor WhatsApp terlebih dahulu.'); return; }
-
-                    btnSendOtp.disabled = true;
-                    btnSendOtp.textContent = 'Mengirim...';
-                    otpMsg.classList.add('hidden');
-
-                    try {
-                        const response = await fetch("{{ route('profil-pemohon.send-otp') }}", {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}', 'Accept': 'application/json' },
-                            body: JSON.stringify({ no_telepon: phone })
-                        });
-                        const result = await response.json();
-
-                        if (response.ok && result.success) {
-                            otpPanel.classList.remove('hidden');
-                            let cooldown = 60;
-                            btnSendOtp.disabled = true;
-                            const interval = setInterval(() => {
-                                cooldown--;
-                                btnSendOtp.textContent = `Tunggu (${cooldown}s)`;
-                                if (cooldown <= 0) { clearInterval(interval); btnSendOtp.textContent = 'Kirim OTP'; btnSendOtp.disabled = false; }
-                            }, 1000);
-                            showMsg('Kode OTP dikirim ke WhatsApp ' + phone + '. Cek pesan Anda.', 'text-indigo-700');
-                        } else {
-                            btnSendOtp.textContent = 'Kirim OTP'; btnSendOtp.disabled = false;
-                            showMsg(result.message || 'Gagal mengirim OTP.', 'text-red-600');
-                        }
-                    } catch (e) {
-                        btnSendOtp.textContent = 'Kirim OTP'; btnSendOtp.disabled = false;
-                        showMsg('Koneksi gagal. Coba lagi.', 'text-red-600');
-                    }
-                });
-            }
-
-            if (btnVerifyOtp) {
-                btnVerifyOtp.addEventListener('click', async () => {
-                    const phone = inputPhone.value.trim();
-                    const otp = inputOtp.value.trim();
-                    if (otp.length !== 6) { alert('Masukkan 6 digit kode OTP.'); return; }
-
-                    btnVerifyOtp.disabled = true;
-                    btnVerifyOtp.textContent = 'Memverifikasi...';
-
-                    try {
-                        const response = await fetch("{{ route('profil-pemohon.verify-otp') }}", {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}', 'Accept': 'application/json' },
-                            body: JSON.stringify({ no_telepon: phone, otp: otp })
-                        });
-                        const result = await response.json();
-
-                        if (response.ok && result.success) {
-                            // Update UI instead of reloading to prevent data loss
-                            otpPanel.classList.add('hidden');
-                            inputPhone.setAttribute('readonly', 'true');
-                            
-                            if (btnSendOtp && btnSendOtp.parentNode) {
-                                const badge = document.createElement('span');
-                                badge.id = 'wa-verified-badge';
-                                badge.className = 'inline-flex items-center gap-2 px-5 py-4 bg-green-100 text-green-800 border-2 border-green-300 rounded-xl font-bold text-sm whitespace-nowrap';
-                                badge.textContent = '✓ Terverifikasi';
-                                btnSendOtp.parentNode.replaceChild(badge, btnSendOtp);
-                            }
-                            phoneMeta.innerHTML = '✅ Nomor terverifikasi via OTP WhatsApp.';
-                            
-                            // Enable submit button
-                            const submitBtn = document.querySelector('button[type="submit"]');
-                            if(submitBtn) {
-                                submitBtn.disabled = false;
-                                submitBtn.removeAttribute('title');
-                            }
-
-                            // Update Checklist UI visually
-                            const waChecklist = document.querySelectorAll('.rounded-xl.bg-amber-50')[0]; // Find first amber checklist, usually WA if email is done
-                            if(waChecklist && waChecklist.innerHTML.includes('WhatsApp')) {
-                                waChecklist.classList.remove('bg-amber-50', 'border-amber-200');
-                                waChecklist.classList.add('bg-green-50', 'border-green-200');
-                                
-                                const waIcon = waChecklist.querySelector('.rounded-full');
-                                if(waIcon) {
-                                    waIcon.classList.remove('bg-amber-400');
-                                    waIcon.classList.add('bg-green-500');
-                                    waIcon.textContent = '✓';
-                                }
-                                
-                                const waTitle = waChecklist.querySelector('h4');
-                                if(waTitle) {
-                                    waTitle.classList.remove('text-amber-800');
-                                    waTitle.classList.add('text-green-800');
-                                }
-                                
-                                const waDesc = waChecklist.querySelector('p');
-                                if(waDesc) {
-                                    waDesc.classList.remove('text-amber-700');
-                                    waDesc.classList.add('text-green-700');
-                                    waDesc.innerHTML = 'Nomor <strong>' + phone + '</strong> sudah terverifikasi via OTP WhatsApp.';
-                                }
-                            }
-                            
-                            alert('Nomor WhatsApp berhasil diverifikasi! Silakan lanjutkan melengkapi form dan klik "Ajukan Verifikasi Profil".');
-                        } else {
-                            btnVerifyOtp.textContent = 'Verifikasi OTP'; btnVerifyOtp.disabled = false;
-                            showMsg(result.message || 'Kode OTP salah.', 'text-red-600');
-                        }
-                    } catch (e) {
-                        btnVerifyOtp.textContent = 'Verifikasi OTP'; btnVerifyOtp.disabled = false;
-                        showMsg('Gagal memverifikasi. Coba lagi.', 'text-red-600');
-                    }
-                });
-            }
-
-            if (btnChangePhone) {
-                btnChangePhone.addEventListener('click', () => {
-                    if (confirm('Mengganti nomor WhatsApp akan mereset verifikasi. Anda harus verifikasi ulang. Lanjutkan?')) {
-                        inputPhone.removeAttribute('readonly');
-                        const badge = document.getElementById('wa-verified-badge');
-                        if (badge) {
-                            const btn = document.createElement('button');
-                            btn.type = 'button'; btn.id = 'btn-send-wa-otp';
-                            btn.className = 'px-6 py-4 bg-indigo-600 text-white rounded-xl font-bold text-sm hover:bg-indigo-700 active:scale-95 transition-all whitespace-nowrap';
-                            btn.textContent = 'Kirim OTP';
-                            badge.parentNode.replaceChild(btn, badge);
-                            btn.addEventListener('click', () => { if(btnSendOtp) btnSendOtp.click(); });
-                        }
-                        phoneMeta.textContent = 'Masukkan nomor WhatsApp baru lalu verifikasi.';
-                        btnChangePhone.remove();
-                    }
-                });
-            }
-
-            function showMsg(text, colorClass) {
-                otpMsg.className = `text-sm font-bold mt-2 ${colorClass}`;
-                otpMsg.textContent = text;
-                otpMsg.classList.remove('hidden');
-            }
-        });
-    </script>
 </x-app-layout>

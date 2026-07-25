@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex items-center gap-6">
             <a href="{{ route('dashboard') }}" class="w-12 h-12 rounded-2xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500 transition-all active:scale-90 shadow-sm border border-slate-200">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                
             </a>
             <div>
                 <h2 class="text-2xl font-black text-slate-900 tracking-tight">Detail Profil Pemohon</h2>
@@ -15,7 +15,7 @@
         {{-- Profile Header Card --}}
         <div class="bg-teal-900 rounded-[3.5rem] p-10 md:p-14 shadow-2xl relative overflow-hidden text-white group">
             <div class="absolute top-0 right-0 p-16 opacity-[0.03] pointer-events-none group-hover:scale-110 transition-transform duration-700">
-                <svg class="w-64 h-64" fill="currentColor" viewBox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                
             </div>
             <div class="relative z-10 flex flex-col md:flex-row items-center gap-10">
                 <div class="w-24 h-24 rounded-[2.5rem] bg-white text-teal-900 flex items-center justify-center font-black text-4xl shadow-2xl transform rotate-3 transition-transform duration-700">
@@ -88,7 +88,7 @@
 
                 <div class="flex flex-col md:flex-row items-center justify-between gap-8 pt-12 border-t border-slate-50">
                     <div class="flex items-center gap-4 text-slate-400">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        
                         <p class="text-[10px] font-bold uppercase tracking-widest leading-loose">Data ini digunakan untuk keperluan administrasi resmi<br>di Kantor KUA Kemantren Tegalrejo.</p>
                     </div>
                     

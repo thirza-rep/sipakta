@@ -10,7 +10,7 @@
         {{-- User Profile Header --}}
         <div class="bg-indigo-950 rounded-[3.5rem] p-10 md:p-14 shadow-2xl relative overflow-hidden text-white group">
             <div class="absolute top-0 right-0 p-16 opacity-[0.03] pointer-events-none group-hover:scale-110 transition-transform duration-700">
-                <svg class="w-64 h-64" fill="currentColor" viewBox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                
             </div>
             
             <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
@@ -33,7 +33,7 @@
                         <span class="text-3xl font-black">{{ $logs->total() }}</span>
                     </div>
                     <a href="{{ route('riwayat.index') }}" class="w-16 h-16 rounded-[2rem] bg-white/10 border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-indigo-950 transition-all active:scale-90 shadow-xl">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7"/></svg>
+                        
                     </a>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                     <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group/item">
                         <!-- Icon -->
                         <div class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-900 text-teal-400 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            
                         </div>
                         <!-- Content -->
                         <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-slate-50 border border-slate-100 p-8 rounded-[2.5rem] shadow-sm hover:shadow-xl hover:bg-white transition-all duration-500 group-hover/item:border-indigo-100 group-hover/item:scale-[1.02]">
@@ -74,7 +74,7 @@
                     @empty
                     <div class="text-center py-20">
                         <div class="w-20 h-20 bg-slate-50 rounded-[2rem] flex items-center justify-center mx-auto mb-6 text-slate-200">
-                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            
                         </div>
                         <p class="text-slate-400 font-bold text-[10px] uppercase tracking-widest">Belum ada riwayat tercatat</p>
                     </div>

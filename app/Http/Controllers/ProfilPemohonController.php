@@ -7,6 +7,7 @@ use App\Services\OtpService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class ProfilPemohonController extends Controller
 {
@@ -23,7 +24,7 @@ class ProfilPemohonController extends Controller
     public function edit()
     {
         /** @var \App\Models\User $user */
-        $user = auth()->user();
+        $user = Auth::user();
         $profil = $user->profilPemohon ?? new ProfilPemohon(['user_id' => $user->id, 'nama_lengkap' => $user->name]);
 
         return view('profil-pemohon.edit', compact('profil', 'user'));
@@ -35,7 +36,7 @@ class ProfilPemohonController extends Controller
     public function update(Request $request)
     {
         /** @var \App\Models\User $user */
-        $user = auth()->user();
+        $user = Auth::user();
         $profil = $user->profilPemohon;
 
         // Validation rules
@@ -91,7 +92,7 @@ class ProfilPemohonController extends Controller
     public function show()
     {
         /** @var \App\Models\User $user */
-        $user = auth()->user();
+        $user = Auth::user();
         $profil = $user->profilPemohon;
 
         if (!$profil) {

@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex items-center gap-6">
             <a href="{{ route('akta-nikah.index') }}" class="w-12 h-12 rounded-2xl bg-white border border-slate-100 hover:bg-slate-50 flex items-center justify-center text-slate-400 hover:text-slate-600 transition-all active:scale-90 shadow-sm">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                
             </a>
             <div>
                 <h2 class="text-2xl font-black text-slate-900 tracking-tight">Perbarui Data Akta Nikah</h2>
@@ -19,7 +19,7 @@
             @if($errors->any())
                 <div class="p-8 bg-rose-50 border border-rose-100 rounded-[2.5rem] flex gap-6 animate-fade-in shadow-xl shadow-rose-100/50">
                     <div class="w-14 h-14 bg-rose-500 rounded-2xl flex items-center justify-center text-white shrink-0 shadow-lg shadow-rose-200">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                        
                     </div>
                     <div>
                         <h4 class="font-black text-rose-800 text-lg tracking-tight">Terjadi Kesalahan Validasi</h4>
@@ -37,7 +37,7 @@
             <div class="bg-white rounded-[3rem] shadow-sm border border-slate-100 overflow-hidden transform transition-all duration-500 hover:shadow-xl hover:shadow-slate-200/40">
                 <div class="p-8 md:p-10 border-b border-slate-50 flex items-center bg-slate-50/30">
                     <div class="w-14 h-14 bg-teal-600 rounded-[1.2rem] flex items-center justify-center text-white mr-6 shadow-xl shadow-teal-200">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                        
                     </div>
                     <div>
                         <h3 class="text-2xl font-black text-slate-900 tracking-tight">Detail Administrasi</h3>
@@ -151,7 +151,7 @@
             {{-- Card: Wali & Berkas (Dark Section) --}}
             <div class="bg-slate-900 rounded-[3.5rem] p-8 md:p-14 text-white shadow-2xl relative overflow-hidden">
                 <div class="absolute top-0 right-0 p-16 opacity-[0.03] pointer-events-none">
-                    <svg class="w-80 h-80" fill="currentColor" viewBox="0 0 24 24"><path d="M4 19h16v2H4v-2zm1.61-12.2a2 2 0 011.33-1.8l8-2.67a2 2 0 012.12.84l1.6 2.4a2 2 0 01.34 1.2V17h-12a2 2 0 01-1.39-3.43l-.01-6.77zm11.39-1.93L9.61 7.2l.6 1.4L17 5.27l-.6-1.4z" /></svg>
+                    
                 </div>
                 
                 <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
@@ -215,7 +215,7 @@
                             <div class="p-8 rounded-[2rem] bg-white/5 border border-white/10 space-y-6 relative group overflow-hidden transition-all hover:bg-white/[0.07]">
                                 <div class="flex items-center gap-6 relative z-10">
                                     <div class="w-16 h-16 rounded-2xl bg-teal-500 flex items-center justify-center shadow-2xl shadow-teal-500/40">
-                                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
+                                        
                                     </div>
                                     <div>
                                         <p class="text-lg font-black tracking-tight">Perbarui Scan Dokumen</p>
@@ -226,7 +226,7 @@
                                     @if($aktaNikah->file_path)
                                         <div class="px-6 py-4 bg-teal-500/10 border border-teal-500/20 rounded-2xl flex items-center justify-between group/file">
                                             <div class="flex items-center gap-3">
-                                                <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                                
                                                 <span class="text-[10px] font-black uppercase tracking-widest text-teal-100">Berkas Terunggah</span>
                                             </div>
                                             <a href="{{ asset('storage/' . $aktaNikah->file_path) }}" target="_blank" 

@@ -53,17 +53,20 @@
                 <div class="bg-white p-6 md:p-8 rounded-2xl shadow-xl border border-slate-200 mt-10">
                     <h3 class="text-xl font-bold text-slate-800 mb-4">Mulai Pencarian Arsip</h3>
                     @auth
-                        <a href="{{ route('pencarian.index') }}" class="block w-full px-8 py-5 bg-teal-600 text-white rounded-xl font-bold text-lg md:text-xl shadow-lg hover:bg-teal-700 transition active:scale-95">
-                            🔍 Cari Arsip Sekarang
+                        <a href="{{ route('pencarian.index') }}" class="flex items-center justify-center w-full px-8 py-5 bg-teal-600 text-white rounded-xl font-bold text-lg md:text-xl shadow-lg hover:bg-teal-700 transition active:scale-95">
+                            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            Cari Arsip Sekarang
                         </a>
                     @else
                         <p class="text-slate-600 font-medium mb-6 text-base">Silakan daftar atau masuk terlebih dahulu untuk mengakses layanan pencarian.</p>
                         <div class="flex flex-col sm:flex-row gap-4">
-                            <a href="{{ route('register') }}" class="flex-1 px-8 py-4 bg-teal-600 text-white rounded-xl font-bold text-lg shadow-lg hover:bg-teal-700 transition">
-                                📝 Daftar Akun Baru
+                            <a href="{{ route('register') }}" class="flex flex-1 items-center justify-center px-8 py-4 bg-teal-600 text-white rounded-xl font-bold text-lg shadow-lg hover:bg-teal-700 transition">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
+                                Daftar Akun Baru
                             </a>
-                            <a href="{{ route('login') }}" class="flex-1 px-8 py-4 bg-white text-teal-700 border-2 border-teal-200 rounded-xl font-bold text-lg hover:bg-teal-50 transition">
-                                🔑 Masuk ke Akun
+                            <a href="{{ route('login') }}" class="flex flex-1 items-center justify-center px-8 py-4 bg-white text-teal-700 border-2 border-teal-200 rounded-xl font-bold text-lg hover:bg-teal-50 transition">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
+                                Masuk ke Akun
                             </a>
                         </div>
                     @endauth
@@ -73,17 +76,23 @@
             {{-- Info Cards --}}
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20 w-full text-left">
                 <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
-                    <div class="text-4xl mb-4">📂</div>
+                    <div class="mb-4 text-teal-600">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                    </div>
                     <h4 class="text-xl font-bold text-slate-800 mb-2">Arsip Digital</h4>
                     <p class="text-base text-slate-600 leading-relaxed">Data pernikahan tersimpan aman dalam format digital yang mudah diakses kapan saja dibutuhkan.</p>
                 </div>
                 <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
-                    <div class="text-4xl mb-4">🔍</div>
+                    <div class="mb-4 text-teal-600">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
                     <h4 class="text-xl font-bold text-slate-800 mb-2">Pencarian Mudah</h4>
                     <p class="text-base text-slate-600 leading-relaxed">Cukup masukkan nama suami/istri atau nomor akta nikah untuk menemukan dokumen yang dicari.</p>
                 </div>
                 <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
-                    <div class="text-4xl mb-4">🖨️</div>
+                    <div class="mb-4 text-teal-600">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                    </div>
                     <h4 class="text-xl font-bold text-slate-800 mb-2">Salinan Cetak</h4>
                     <p class="text-base text-slate-600 leading-relaxed">Anda dapat mencetak salinan hasil pencarian sebagai bukti awal arsip telah ditemukan.</p>
                 </div>
@@ -110,9 +119,7 @@
        rel="noopener noreferrer" 
        class="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 flex items-center justify-center w-16 h-16 bg-[#25D366] text-white rounded-full shadow-xl hover:scale-110 transition-transform"
        title="Hubungi Admin KUA">
-        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
-        </svg>
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 2.17.69 4.18 1.86 5.82L3 21l3.31-.85C7.8 21.36 9.81 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm4.31 14.54c-.19.53-.98.98-1.42 1.05-.44.07-.94.22-3.04-.65-2.52-1.05-4.14-3.66-4.26-3.82-.12-.16-1.02-1.36-1.02-2.59s.64-1.84.86-2.07c.22-.22.48-.28.64-.28.16 0 .32.01.45.02.15.01.35-.06.54.4.19.46.66 1.62.72 1.74.06.12.09.26.02.4-.07.14-.11.23-.21.35-.11.12-.23.26-.33.37-.09.09-.19.19-.08.38.11.19.49.81 1.05 1.31.72.64 1.32.84 1.51.93.19.09.31.08.43-.05.12-.14.52-.61.66-.82.14-.21.28-.17.46-.11.18.06 1.15.54 1.35.64.2.1.33.15.38.24.05.09.05.52-.14 1.05z"/></svg>
     </a>
 </body>
 </html>

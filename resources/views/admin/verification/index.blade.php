@@ -11,7 +11,7 @@
         @if(session('success'))
             <div class="bg-teal-50 border-l-4 border-teal-500 p-6 rounded-2xl shadow-sm flex items-center gap-4">
                 <div class="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center text-teal-600">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                    
                 </div>
                 <p class="text-teal-900 font-bold">{{ session('success') }}</p>
             </div>
@@ -130,7 +130,7 @@
                 @else
                     <div class="py-16 text-center">
                         <div class="w-16 h-16 bg-slate-50 text-slate-300 flex items-center justify-center rounded-2xl mx-auto mb-4">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                            
                         </div>
                         <h3 class="font-black text-slate-800 text-lg">Tidak Ada Pengajuan Verifikasi</h3>
                         <p class="text-slate-400 text-sm mt-1 max-w-sm mx-auto">Saat ini tidak ada berkas identitas pemohon yang masuk dalam antrean verifikasi atau sesuai dengan filter.</p>

@@ -39,7 +39,7 @@ class AdminVerificationController extends Controller
     /**
      * Show detail of a verification request
      */
-    public function show($id)
+    public function show(int $id)
     {
         $requestData = ProfilPemohon::with('user')->findOrFail($id);
         return view('admin.verification.show', compact('requestData'));
@@ -48,7 +48,7 @@ class AdminVerificationController extends Controller
     /**
      * Approve the pemohon verification request
      */
-    public function approve($id)
+    public function approve(int $id)
     {
         $profile = ProfilPemohon::findOrFail($id);
         
@@ -64,7 +64,7 @@ class AdminVerificationController extends Controller
     /**
      * Reject the pemohon verification request
      */
-    public function reject(Request $request, $id)
+    public function reject(Request $request, int $id)
     {
         $request->validate([
             'rejected_reason' => ['required', 'string', 'max:500'],

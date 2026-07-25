@@ -43,8 +43,9 @@
                    class="w-full border-2 border-slate-200 rounded-xl px-4 py-4 text-base focus:ring-4 focus:ring-teal-500/20 focus:border-teal-500 font-semibold">
         </div>
 
-        <button type="submit" class="w-full bg-teal-600 text-white py-4 rounded-xl font-bold text-base hover:bg-teal-700 transition shadow-lg active:scale-[0.98]">
-            📝 Daftar Sekarang
+        <button type="submit" class="w-full bg-teal-600 text-white py-4 rounded-xl font-bold text-base flex items-center justify-center hover:bg-teal-700 transition shadow-lg active:scale-[0.98]">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
+            Daftar Sekarang
         </button>
 
         <p class="text-center text-sm text-slate-600 mt-5 font-semibold">

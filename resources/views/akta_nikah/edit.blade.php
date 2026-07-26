@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex items-center gap-6">
             <a href="{{ route('akta-nikah.index') }}" class="w-12 h-12 rounded-2xl bg-white border border-slate-100 hover:bg-slate-50 flex items-center justify-center text-slate-400 hover:text-slate-600 transition-all active:scale-90 shadow-sm">
-                
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
             </a>
             <div>
                 <h2 class="text-2xl font-black text-slate-900 tracking-tight">Perbarui Data Akta Nikah</h2>
@@ -19,7 +19,7 @@
             @if($errors->any())
                 <div class="p-8 bg-rose-50 border border-rose-100 rounded-[2.5rem] flex gap-6 animate-fade-in shadow-xl shadow-rose-100/50">
                     <div class="w-14 h-14 bg-rose-500 rounded-2xl flex items-center justify-center text-white shrink-0 shadow-lg shadow-rose-200">
-                        
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                     </div>
                     <div>
                         <h4 class="font-black text-rose-800 text-lg tracking-tight">Terjadi Kesalahan Validasi</h4>
@@ -37,7 +37,7 @@
             <div class="bg-white rounded-[3rem] shadow-sm border border-slate-100 overflow-hidden transform transition-all duration-500 hover:shadow-xl hover:shadow-slate-200/40">
                 <div class="p-8 md:p-10 border-b border-slate-50 flex items-center bg-slate-50/30">
                     <div class="w-14 h-14 bg-teal-600 rounded-[1.2rem] flex items-center justify-center text-white mr-6 shadow-xl shadow-teal-200">
-                        
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                     </div>
                     <div>
                         <h3 class="text-2xl font-black text-slate-900 tracking-tight">Detail Administrasi</h3>
@@ -72,7 +72,9 @@
                 {{-- Data Suami --}}
                 <div class="bg-white rounded-[3rem] shadow-sm border border-slate-100 overflow-hidden group hover:shadow-xl transition-all duration-500">
                     <div class="p-8 border-b border-slate-50 flex items-center bg-teal-50/20">
-                        <div class="w-14 h-14 bg-slate-900 rounded-[1.2rem] flex items-center justify-center text-2xl mr-6 shadow-xl shadow-slate-200">👨</div>
+                        <div class="w-14 h-14 bg-slate-900 rounded-[1.2rem] flex items-center justify-center text-white mr-6 shadow-xl shadow-slate-200">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        </div>
                         <div>
                             <h3 class="text-xl font-black text-slate-900 tracking-tight">Data Suami</h3>
                             <p class="text-[10px] font-black text-teal-600 uppercase tracking-[0.2em] mt-1">Groom Information</p>
@@ -111,7 +113,9 @@
                 {{-- Data Istri --}}
                 <div class="bg-white rounded-[3rem] shadow-sm border border-slate-100 overflow-hidden group hover:shadow-xl transition-all duration-500">
                     <div class="p-8 border-b border-slate-50 flex items-center bg-rose-50/20">
-                        <div class="w-14 h-14 bg-rose-500 rounded-[1.2rem] flex items-center justify-center text-2xl mr-6 shadow-xl shadow-rose-100">👩</div>
+                        <div class="w-14 h-14 bg-rose-500 rounded-[1.2rem] flex items-center justify-center text-white mr-6 shadow-xl shadow-rose-100">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        </div>
                         <div>
                             <h3 class="text-xl font-black text-slate-900 tracking-tight">Data Istri</h3>
                             <p class="text-[10px] font-black text-rose-500 uppercase tracking-[0.2em] mt-1">Bride Information</p>
@@ -151,7 +155,7 @@
             {{-- Card: Wali & Berkas (Dark Section) --}}
             <div class="bg-slate-900 rounded-[3.5rem] p-8 md:p-14 text-white shadow-2xl relative overflow-hidden">
                 <div class="absolute top-0 right-0 p-16 opacity-[0.03] pointer-events-none">
-                    
+                    <svg class="w-full h-full text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
                 </div>
                 
                 <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
@@ -215,7 +219,7 @@
                             <div class="p-8 rounded-[2rem] bg-white/5 border border-white/10 space-y-6 relative group overflow-hidden transition-all hover:bg-white/[0.07]">
                                 <div class="flex items-center gap-6 relative z-10">
                                     <div class="w-16 h-16 rounded-2xl bg-teal-500 flex items-center justify-center shadow-2xl shadow-teal-500/40">
-                                        
+                                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
                                     </div>
                                     <div>
                                         <p class="text-lg font-black tracking-tight">Perbarui Scan Dokumen</p>
@@ -226,7 +230,7 @@
                                     @if($aktaNikah->file_path)
                                         <div class="px-6 py-4 bg-teal-500/10 border border-teal-500/20 rounded-2xl flex items-center justify-between group/file">
                                             <div class="flex items-center gap-3">
-                                                
+                                                <svg class="w-5 h-5 text-teal-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                                 <span class="text-[10px] font-black uppercase tracking-widest text-teal-100">Berkas Terunggah</span>
                                             </div>
                                             <a href="{{ asset('storage/' . $aktaNikah->file_path) }}" target="_blank" 
@@ -270,4 +274,4 @@
         }
         .animate-fade-in { animation: fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
     </style>
-</x-app-layout>ayout>
+</x-app-layout>

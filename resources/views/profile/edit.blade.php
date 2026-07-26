@@ -1,9 +1,10 @@
+<x-app-layout>
     <div class="px-4 sm:px-6 lg:px-8 py-12">
         {{-- Glass Header --}}
         <div class="mb-12 bg-white/40 backdrop-blur-xl border border-white/20 p-8 rounded-[3rem] shadow-xl shadow-slate-200/50 flex flex-col md:flex-row md:items-center justify-between gap-8">
             <div class="flex items-center">
                 <div class="w-16 h-16 rounded-[2rem] bg-indigo-600 flex items-center justify-center text-white mr-6 shadow-xl shadow-indigo-200">
-                    
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                 </div>
                 <div>
                     <h1 class="text-3xl font-black text-slate-900 tracking-tight">Profil Saya</h1>
@@ -58,3 +59,4 @@
             </div>
         </div>
     </div>
+</x-app-layout>

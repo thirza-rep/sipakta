@@ -35,7 +35,7 @@
                     @endif
 
                     @if($canVerify)
-                        <x-nav-link-premium :href="route('admin.verification.index')" :active="request()->routeIs('admin.verification.*')" icon="shield">Verifikasi KTP</x-nav-link-premium>
+                        <x-nav-link-premium :href="route('admin.verification.index')" :active="request()->routeIs('admin.verification.*')" icon="shield">Verifikasi</x-nav-link-premium>
                     @endif
 
                     @if($isStaf)
@@ -65,7 +65,7 @@
                                     {{ substr(Auth::user()->name, 0, 1) }}
                                 @endif
                             </div>
-                            
+                            <svg class="ml-2 w-4 h-4 text-slate-300 group-hover:text-teal-500 transition hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                     </x-slot>
 
@@ -75,14 +75,16 @@
                             <p class="text-sm font-bold truncate">{{ Auth::user()->email }}</p>
                         </div>
                         <div class="p-2 space-y-1">
+                            @if(!Auth::user()->isAdmin())
                             <a href="{{ route('profile.edit') }}" class="flex items-center px-4 py-3 text-sm font-bold text-slate-600 rounded-xl hover:bg-teal-50 hover:text-teal-700 transition group">
-                                
+                                <svg class="w-5 h-5 mr-3 text-slate-400 group-hover:text-teal-500 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                                 Pengaturan Profil
                             </a>
+                            @endif
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit" class="w-full flex items-center px-4 py-3 text-sm font-bold text-red-500 rounded-xl hover:bg-red-50 transition group">
-                                    
+                                    <svg class="w-5 h-5 mr-3 text-red-400 group-hover:text-red-500 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
                                     Keluar Sistem
                                 </button>
                             </form>
@@ -94,7 +96,10 @@
             {{-- Mobile Menu Button --}}
             <div class="flex items-center lg:hidden">
                 <button @click="open = !open" class="p-3 bg-slate-50 text-slate-400 rounded-2xl hover:text-teal-600 hover:bg-teal-50 transition-all duration-300 border border-slate-100 active:scale-90">
-                    
+                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 14h16M4 22h16" />
+                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
                 </button>
             </div>
         </div>
@@ -115,7 +120,7 @@
             @endif
 
             @if($canVerify)
-                <x-responsive-nav-link-premium :href="route('admin.verification.index')" :active="request()->routeIs('admin.verification.*')" icon="shield">Verifikasi KTP</x-responsive-nav-link-premium>
+                <x-responsive-nav-link-premium :href="route('admin.verification.index')" :active="request()->routeIs('admin.verification.*')" icon="shield">Verifikasi</x-responsive-nav-link-premium>
             @endif
 
             @if($isStaf)
@@ -141,8 +146,10 @@
                         <div class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">{{ Auth::user()->role_display }}</div>
                     </div>
                 </div>
-                <div class="grid grid-cols-2 gap-3 pb-2">
+                <div class="grid {{ !Auth::user()->isAdmin() ? 'grid-cols-2' : 'grid-cols-1' }} gap-3 pb-2">
+                    @if(!Auth::user()->isAdmin())
                     <a href="{{ route('profile.edit') }}" class="flex items-center justify-center px-4 py-3 bg-slate-50 text-slate-600 rounded-xl font-bold text-sm hover:bg-teal-50 hover:text-teal-700 transition">Profil</a>
+                    @endif
                     <form method="POST" action="{{ route('logout') }}" class="flex">
                         @csrf
                         <button type="submit" class="flex-1 px-4 py-3 bg-red-50 text-red-500 rounded-xl font-bold text-sm hover:bg-red-100 transition">Logout</button>

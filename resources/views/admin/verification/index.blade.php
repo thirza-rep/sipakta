@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex items-center gap-6">
             <h2 class="text-2xl font-black text-slate-900 tracking-tight">Verifikasi Berkas Pemohon</h2>
-            <p class="text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em] mt-0.5">Validasi Identitas & KTP Pemohon</p>
+            <p class="text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em] mt-0.5">Validasi Identitas & Berkas Pemohon</p>
         </div>
     </x-slot>
 
@@ -11,7 +11,7 @@
         @if(session('success'))
             <div class="bg-teal-50 border-l-4 border-teal-500 p-6 rounded-2xl shadow-sm flex items-center gap-4">
                 <div class="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center text-teal-600">
-                    
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                 </div>
                 <p class="text-teal-900 font-bold">{{ session('success') }}</p>
             </div>
@@ -130,7 +130,7 @@
                 @else
                     <div class="py-16 text-center">
                         <div class="w-16 h-16 bg-slate-50 text-slate-300 flex items-center justify-center rounded-2xl mx-auto mb-4">
-                            
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
                         </div>
                         <h3 class="font-black text-slate-800 text-lg">Tidak Ada Pengajuan Verifikasi</h3>
                         <p class="text-slate-400 text-sm mt-1 max-w-sm mx-auto">Saat ini tidak ada berkas identitas pemohon yang masuk dalam antrean verifikasi atau sesuai dengan filter.</p>

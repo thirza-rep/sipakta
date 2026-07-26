@@ -10,13 +10,12 @@
         {{-- Hero Audit Banner --}}
         <div class="bg-slate-900 rounded-[3.5rem] p-10 md:p-14 shadow-2xl relative overflow-hidden text-white">
             <div class="absolute top-0 right-0 p-16 opacity-[0.03] pointer-events-none">
-                
+                <svg class="w-96 h-96" fill="currentColor" viewBox="0 0 24 24"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>
             </div>
-            
             <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
                 <div class="flex items-center gap-8 text-left">
                     <div class="w-20 h-20 rounded-[2.5rem] bg-indigo-600 flex items-center justify-center text-white shadow-2xl shadow-indigo-500/40">
-                        
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                     </div>
                     <div>
                         <h1 class="text-4xl font-black tracking-tight leading-tight">Log Transaksi</h1>
@@ -27,7 +26,7 @@
                 <div class="space-y-4">
                     <div class="px-6 py-4 bg-white/5 border border-white/10 rounded-2xl flex items-center gap-4">
                         <div class="w-10 h-10 rounded-xl bg-teal-500/20 text-teal-400 flex items-center justify-center font-black">
-                            
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                         </div>
                         <div class="flex flex-col">
                             <span class="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-none mb-1">Integritas Data</span>
@@ -94,7 +93,7 @@
                             <td colspan="4" class="px-10 py-32 text-center bg-slate-50/20">
                                 <div class="flex flex-col items-center">
                                     <div class="w-24 h-24 bg-slate-100 rounded-[2.5rem] flex items-center justify-center mb-8 text-slate-200">
-                                        
+                                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     </div>
                                     <h4 class="text-2xl font-black text-slate-800 tracking-tight">Belum Ada Riwayat</h4>
                                     <p class="text-slate-400 mt-2 font-bold max-w-sm mx-auto">Database log saat ini masih kosong atau belum ada aktivitas yang tercatat dalam periode ini.</p>

@@ -19,7 +19,9 @@
             {{-- Card 1 --}}
             <div class="bg-teal-700 rounded-2xl p-8 shadow-xl text-white">
                 <div class="flex items-center gap-4 mb-4">
-                    <span class="text-4xl">📂</span>
+                    <div class="p-3 bg-teal-600 rounded-xl">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    </div>
                     <h3 class="text-lg font-bold">Total Arsip Akta</h3>
                 </div>
                 <div class="text-5xl font-extrabold">{{ number_format(\App\Models\AktaNikah::count()) }}</div>
@@ -29,7 +31,9 @@
             {{-- Card 2 --}}
             <div class="bg-white border-2 border-slate-200 rounded-2xl p-8 shadow-sm">
                 <div class="flex items-center gap-4 mb-4">
-                    <span class="text-4xl">📅</span>
+                    <div class="p-3 bg-blue-50 text-blue-600 rounded-xl">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    </div>
                     <h3 class="text-lg font-bold text-slate-800">Tahun {{ date('Y') }}</h3>
                 </div>
                 <div class="text-5xl font-extrabold text-slate-900">{{ number_format(\App\Models\AktaNikah::whereYear('tanggal_akad', date('Y'))->count()) }}</div>
@@ -39,7 +43,9 @@
             {{-- Card 3 --}}
             <div class="bg-white border-2 border-slate-200 rounded-2xl p-8 shadow-sm">
                 <div class="flex items-center gap-4 mb-4">
-                    <span class="text-4xl">🖨️</span>
+                    <div class="p-3 bg-purple-50 text-purple-600 rounded-xl">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
                     <h3 class="text-lg font-bold text-slate-800">Tersedia Digital</h3>
                 </div>
                 <div class="text-5xl font-extrabold text-slate-900">{{ number_format(\App\Models\AktaNikah::whereNotNull('file_path')->count()) }}</div>
@@ -121,7 +127,9 @@
                         @empty
                             <tr>
                                 <td colspan="5" class="px-6 py-12 text-center text-slate-500">
-                                    <span class="text-4xl block mb-2">📂</span>
+                                    <div class="w-16 h-16 bg-slate-100 text-slate-300 flex items-center justify-center rounded-2xl mx-auto mb-4">
+                                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
+                                    </div>
                                     <p class="font-bold text-lg text-slate-700">Tidak Ada Data Ditemukan</p>
                                     <p class="text-sm">Silakan gunakan kata kunci lain untuk mencari.</p>
                                 </td>

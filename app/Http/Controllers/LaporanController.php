@@ -39,8 +39,10 @@ class LaporanController extends Controller
 
         $namaBulan = $this->getNamaBulan($bulan);
 
-        // Get available years for filter
-        $availableYears = AktaNikah::selectRaw('YEAR(tanggal_akad) as year')
+        $driver = \Illuminate\Support\Facades\DB::connection()->getDriverName();
+        $yearSql = $driver === 'sqlite' ? "strftime('%Y', tanggal_akad)" : 'YEAR(tanggal_akad)';
+
+        $availableYears = AktaNikah::selectRaw("{$yearSql} as year")
                                    ->distinct()
                                    ->orderBy('year', 'desc')
                                    ->pluck('year')
@@ -113,8 +115,10 @@ class LaporanController extends Controller
             ];
         }
 
-        // Get available years
-        $availableYears = AktaNikah::selectRaw('YEAR(tanggal_akad) as year')
+        $driver = \Illuminate\Support\Facades\DB::connection()->getDriverName();
+        $yearSql = $driver === 'sqlite' ? "strftime('%Y', tanggal_akad)" : 'YEAR(tanggal_akad)';
+
+        $availableYears = AktaNikah::selectRaw("{$yearSql} as year")
                                    ->distinct()
                                    ->orderBy('year', 'desc')
                                    ->pluck('year')

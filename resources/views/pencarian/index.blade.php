@@ -26,7 +26,7 @@
 
                     <div class="pt-4 border-t border-slate-200">
                         <button type="submit" class="w-full py-5 bg-teal-600 text-white rounded-xl font-bold text-xl hover:bg-teal-700 transition active:scale-[0.98] shadow-lg flex items-center justify-center gap-3">
-                            <span class="text-2xl">🔍</span> Cari Arsip Sekarang
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg> Cari Arsip Sekarang
                         </button>
                     </div>
                 </form>

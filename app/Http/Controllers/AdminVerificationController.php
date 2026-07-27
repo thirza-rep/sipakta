@@ -19,7 +19,12 @@ class AdminVerificationController extends Controller
             $query->where('status', $request->status);
         } else {
             // By default, prioritize pending_verification, then show all
-            $query->orderByRaw("FIELD(status, 'pending_verification', 'rejected', 'unverified', 'verified') ASC");
+            $query->orderByRaw("CASE status 
+                WHEN 'pending_verification' THEN 1 
+                WHEN 'rejected' THEN 2 
+                WHEN 'unverified' THEN 3 
+                WHEN 'verified' THEN 4 
+                ELSE 5 END ASC");
         }
 
         // Search by name or NIK

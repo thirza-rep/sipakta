@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\AktaNikah;
+use App\Models\LaporanTersimpan;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class LaporanController extends Controller
 {
@@ -21,7 +24,9 @@ class LaporanController extends Controller
             'arsip_tahun_ini' => AktaNikah::whereYear('tanggal_akad', now()->year)->count(),
         ];
 
-        return view('laporan.index', compact('stats'));
+        $laporanTersimpan = LaporanTersimpan::with('pengelola')->orderBy('created_at', 'desc')->get();
+
+        return view('laporan.index', compact('stats', 'laporanTersimpan'));
     }
 
     /**
@@ -69,9 +74,9 @@ class LaporanController extends Controller
     }
 
     /**
-     * Export monthly report to PDF
+     * Generate and save monthly report to system (Pengelola Data)
      */
-    public function exportPdf(Request $request)
+    public function simpanBulanan(Request $request)
     {
         $bulan = $request->get('bulan', now()->month);
         $tahun = $request->get('tahun', now()->year);
@@ -91,9 +96,37 @@ class LaporanController extends Controller
 
         $pdf = Pdf::loadView('laporan.pdf', compact('arsip', 'bulan', 'tahun', 'namaBulan', 'summary'));
         
-        $filename = "Laporan_Arsip_Akta_Nikah_{$namaBulan}_{$tahun}.pdf";
+        $filename = "Laporan_Bulanan_{$namaBulan}_{$tahun}_" . time() . ".pdf";
+        $path = "laporan_arsip/{$filename}";
         
-        return $pdf->download($filename);
+        // Save PDF to storage
+        Storage::disk('public')->put($path, $pdf->output());
+
+        // Save record to database
+        LaporanTersimpan::create([
+            'judul_laporan' => "Laporan Akta Nikah Bulan {$namaBulan} {$tahun}",
+            'tipe_laporan' => 'bulanan',
+            'bulan' => $bulan,
+            'tahun' => $tahun,
+            'file_path' => $path,
+            'pengelola_id' => Auth::id(),
+        ]);
+        
+        return redirect()->route('laporan.index')->with('success', 'Laporan berhasil di-generate dan disimpan ke sistem.');
+    }
+
+    /**
+     * Download a saved report (Pengelola Data & Kepala KUA)
+     */
+    public function downloadTersimpan($id)
+    {
+        $laporan = LaporanTersimpan::findOrFail($id);
+
+        if (!Storage::disk('public')->exists($laporan->file_path)) {
+            return back()->with('error', 'File PDF tidak ditemukan di sistem.');
+        }
+
+        return Storage::disk('public')->download($laporan->file_path);
     }
 
     /**

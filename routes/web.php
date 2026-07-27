@@ -123,8 +123,12 @@ Route::middleware('auth')->group(function () {
     // ============================================
     Route::middleware('role:pengelola_data,kepala_kua')->group(function () {
         Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
+        Route::get('/laporan/download-tersimpan/{id}', [LaporanController::class, 'downloadTersimpan'])->name('laporan.download-tersimpan');
+    });
+
+    Route::middleware('role:pengelola_data')->group(function () {
         Route::get('/laporan/bulanan', [LaporanController::class, 'bulanan'])->name('laporan.bulanan');
-        Route::get('/laporan/export-pdf', [LaporanController::class, 'exportPdf'])->name('laporan.export-pdf');
+        Route::post('/laporan/simpan-bulanan', [LaporanController::class, 'simpanBulanan'])->name('laporan.simpan-bulanan');
         Route::get('/laporan/rekap', [LaporanController::class, 'rekap'])->name('laporan.rekap');
     });
 

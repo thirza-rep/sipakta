@@ -30,11 +30,15 @@
 
             <div class="relative z-10 flex flex-wrap justify-center gap-4">
                 @if($arsip->count() > 0)
-                <a href="{{ route('laporan.export-pdf', ['bulan' => $bulan, 'tahun' => $tahun]) }}" 
-                   class="inline-flex items-center px-10 py-5 bg-teal-600 text-white rounded-[1.5rem] font-black shadow-xl shadow-teal-600/20 hover:bg-teal-500 transition-all active:scale-95 group">
-                    
-                    UNDUH LAPORAN PDF
-                </a>
+                <form method="POST" action="{{ route('laporan.simpan-bulanan') }}">
+                    @csrf
+                    <input type="hidden" name="bulan" value="{{ $bulan }}">
+                    <input type="hidden" name="tahun" value="{{ $tahun }}">
+                    <button type="submit" 
+                       class="inline-flex items-center px-10 py-5 bg-teal-600 text-white rounded-[1.5rem] font-black shadow-xl shadow-teal-600/20 hover:bg-teal-500 transition-all active:scale-95 group">
+                        GENERATE & SIMPAN LAPORAN
+                    </button>
+                </form>
                 @endif
             </div>
         </div>

@@ -7,8 +7,9 @@
                 </h2>
                 <p class="text-slate-600 text-sm mt-1">Sistem Informasi Pencarian dan Pengarsipan Akta Nikah</p>
             </div>
-            <div class="px-5 py-3 bg-white border-2 border-slate-200 rounded-xl font-bold text-slate-700 shadow-sm text-sm">
-                📅 {{ now()->translatedFormat('d F Y') }}
+            <div class="px-5 py-3 bg-white border-2 border-slate-200 rounded-xl font-bold text-slate-700 shadow-sm text-sm flex items-center gap-2">
+                <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                {{ now()->translatedFormat('d F Y') }}
             </div>
         </div>
     </x-slot>

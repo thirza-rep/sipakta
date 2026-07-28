@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center gap-6">
-            <a href="{{ route('laporan.rekap') }}" class="w-12 h-12 rounded-2xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500 transition-all active:scale-90 shadow-sm border border-slate-200">
-                
+            <a href="{{ route('laporan.index') }}" class="w-12 h-12 rounded-2xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500 transition-all active:scale-90 shadow-sm border border-slate-200">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
             </a>
             <div>
                 <h2 class="text-2xl font-black text-slate-900 tracking-tight">Laporan Bulanan</h2>
@@ -15,12 +15,12 @@
         {{-- Hero Header --}}
         <div class="bg-slate-900 rounded-[3.5rem] p-10 md:p-14 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10">
             <div class="absolute top-0 right-0 p-16 opacity-[0.03] pointer-events-none">
-                
+                <svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
             </div>
 
             <div class="relative z-10 flex items-center gap-8">
                 <div class="w-20 h-20 rounded-[2.5rem] bg-teal-500 flex items-center justify-center text-white shadow-2xl shadow-teal-500/40 transform rotate-3">
-                    
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                 </div>
                 <div>
                     <h1 class="text-4xl font-black text-white tracking-tight">Detail Periode</h1>
@@ -65,7 +65,7 @@
                                         @endfor
                                     </select>
                                     <div class="absolute right-6 top-5 text-slate-300 pointer-events-none group-focus-within:text-teal-600 transition-colors">
-                                        
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                                         @endforeach
                                     </select>
                                     <div class="absolute right-6 top-5 text-slate-300 pointer-events-none group-focus-within:text-teal-600 transition-colors">
-                                        
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                                     </div>
                                 </div>
                             </div>
@@ -167,7 +167,7 @@
                                         @if($item->hasDocument())
                                             <div class="inline-flex flex-col items-center">
                                                 <div class="w-14 h-14 rounded-2xl bg-teal-50 flex items-center justify-center text-teal-600 border border-teal-100 shadow-sm relative group-hover/row:scale-110 transition-transform">
-                                                    
+                                                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                                                     <div class="absolute -top-1 -right-1 w-4 h-4 bg-teal-500 rounded-full border-2 border-white"></div>
                                                 </div>
                                                 <span class="mt-3 text-[10px] font-black text-teal-600 uppercase tracking-widest">DIGITAL</span>
@@ -175,7 +175,7 @@
                                         @else
                                             <div class="inline-flex flex-col items-center opacity-40">
                                                 <div class="w-14 h-14 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-400 border border-slate-200">
-                                                    
+                                                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
                                                 </div>
                                                 <span class="mt-3 text-[10px] font-black text-slate-400 uppercase tracking-widest">FISIK</span>
                                             </div>
@@ -187,7 +187,7 @@
                                     <td colspan="3" class="px-10 py-32 text-center bg-slate-50/20">
                                         <div class="flex flex-col items-center">
                                             <div class="w-24 h-24 bg-slate-200/50 rounded-[2.5rem] flex items-center justify-center mb-8">
-                                                
+                                                <svg class="w-12 h-12 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
                                             </div>
                                             <h4 class="text-2xl font-black text-slate-800 tracking-tight">Data Tidak Ditemukan</h4>
                                             <p class="text-slate-400 mt-2 max-w-sm font-bold text-center leading-relaxed">Belum ada arsip yang masuk untuk periode {{ $namaBulan }} {{ $tahun }}.</p>

@@ -31,17 +31,20 @@ class PdfController extends Controller
     /**
      * Export PDF salinan arsip akta nikah (untuk Pemohon)
      */
-    public function exportAktaNikah(string $id)
+    public function exportAktaNikah(Request $request, string $id)
     {
         $akta = AktaNikah::findOrFail($id);
         /** @var \App\Models\User $user */
         $user = Auth::user();
         $profil = $user->profilPemohon;
+        
+        $alasanCetak = $request->query('alasan_cetak', 'Keperluan Administratif / Penelusuran Arsip');
 
         $pdf = Pdf::loadView('pdf.akta-nikah-pdf', [
             'akta' => $akta,
             'pemohon' => $profil,
             'userName' => $user->name,
+            'alasanCetak' => $alasanCetak,
             'tanggalCetak' => now()->translatedFormat('d F Y, H:i'),
         ]);
 

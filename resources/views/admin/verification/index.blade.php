@@ -61,6 +61,7 @@
                                     <th class="pb-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">NIK</th>
                                     <th class="pb-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">No. WhatsApp</th>
                                     <th class="pb-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">Tanggal Pengajuan</th>
+                                    <th class="pb-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">Keperluan</th>
                                     <th class="pb-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">Status</th>
                                     <th class="pb-6 text-[10px] font-black text-slate-400 uppercase tracking-widest text-center pr-4">Aksi</th>
                                 </tr>
@@ -92,6 +93,11 @@
                                         </td>
                                         <td class="py-6 text-xs font-bold text-slate-400">
                                             {{ $req->updated_at->format('d M Y H:i') }}
+                                        </td>
+                                        <td class="py-6">
+                                            <span class="text-xs font-bold text-slate-600 line-clamp-2" title="{{ $req->keperluan }}">
+                                                {{ $req->keperluan ?? '-' }}
+                                            </span>
                                         </td>
                                         <td class="py-6">
                                             @if($req->status === 'pending_verification')

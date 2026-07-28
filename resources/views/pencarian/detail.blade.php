@@ -64,30 +64,43 @@
 
                 </div>
 
-                {{-- Action Area (PDF) --}}
-                <div class="mt-12 flex flex-col items-center">
-                    <a href="{{ route('pencarian.cetak-pdf', $arsip->id) }}" target="_blank"
-                       class="w-full md:w-auto px-10 py-5 bg-teal-600 text-white rounded-xl font-bold text-lg hover:bg-teal-700 transition active:scale-95 shadow-lg flex items-center justify-center gap-3">
-                        <span class="text-2xl">🖨️</span> Cetak Salinan Bukti Pencarian (PDF)
-                    </a>
-                    <p class="text-sm text-slate-500 font-medium mt-4 text-center">
-                        Cetak dokumen ini sebagai bukti awal bahwa data arsip telah ditemukan di sistem.
-                    </p>
-                </div>
-            </div>
-        </div>
+                {{-- Action Area (Form Cetak PDF & Validasi) --}}
+                <form action="{{ route('pencarian.cetak-pdf', $arsip->id) }}" method="GET" target="_blank" class="mt-12 bg-slate-50 p-6 md:p-8 rounded-2xl border-2 border-slate-200">
+                    <h4 class="font-bold text-slate-800 text-lg mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Validasi & Alasan Pengambilan Dokumen
+                    </h4>
+                    
+                    <div class="mb-6">
+                        <label for="alasan_cetak" class="block text-sm font-bold text-slate-700 mb-2">Jelaskan Tujuan/Alasan Mengambil Salinan Arsip Fisik</label>
+                        <textarea name="alasan_cetak" id="alasan_cetak" rows="2" required 
+                                  class="w-full px-4 py-3 text-base bg-white border-2 border-slate-300 rounded-xl focus:ring-4 focus:ring-teal-500/20 focus:border-teal-500 font-medium text-slate-800 resize-none" 
+                                  placeholder="Contoh: Mengurus pembuatan KK baru, syarat pensiun, dll."></textarea>
+                    </div>
 
-        {{-- Info Box Penting --}}
-        <div class="bg-amber-50 border-2 border-amber-200 rounded-2xl p-6 md:p-8 flex gap-6 items-start">
-            <span class="text-4xl">⚠️</span>
-            <div>
-                <h4 class="text-lg font-bold text-amber-900 mb-2">Prosedur Pengambilan Dokumen Resmi</h4>
-                <p class="text-amber-800 font-medium leading-relaxed text-base">
-                    Salinan PDF dari sistem ini <strong>bukanlah pengganti Akta Nikah resmi</strong>. 
-                    Jika Anda membutuhkan kutipan akta nikah fisik berlegalisir, Anda <strong>wajib</strong> datang langsung ke Kantor KUA Kemantren Tegalrejo. Jangan lupa membawa KTP asli dan menunjukkan hasil cetak pencarian ini (atau menyebutkan Nomor Akta) kepada petugas loket.
-                </p>
-            </div>
-        </div>
+                    <div class="bg-amber-50 border-2 border-amber-200 rounded-xl p-5 mb-6">
+                        <h5 class="font-bold text-amber-900 mb-3 flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Note: Persyaratan yang Wajib Dibawa ke KUA
+                        </h5>
+                        <ul class="list-disc list-inside text-amber-800 text-sm space-y-1.5 font-medium ml-2">
+                            <li>KTP Asli Pemohon (Sesuai identitas Anda)</li>
+                            <li>Fotokopi Kartu Keluarga (KK)</li>
+                            <li>Hasil Cetak (Print Out) Salinan Bukti Pencarian ini</li>
+                            <li>Surat Kuasa bermaterai (Jika pengambilan diwakilkan oleh pihak lain)</li>
+                        </ul>
+                    </div>
 
+                    <div class="flex flex-col items-center">
+                        <button type="submit" class="w-full px-10 py-4 bg-teal-600 text-white rounded-xl font-bold text-lg hover:bg-teal-700 transition active:scale-95 shadow-lg flex items-center justify-center gap-3">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                            Cetak Salinan Bukti Pencarian (PDF)
+                        </button>
+                        <p class="text-sm text-slate-500 font-medium mt-3 text-center">
+                            Cetak dokumen ini sebagai bukti awal bahwa data arsip telah ditemukan di sistem.
+                        </p>
+                    </div>
+                </form>
+            </div>
     </div>
 </x-app-layout>

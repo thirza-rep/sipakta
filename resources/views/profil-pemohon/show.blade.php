@@ -58,6 +58,13 @@
                                     {{ $profil->nik ?? '-' }}
                                 </p>
                             </div>
+
+                            <div>
+                                <h4 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">Tempat, Tanggal Lahir</h4>
+                                <p class="text-base font-black text-slate-700 px-6 py-4 bg-slate-50 rounded-2xl border border-slate-100 shadow-inner tracking-widest">
+                                    {{ $profil->tempat_lahir ?? '-' }}, {{ $profil->tanggal_lahir ? \Carbon\Carbon::parse($profil->tanggal_lahir)->translatedFormat('d F Y') : '-' }}
+                                </p>
+                            </div>
                         </div>
                     </div>
 
@@ -80,6 +87,13 @@
                                 <h4 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">Alamat Lengkap</h4>
                                 <p class="text-base font-black text-slate-700 px-6 py-4 bg-slate-50 rounded-2xl border border-slate-100 shadow-inner leading-relaxed">
                                     {{ $profil->alamat ?? '-' }}
+                                </p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">Tujuan / Keperluan Pencarian Arsip</h4>
+                                <p class="text-base font-black text-slate-700 px-6 py-4 bg-slate-50 rounded-2xl border border-slate-100 shadow-inner leading-relaxed">
+                                    {{ $profil->keperluan ?? '-' }}
                                 </p>
                             </div>
                         </div>

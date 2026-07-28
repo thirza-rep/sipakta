@@ -28,13 +28,24 @@
                 {{-- =============================== --}}
                 <div class="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
                     <div class="bg-slate-800 px-6 py-4">
-                        <h4 class="text-white font-bold text-base">📋 Checklist Kelengkapan</h4>
+                        <h4 class="text-white font-bold text-base flex items-center">
+                            <svg class="w-5 h-5 mr-2 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                            Checklist Kelengkapan
+                        </h4>
                         <p class="text-slate-300 text-sm">Ringkasan status verifikasi pemohon</p>
                     </div>
                     <div class="p-5 space-y-3">
                         {{-- Email --}}
                         <div class="flex items-center gap-3 p-3 rounded-lg {{ $emailVerified ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200' }}">
-                            <span class="text-xl">{{ $emailVerified ? '✅' : '❌' }}</span>
+                            @if($emailVerified)
+                                <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 shrink-0">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                </div>
+                            @else
+                                <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-600 shrink-0">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                </div>
+                            @endif
                             <div>
                                 <span class="font-bold text-sm {{ $emailVerified ? 'text-green-800' : 'text-red-800' }}">Email {{ $emailVerified ? 'Terverifikasi' : 'Belum Verifikasi' }}</span>
                                 <span class="block text-xs {{ $emailVerified ? 'text-green-600' : 'text-red-600' }}">{{ $requestData->user->email }}</span>
@@ -43,7 +54,15 @@
 
                         {{-- WhatsApp --}}
                         <div class="flex items-center gap-3 p-3 rounded-lg {{ $waFilled ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200' }}">
-                            <span class="text-xl">{{ $waFilled ? '✅' : '❌' }}</span>
+                            @if($waFilled)
+                                <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 shrink-0">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                </div>
+                            @else
+                                <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-600 shrink-0">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                </div>
+                            @endif
                             <div>
                                 <span class="font-bold text-sm {{ $waFilled ? 'text-green-800' : 'text-red-800' }}">WhatsApp {{ $waFilled ? 'Sudah Diisi' : 'Belum Diisi' }}</span>
                                 <span class="block text-xs {{ $waFilled ? 'text-green-600' : 'text-red-600' }}">{{ $requestData->no_telepon }}</span>
@@ -52,7 +71,15 @@
 
                         {{-- NIK --}}
                         <div class="flex items-center gap-3 p-3 rounded-lg {{ $nikValid ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200' }}">
-                            <span class="text-xl">{{ $nikValid ? '✅' : '❌' }}</span>
+                            @if($nikValid)
+                                <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 shrink-0">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                </div>
+                            @else
+                                <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-600 shrink-0">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                </div>
+                            @endif
                             <div>
                                 <span class="font-bold text-sm {{ $nikValid ? 'text-green-800' : 'text-red-800' }}">NIK {{ $nikValid ? '16 Digit Valid' : 'Tidak Valid' }}</span>
                                 <span class="block text-xs {{ $nikValid ? 'text-green-600' : 'text-red-600' }}">{{ $requestData->nik ?? 'Kosong' }}</span>
@@ -80,6 +107,10 @@
                             <span class="font-bold text-slate-700 text-base tracking-wider">{{ $requestData->nik }}</span>
                         </div>
                         <div>
+                            <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Tempat, Tanggal Lahir</span>
+                            <span class="font-semibold text-slate-700">{{ $requestData->tempat_lahir ?? '-' }}, {{ $requestData->tanggal_lahir ? \Carbon\Carbon::parse($requestData->tanggal_lahir)->translatedFormat('d F Y') : '-' }}</span>
+                        </div>
+                        <div>
                             <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Email</span>
                             <span class="font-semibold text-slate-700">{{ $requestData->user->email }}</span>
                         </div>
@@ -88,15 +119,30 @@
                             <p class="font-semibold text-slate-600 text-sm leading-relaxed">{{ $requestData->alamat }}</p>
                         </div>
                         <div>
+                            <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Tujuan / Keperluan Mencari Arsip</span>
+                            <p class="font-bold text-slate-700 text-sm bg-slate-50 p-3 rounded-xl border border-slate-100">{{ $requestData->keperluan ?? 'Tidak ada keterangan' }}</p>
+                        </div>
+                        <div>
                             <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Status Saat Ini</span>
                             @if($requestData->status === 'pending_verification')
-                                <span class="inline-block px-4 py-2 bg-blue-100 text-blue-700 border border-blue-200 rounded-lg text-sm font-bold">⏳ Menunggu Review</span>
+                                <span class="inline-flex items-center gap-1.5 px-4 py-2 bg-blue-100 text-blue-700 border border-blue-200 rounded-lg text-sm font-bold">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    Menunggu Review
+                                </span>
                             @elseif($requestData->status === 'verified')
-                                <span class="inline-block px-4 py-2 bg-green-100 text-green-700 border border-green-200 rounded-lg text-sm font-bold">✅ Disetujui (Aktif)</span>
+                                <span class="inline-flex items-center gap-1.5 px-4 py-2 bg-green-100 text-green-700 border border-green-200 rounded-lg text-sm font-bold">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    Disetujui (Aktif)
+                                </span>
                             @elseif($requestData->status === 'rejected')
-                                <span class="inline-block px-4 py-2 bg-red-100 text-red-700 border border-red-200 rounded-lg text-sm font-bold">❌ Ditolak</span>
+                                <span class="inline-flex items-center gap-1.5 px-4 py-2 bg-red-100 text-red-700 border border-red-200 rounded-lg text-sm font-bold">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    Ditolak
+                                </span>
                             @else
-                                <span class="inline-block px-4 py-2 bg-slate-100 text-slate-600 border border-slate-200 rounded-lg text-sm font-bold">Belum Diajukan</span>
+                                <span class="inline-flex items-center gap-1.5 px-4 py-2 bg-slate-100 text-slate-600 border border-slate-200 rounded-lg text-sm font-bold">
+                                    Belum Diajukan
+                                </span>
                             @endif
                         </div>
 
@@ -112,18 +158,23 @@
                 {{-- Action Panel --}}
                 @if($requestData->status === 'pending_verification')
                     <div class="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 space-y-5">
-                        <h4 class="font-bold text-slate-800 text-base">🔑 Keputusan Verifikasi</h4>
+                        <h4 class="font-bold text-slate-800 text-base flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                            Keputusan Verifikasi
+                        </h4>
 
                         <div class="flex flex-col sm:flex-row gap-3">
                             <form method="POST" action="{{ route('admin.verification.approve', $requestData->id) }}" class="flex-1" onsubmit="return confirm('Yakin ingin MENYETUJUI dan mengaktifkan akun pemohon ini?');">
                                 @csrf
-                                <button type="submit" class="w-full py-4 bg-green-600 text-white font-bold text-sm rounded-xl hover:bg-green-700 active:scale-95 transition-all shadow-lg">
-                                    ✅ Setujui & Aktifkan
+                                <button type="submit" class="w-full py-4 bg-green-600 text-white font-bold text-sm rounded-xl hover:bg-green-700 active:scale-95 transition-all shadow-lg flex items-center justify-center gap-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    Setujui & Aktifkan
                                 </button>
                             </form>
 
-                            <button type="button" onclick="document.getElementById('reject-form-container').classList.toggle('hidden')" class="flex-1 py-4 bg-red-600 text-white font-bold text-sm rounded-xl hover:bg-red-700 active:scale-95 transition-all shadow-lg">
-                                ❌ Tolak Verifikasi
+                            <button type="button" onclick="document.getElementById('reject-form-container').classList.toggle('hidden')" class="flex-1 py-4 bg-red-600 text-white font-bold text-sm rounded-xl hover:bg-red-700 active:scale-95 transition-all shadow-lg flex items-center justify-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                Tolak Verifikasi
                             </button>
                         </div>
 
@@ -145,8 +196,9 @@
 
                 {{-- Cetak PDF Button --}}
                 <a href="{{ route('admin.verification.cetak-pdf', $requestData->id) }}" target="_blank"
-                   class="block w-full py-4 bg-slate-100 text-slate-700 font-bold text-sm rounded-xl hover:bg-slate-200 transition-all text-center border border-slate-200">
-                    🖨️ Cetak Salinan Data Pemohon (PDF)
+                   class="flex items-center justify-center gap-2 w-full py-4 bg-slate-100 text-slate-700 font-bold text-sm rounded-xl hover:bg-slate-200 transition-all text-center border border-slate-200">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                    Cetak Salinan Data Pemohon (PDF)
                 </a>
             </div>
 

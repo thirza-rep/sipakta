@@ -43,8 +43,11 @@ class ProfilPemohonController extends Controller
         $rules = [
             'nik' => ['required', 'string', 'size:16', 'regex:/^[0-9]+$/'],
             'nama_lengkap' => ['required', 'string', 'max:255'],
+            'tempat_lahir' => ['required', 'string', 'max:255'],
+            'tanggal_lahir' => ['required', 'date'],
             'alamat' => ['required', 'string'],
             'no_telepon' => ['required', 'string', 'max:20'],
+            'keperluan' => ['required', 'string'],
         ];
 
         // NIK must be unique in profil_pemohon table (except for current profile)
@@ -68,8 +71,11 @@ class ProfilPemohonController extends Controller
             [
                 'nik' => $validated['nik'],
                 'nama_lengkap' => $validated['nama_lengkap'],
+                'tempat_lahir' => $validated['tempat_lahir'],
+                'tanggal_lahir' => $validated['tanggal_lahir'],
                 'alamat' => $validated['alamat'],
                 'no_telepon' => $validated['no_telepon'],
+                'keperluan' => $validated['keperluan'],
                 'status' => 'pending_verification', // set status to pending review
                 'rejected_reason' => null, // clear old rejection reason
                 'phone_verified_at' => now(), // automatically verified without OTP

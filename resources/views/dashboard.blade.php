@@ -62,7 +62,7 @@
                 </div>
                 <div class="flex items-end gap-2 h-48 mt-4">
                     @foreach($trendPengarsipan as $trend)
-                    <div class="flex-1 flex flex-col items-center justify-end group">
+                    <div class="flex-1 flex flex-col items-center justify-end group h-full">
                         <div class="w-full bg-teal-100 rounded-t-md relative overflow-visible transition-all duration-300 group-hover:bg-teal-200" style="height: {{ max($trend['persentase'], 5) }}%;">
                             <div class="absolute inset-x-0 bottom-0 bg-teal-500 rounded-t-md w-full" style="height: 100%;"></div>
                             <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 pointer-events-none">

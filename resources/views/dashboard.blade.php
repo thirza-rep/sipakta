@@ -111,6 +111,78 @@
         </div>
         @endif
 
+        @if(auth()->user()->isKepalaKua())
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {{-- Daftar Laporan Terbaru --}}
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                        <span class="w-8 h-8 bg-teal-50 text-teal-600 rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        </span>
+                        Laporan Siap Unduh
+                    </h3>
+                    <a href="{{ route('laporan.index') }}" class="text-sm font-bold text-teal-600 hover:text-teal-700">Pusat Laporan &rarr;</a>
+                </div>
+                <div class="flex-1 overflow-y-auto space-y-3">
+                    @forelse($laporanTerbaru as $laporan)
+                    <div class="flex items-center justify-between p-4 rounded-xl border border-slate-100 bg-slate-50 hover:bg-slate-100 transition">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-teal-600 text-white flex items-center justify-center font-bold shadow-sm">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold text-slate-800">{{ $laporan->judul_laporan }}</p>
+                                <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-0.5">Disusun: {{ $laporan->created_at->translatedFormat('d M Y') }}</p>
+                            </div>
+                        </div>
+                        <a href="{{ route('laporan.download-tersimpan', $laporan->id) }}" class="px-4 py-2 bg-slate-900 text-white rounded-lg text-xs font-bold hover:bg-teal-600 transition active:scale-95 shadow-sm">
+                            Unduh PDF
+                        </a>
+                    </div>
+                    @empty
+                    <div class="flex flex-col items-center justify-center h-full text-slate-400 py-8">
+                        <svg class="w-12 h-12 mb-3 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        <p class="text-sm font-bold text-slate-500">Belum ada laporan yang di-generate</p>
+                    </div>
+                    @endforelse
+                </div>
+            </div>
+
+            {{-- Ringkasan Aktivitas Sistem --}}
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                        <span class="w-8 h-8 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </span>
+                        Aktivitas Penggunaan Terkini
+                    </h3>
+                    <a href="{{ route('riwayat.index') }}" class="text-sm font-bold text-teal-600 hover:text-teal-700">Lihat Riwayat &rarr;</a>
+                </div>
+                <div class="flex-1 overflow-y-auto space-y-3">
+                    @forelse($aktivitasTerbaru as $log)
+                    <div class="flex items-center gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50 hover:bg-slate-100 transition">
+                        <div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold">
+                            {{ substr($log->user->name ?? 'S', 0, 1) }}
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm font-bold text-slate-800">{{ $log->user->name ?? 'System Process' }}</p>
+                            <p class="text-xs text-slate-600 mt-0.5">Pencarian: <span class="font-semibold italic">"{{ $log->kata_kunci }}"</span></p>
+                        </div>
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest whitespace-nowrap">{{ $log->waktu->diffForHumans() }}</span>
+                    </div>
+                    @empty
+                    <div class="flex flex-col items-center justify-center h-full text-slate-400 py-8">
+                        <svg class="w-12 h-12 mb-3 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <p class="text-sm font-bold text-slate-500">Belum ada aktivitas tercatat</p>
+                    </div>
+                    @endforelse
+                </div>
+            </div>
+        </div>
+        @endif
+
         {{-- Form Pencarian Cepat --}}
         <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-200">
             <h3 class="text-lg font-bold text-slate-800 mb-4">🔍 Pencarian Cepat Akta Nikah</h3>

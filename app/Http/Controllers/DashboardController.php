@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\AktaNikah;
 use App\Models\ProfilPemohon;
+use App\Models\LaporanTersimpan;
+use App\Models\LogPencarian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -134,11 +136,21 @@ class DashboardController extends Controller
             }
         }
 
+        $laporanTerbaru = [];
+        $aktivitasTerbaru = [];
+
+        if ($user->isKepalaKua()) {
+            $laporanTerbaru = LaporanTersimpan::with('pengelola')->latest()->take(5)->get();
+            $aktivitasTerbaru = LogPencarian::with('user')->latest()->take(5)->get();
+        }
+
         return view('dashboard', [
             'arsip' => $arsip,
             'stats' => $stats,
             'antreanVerifikasi' => collect($antreanVerifikasi),
             'trendPengarsipan' => collect($trendPengarsipan),
+            'laporanTerbaru' => collect($laporanTerbaru),
+            'aktivitasTerbaru' => collect($aktivitasTerbaru),
         ]);
     }
 }

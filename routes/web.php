@@ -130,6 +130,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/laporan/bulanan', [LaporanController::class, 'bulanan'])->name('laporan.bulanan');
         Route::post('/laporan/simpan-bulanan', [LaporanController::class, 'simpanBulanan'])->name('laporan.simpan-bulanan');
         Route::get('/laporan/rekap', [LaporanController::class, 'rekap'])->name('laporan.rekap');
+        Route::post('/laporan/simpan-tahunan', [LaporanController::class, 'simpanTahunan'])->name('laporan.simpan-tahunan');
     });
 
     // ============================================

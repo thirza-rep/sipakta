@@ -167,6 +167,48 @@ class LaporanController extends Controller
     }
 
     /**
+     * Generate and save yearly report to system (Pengelola Data)
+     */
+    public function simpanTahunan(Request $request)
+    {
+        $tahun = $request->get('tahun', now()->year);
+
+        // Get monthly stats for the year
+        $monthlyStats = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $count = AktaNikah::whereMonth('tanggal_akad', $i)
+                              ->whereYear('tanggal_akad', $tahun)
+                              ->count();
+            $monthlyStats[$i] = [
+                'bulan' => $this->getNamaBulan($i),
+                'jumlah' => $count,
+            ];
+        }
+
+        $totalTahun = AktaNikah::whereYear('tanggal_akad', $tahun)->count();
+
+        $pdf = Pdf::loadView('laporan.pdf-tahunan', compact('monthlyStats', 'tahun', 'totalTahun'));
+        
+        $filename = "Laporan_Tahunan_{$tahun}_" . time() . ".pdf";
+        $path = "laporan_arsip/{$filename}";
+        
+        // Save PDF to storage
+        Storage::disk('public')->put($path, $pdf->output());
+
+        // Save record to database
+        LaporanTersimpan::create([
+            'judul_laporan' => "Laporan Akta Nikah Tahun {$tahun}",
+            'tipe_laporan' => 'tahunan',
+            'bulan' => null,
+            'tahun' => $tahun,
+            'file_path' => $path,
+            'pengelola_id' => Auth::id(),
+        ]);
+        
+        return redirect()->route('laporan.index')->with('success', 'Laporan Rekapitulasi Tahunan berhasil di-generate dan disimpan ke sistem.');
+    }
+
+    /**
      * Get Indonesian month name
      */
     private function getNamaBulan(int $bulan): string

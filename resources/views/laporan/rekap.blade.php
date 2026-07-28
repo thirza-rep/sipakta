@@ -82,6 +82,18 @@
                             PERBARUI DATA
                         </button>
                     </form>
+
+                    {{-- Tombol Generate Laporan (Khusus Pengelola Data) --}}
+                    @if(auth()->user()->isPengelolaData())
+                    <form action="{{ route('laporan.simpan-tahunan') }}" method="POST" class="mt-4">
+                        @csrf
+                        <input type="hidden" name="tahun" value="{{ $tahun }}">
+                        <button type="submit" class="w-full py-5 bg-teal-600 text-white rounded-[1.5rem] font-black shadow-xl shadow-teal-600/20 hover:bg-teal-700 transition active:scale-95 uppercase tracking-widest text-[10px] flex items-center justify-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
+                            GENERATE & SIMPAN LAPORAN
+                        </button>
+                    </form>
+                    @endif
                 </div>
 
                 {{-- Quick Tip Card --}}

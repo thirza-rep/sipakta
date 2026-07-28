@@ -60,16 +60,24 @@
                 <div class="flex items-center justify-between mb-6">
                     <h3 class="text-lg font-bold text-slate-800">Grafik Tren Pengarsipan ({{ date('Y') }})</h3>
                 </div>
-                <div class="flex items-end gap-2 h-48 mt-4">
+                <div class="flex items-end gap-2 h-48 mt-8">
                     @foreach($trendPengarsipan as $trend)
-                    <div class="flex-1 flex flex-col items-center justify-end group h-full">
-                        <div class="w-full bg-teal-100 rounded-t-md relative overflow-visible transition-all duration-300 group-hover:bg-teal-200" style="height: {{ max($trend['persentase'], 5) }}%;">
-                            <div class="absolute inset-x-0 bottom-0 bg-teal-500 rounded-t-md w-full" style="height: 100%;"></div>
-                            <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 pointer-events-none">
-                                {{ $trend['jumlah'] }} Arsip
+                    <div class="flex-1 h-full flex flex-col justify-end group relative">
+                        
+                        <!-- Tooltip -->
+                        <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 pointer-events-none">
+                            {{ $trend['jumlah'] }} Arsip
+                        </div>
+
+                        <!-- Bar Track -->
+                        <div class="w-full flex-1 flex items-end border-b-2 border-slate-100 pb-1">
+                            <div class="w-full bg-teal-500 rounded-t-md transition-all duration-300 group-hover:bg-teal-400 group-hover:shadow-lg" 
+                                 style="height: {{ max($trend['persentase'], 2) }}%;">
                             </div>
                         </div>
-                        <span class="text-[10px] font-bold text-slate-500 mt-2 uppercase">{{ $trend['bulan'] }}</span>
+
+                        <!-- Label -->
+                        <span class="text-[10px] font-bold text-slate-500 mt-2 uppercase text-center w-full block">{{ $trend['bulan'] }}</span>
                     </div>
                     @endforeach
                 </div>

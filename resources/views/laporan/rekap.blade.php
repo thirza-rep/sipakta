@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex items-center gap-6">
             <a href="{{ route('laporan.index') }}" class="w-12 h-12 rounded-2xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500 transition-all active:scale-90 shadow-sm border border-slate-200">
-                
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
             </a>
             <div>
                 <h2 class="text-2xl font-black text-slate-900 tracking-tight">Rekapitulasi Tahunan</h2>
@@ -15,13 +15,13 @@
         {{-- Banner: Overview --}}
         <div class="bg-slate-900 rounded-[3.5rem] p-10 md:p-14 text-white shadow-2xl relative overflow-hidden">
             <div class="absolute top-0 right-0 p-16 opacity-[0.03] pointer-events-none">
-                
+                <svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
             </div>
             
             <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
                 <div class="flex items-center gap-8">
-                    <div class="w-20 h-20 rounded-[2.5rem] bg-teal-500 flex items-center justify-center text-white shadow-2xl shadow-teal-500/40">
-                        
+                    <div class="w-20 h-20 rounded-[2.5rem] bg-teal-500 flex items-center justify-center text-white shadow-2xl shadow-teal-500/40 transform rotate-3">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
                     </div>
                     <div>
                         <h1 class="text-4xl font-black tracking-tight">Ringkasan Grafik</h1>
@@ -54,7 +54,7 @@
                 <div class="bg-white rounded-[3rem] p-8 md:p-10 border border-slate-100 shadow-xl shadow-slate-200/40">
                     <div class="flex items-center gap-4 mb-8">
                         <div class="w-10 h-10 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center font-black">
-                            
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
                         </div>
                         <h3 class="text-xl font-black text-slate-900 tracking-tight">Filter Periode</h3>
                     </div>
@@ -71,10 +71,10 @@
                                     @endforeach
                                 </select>
                                 <div class="absolute left-5 top-5 text-slate-300 group-hover:text-teal-600 transition-all">
-                                    
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                 </div>
                                 <div class="absolute right-5 top-6 text-slate-300 pointer-events-none">
-                                    
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                                 </div>
                             </div>
                         </div>
@@ -99,7 +99,7 @@
                 {{-- Quick Tip Card --}}
                 <div class="mt-10 bg-teal-600 rounded-[3rem] p-8 text-white relative overflow-hidden group">
                     <div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-700">
-                        
+                        <svg class="w-32 h-32" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     </div>
                     <p class="text-[10px] font-black uppercase tracking-[0.3em] opacity-60 mb-3">Informasi Sistem</p>
                     <p class="text-sm font-bold leading-relaxed">Pilih salah satu bulan di tabel samping untuk melihat detail daftar pasangan serta data administrasi lengkap.</p>
@@ -116,7 +116,7 @@
                             <p class="text-[10px] font-black text-teal-600 uppercase tracking-[0.2em] mt-1">Monthly Traffic Distribution</p>
                         </div>
                         <div class="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-300">
-                            
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
                         </div>
                     </div>
                     
@@ -175,7 +175,7 @@
                                         <a href="{{ route('laporan.bulanan', ['bulan' => $month, 'tahun' => $tahun]) }}" 
                                            class="inline-flex items-center px-8 py-4 bg-slate-900 text-white text-[10px] font-black rounded-2xl hover:bg-teal-600 transition-all active:scale-95 shadow-xl shadow-slate-900/10 hover:shadow-teal-500/20 group/btn">
                                             LIHAT DATA
-                                            
+                                            <svg class="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                         </a>
                                         @else
                                         <div class="px-8 py-4 bg-slate-100 text-slate-400 text-[10px] font-black rounded-2xl uppercase tracking-[0.2em]">
@@ -198,7 +198,7 @@
                                         </div>
                                     </td>
                                     <td class="px-10 py-10 text-right opacity-20 group-hover:opacity-40 transition-opacity">
-                                        
+                                        <svg class="w-16 h-16 inline-block text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
                                     </td>
                                 </tr>
                             </tfoot>

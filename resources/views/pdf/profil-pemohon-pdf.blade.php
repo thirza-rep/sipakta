@@ -5,82 +5,93 @@
     <title>Salinan Data Pemohon — SIPAKTA</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'DejaVu Sans', Arial, sans-serif; font-size: 13pt; color: #1e293b; line-height: 1.6; padding: 30px; }
+        body { font-family: 'Times New Roman', Times, serif; font-size: 12pt; color: #000; line-height: 1.5; padding: 30px; }
 
-        .header { text-align: center; border-bottom: 3px solid #0f766e; padding-bottom: 15px; margin-bottom: 25px; }
-        .header h1 { font-size: 16pt; font-weight: bold; color: #0f766e; margin-bottom: 3px; }
-        .header h2 { font-size: 12pt; font-weight: normal; color: #475569; }
-        .header .sub { font-size: 10pt; color: #94a3b8; margin-top: 5px; }
+        /* Remove old header styles as we use inline styles for the table layout now */
 
-        .section-title { font-size: 14pt; font-weight: bold; color: #0f766e; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; margin-top: 25px; margin-bottom: 15px; }
+        .section-title { font-size: 13pt; font-weight: bold; color: #000; border-bottom: 2px solid #000; padding-bottom: 5px; margin-top: 25px; margin-bottom: 15px; text-transform: uppercase; }
 
         table.data { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-        table.data td { padding: 10px 12px; vertical-align: top; border-bottom: 1px solid #e2e8f0; font-size: 12pt; }
-        table.data td.label { width: 200px; font-weight: bold; color: #475569; background: #f8fafc; }
-        table.data td.value { color: #1e293b; font-weight: 600; }
+        table.data td { padding: 8px 10px; vertical-align: top; border-bottom: 1px solid #333; font-size: 12pt; }
+        table.data td.label { width: 220px; font-weight: bold; color: #000; }
+        table.data td.value { color: #000; }
 
         .checklist { margin: 15px 0; }
-        .checklist-item { padding: 8px 12px; margin-bottom: 5px; border: 1px solid #e2e8f0; border-radius: 5px; font-size: 12pt; }
-        .checklist-item.ok { background: #f0fdf4; border-color: #86efac; }
-        .checklist-item.fail { background: #fef2f2; border-color: #fca5a5; }
-
-        .footer { margin-top: 40px; border-top: 2px solid #e2e8f0; padding-top: 15px; font-size: 10pt; color: #94a3b8; text-align: center; }
+        .checklist-item { padding: 5px 0; font-size: 12pt; }
+        
+        .footer { margin-top: 40px; border-top: 1px solid #000; padding-top: 10px; font-size: 10pt; color: #333; text-align: center; font-style: italic; }
         .stamp-area { margin-top: 40px; text-align: right; }
-        .stamp-area .label { font-size: 11pt; color: #475569; }
-        .stamp-area .name { font-size: 12pt; font-weight: bold; color: #1e293b; margin-top: 60px; border-top: 1px solid #1e293b; display: inline-block; padding-top: 5px; }
+        .stamp-area .label { font-size: 11pt; color: #000; }
+        .stamp-area .name { font-size: 12pt; font-weight: bold; color: #000; margin-top: 60px; border-top: 1px solid #000; display: inline-block; padding-top: 5px; }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>KANTOR URUSAN AGAMA (KUA)</h1>
-        <h1>KEMANTREN TEGALREJO — KOTA YOGYAKARTA</h1>
-        <h2>Kementerian Agama Republik Indonesia</h2>
-        <div class="sub">Jl. Magelang KM 4,5 No.03, Tegalrejo, Yogyakarta | Telp: (0274) 623456</div>
-    </div>
+    <table style="width: 100%; border-bottom: 3px solid #000; padding-bottom: 10px; margin-bottom: 20px;">
+        <tr>
+            <td style="width: 15%; text-align: center; vertical-align: middle;">
+                <img src="{{ public_path('images/logo-kua.jpg') }}" alt="Logo KUA" style="width: 80px;">
+            </td>
+            <td style="width: 70%; text-align: center; vertical-align: middle;">
+                <h1 style="font-size: 16pt; font-weight: bold; color: #000; margin-bottom: 2px;">KANTOR URUSAN AGAMA (KUA)</h1>
+                <h1 style="font-size: 16pt; font-weight: bold; color: #000; margin-bottom: 2px;">KEMANTREN TEGALREJO — KOTA YOGYAKARTA</h1>
+                <h2 style="font-size: 12pt; font-weight: normal; color: #000; margin-bottom: 2px;">Kementerian Agama Republik Indonesia</h2>
+                <div style="font-size: 10pt; color: #000; margin-top: 5px;">Jl. Tompeyan No.200A, Tegalrejo, Kec. Tegalrejo, Kota Yogyakarta, DIY 55244</div>
+            </td>
+            <td style="width: 15%; text-align: center; vertical-align: middle;">
+                <!-- Penyeimbang layout -->
+            </td>
+        </tr>
+    </table>
 
     <div style="text-align: center; margin-bottom: 25px;">
         <strong style="font-size: 14pt; text-decoration: underline;">SALINAN DATA PEMOHON</strong><br>
-        <span style="font-size: 11pt; color: #64748b;">Dokumen ini dicetak sebagai arsip kelengkapan verifikasi</span>
+        <span style="font-size: 11pt; color: #000;">Dokumen ini dicetak sebagai arsip kelengkapan verifikasi</span>
     </div>
 
     <div class="section-title">Identitas Pemohon</div>
     <table class="data">
         <tr><td class="label">Nama Lengkap</td><td class="value">{{ $profil->nama_lengkap }}</td></tr>
         <tr><td class="label">NIK</td><td class="value">{{ $profil->nik }}</td></tr>
+        <tr><td class="label">Tempat, Tgl Lahir</td><td class="value">{{ $profil->tempat_lahir ?? '-' }}, {{ $profil->tanggal_lahir_formatted }}</td></tr>
+        <tr><td class="label">Jenis Kelamin</td><td class="value">{{ $profil->jenis_kelamin_display }}</td></tr>
         <tr><td class="label">Alamat Domisili</td><td class="value">{{ $profil->alamat ?? '-' }}</td></tr>
         <tr><td class="label">Nomor WhatsApp</td><td class="value">{{ $profil->no_telepon ?? '-' }}</td></tr>
         <tr><td class="label">Email</td><td class="value">{{ $profil->user->email }}</td></tr>
+        <tr><td class="label">Keperluan Akses</td><td class="value">{{ $profil->keperluan ?? '-' }}</td></tr>
     </table>
 
-    <div class="section-title">Status Verifikasi</div>
+    <div class="section-title">Status Kelengkapan Berkas</div>
     <div class="checklist">
-        <div class="checklist-item {{ $profil->user->email_verified_at ? 'ok' : 'fail' }}">
-            {{ $profil->user->email_verified_at ? '✔' : '✘' }} Email: {{ $profil->user->email_verified_at ? 'Terverifikasi' : 'Belum Verifikasi' }}
+        <div class="checklist-item">
+            [ {{ $profil->user->email_verified_at ? 'X' : ' ' }} ] Email ({{ $profil->user->email_verified_at ? 'Terverifikasi' : 'Belum Verifikasi' }})
         </div>
-        <div class="checklist-item {{ $profil->no_telepon ? 'ok' : 'fail' }}">
-            {{ $profil->no_telepon ? '✔' : '✘' }} WhatsApp: {{ $profil->no_telepon ? 'Sudah Diisi' : 'Belum Diisi' }}
+        <div class="checklist-item">
+            [ {{ $profil->no_telepon ? 'X' : ' ' }} ] Nomor WhatsApp ({{ $profil->no_telepon ? 'Sudah Diisi' : 'Belum Diisi' }})
         </div>
-
-        <div class="checklist-item {{ $profil->nik && strlen($profil->nik) === 16 ? 'ok' : 'fail' }}">
-            {{ $profil->nik && strlen($profil->nik) === 16 ? '✔' : '✘' }} NIK: {{ $profil->nik && strlen($profil->nik) === 16 ? '16 Digit Valid' : 'Tidak Valid' }}
+        <div class="checklist-item">
+            [ {{ $profil->nik && strlen($profil->nik) === 16 ? 'X' : ' ' }} ] NIK KTP ({{ $profil->nik && strlen($profil->nik) === 16 ? '16 Digit Valid' : 'Tidak Valid' }})
         </div>
     </div>
 
+    <div class="section-title">Riwayat Persetujuan & Verifikasi</div>
     <table class="data">
+        <tr><td class="label">Tanggal Pengajuan</td><td class="value">{{ $profil->created_at ? $profil->created_at->translatedFormat('d F Y, H:i') : '-' }}</td></tr>
         <tr>
-            <td class="label">Status Akun</td>
+            <td class="label">Status Verifikasi</td>
             <td class="value">
-                @if($profil->status === 'verified') DISETUJUI (AKTIF)
-                @elseif($profil->status === 'pending_verification') MENUNGGU VERIFIKASI
-                @elseif($profil->status === 'rejected') DITOLAK
-                @else BELUM DIAJUKAN
+                @if($profil->status === 'verified') <strong>DISETUJUI (AKTIF)</strong>
+                @elseif($profil->status === 'pending_verification') <strong>MENUNGGU VERIFIKASI</strong>
+                @elseif($profil->status === 'rejected') <strong>DITOLAK</strong>
+                @else <strong>BELUM DIAJUKAN</strong>
                 @endif
             </td>
         </tr>
         @if($profil->status === 'rejected' && $profil->rejected_reason)
         <tr><td class="label">Alasan Penolakan</td><td class="value">{{ $profil->rejected_reason }}</td></tr>
         @endif
-        <tr><td class="label">Tanggal Pengajuan</td><td class="value">{{ $profil->updated_at ? $profil->updated_at->translatedFormat('d F Y, H:i') : '-' }}</td></tr>
+        @if($profil->status !== 'pending_verification')
+        <tr><td class="label">Tanggal Diproses</td><td class="value">{{ $profil->updated_at ? $profil->updated_at->translatedFormat('d F Y, H:i') : '-' }}</td></tr>
+        @endif
     </table>
 
     <div class="stamp-area">

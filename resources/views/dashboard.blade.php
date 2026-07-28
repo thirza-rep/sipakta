@@ -53,6 +53,64 @@
             </div>
         </div>
 
+        @if(auth()->user()->isAdmin() || auth()->user()->isPengelolaData())
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {{-- Grafik Tren Pengarsipan --}}
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-lg font-bold text-slate-800">Grafik Tren Pengarsipan ({{ date('Y') }})</h3>
+                </div>
+                <div class="flex items-end gap-2 h-48 mt-4">
+                    @foreach($trendPengarsipan as $trend)
+                    <div class="flex-1 flex flex-col items-center justify-end group">
+                        <div class="w-full bg-teal-100 rounded-t-md relative overflow-visible transition-all duration-300 group-hover:bg-teal-200" style="height: {{ max($trend['persentase'], 5) }}%;">
+                            <div class="absolute inset-x-0 bottom-0 bg-teal-500 rounded-t-md w-full" style="height: 100%;"></div>
+                            <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 pointer-events-none">
+                                {{ $trend['jumlah'] }} Arsip
+                            </div>
+                        </div>
+                        <span class="text-[10px] font-bold text-slate-500 mt-2 uppercase">{{ $trend['bulan'] }}</span>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+
+            {{-- Antrean Permohonan Verifikasi --}}
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                        Antrean Verifikasi Profil
+                    </h3>
+                    <a href="{{ route('admin.verification.index') }}" class="text-sm font-bold text-teal-600 hover:text-teal-700">Lihat Semua &rarr;</a>
+                </div>
+                <div class="flex-1 overflow-y-auto space-y-3">
+                    @forelse($antreanVerifikasi as $queue)
+                    <div class="flex items-center justify-between p-4 rounded-xl border border-slate-100 bg-slate-50 hover:bg-slate-100 transition">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center font-bold">
+                                {{ substr($queue->nama_lengkap, 0, 1) }}
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold text-slate-800">{{ $queue->nama_lengkap }}</p>
+                                <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-0.5">NIK: {{ $queue->nik }} &bull; {{ $queue->updated_at->diffForHumans() }}</p>
+                            </div>
+                        </div>
+                        <a href="{{ route('admin.verification.show', $queue->id) }}" class="px-4 py-2 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-700 hover:bg-slate-50 transition active:scale-95">
+                            Proses
+                        </a>
+                    </div>
+                    @empty
+                    <div class="flex flex-col items-center justify-center h-full text-slate-400 py-8">
+                        <svg class="w-12 h-12 mb-3 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <p class="text-sm font-bold text-slate-500">Semua permohonan telah diverifikasi</p>
+                    </div>
+                    @endforelse
+                </div>
+            </div>
+        </div>
+        @endif
+
         {{-- Form Pencarian Cepat --}}
         <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-200">
             <h3 class="text-lg font-bold text-slate-800 mb-4">🔍 Pencarian Cepat Akta Nikah</h3>

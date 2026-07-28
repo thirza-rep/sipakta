@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AktaNikah;
+use App\Models\ProfilPemohon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -102,9 +103,42 @@ class DashboardController extends Controller
                                          ->count(),
         ];
 
+        $antreanVerifikasi = [];
+        $trendPengarsipan = [];
+
+        if ($user->isAdmin() || $user->isPengelolaData()) {
+            $antreanVerifikasi = ProfilPemohon::with('user')
+                ->where('status', 'pending_verification')
+                ->orderBy('updated_at', 'desc')
+                ->take(5)
+                ->get();
+                
+            $tahunSekarang = now()->year;
+            $maxCount = 1; // Untuk referensi tinggi bar chart
+            for ($i = 1; $i <= 12; $i++) {
+                $count = AktaNikah::whereMonth('tanggal_akad', $i)
+                                 ->whereYear('tanggal_akad', $tahunSekarang)
+                                 ->count();
+                $trendPengarsipan[] = [
+                    'bulan' => \Carbon\Carbon::create()->month($i)->translatedFormat('M'),
+                    'jumlah' => $count
+                ];
+                if ($count > $maxCount) {
+                    $maxCount = $count;
+                }
+            }
+            
+            // Hitung persentase untuk bar chart
+            foreach ($trendPengarsipan as &$trend) {
+                $trend['persentase'] = ($trend['jumlah'] / $maxCount) * 100;
+            }
+        }
+
         return view('dashboard', [
             'arsip' => $arsip,
             'stats' => $stats,
+            'antreanVerifikasi' => collect($antreanVerifikasi),
+            'trendPengarsipan' => collect($trendPengarsipan),
         ]);
     }
 }

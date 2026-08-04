@@ -48,6 +48,8 @@ class ProfilPemohonController extends Controller
             'alamat' => ['required', 'string'],
             'no_telepon' => ['required', 'string', 'max:20'],
             'keperluan' => ['required', 'string'],
+            'foto_ktp' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
+            'dokumen_pendukung' => ['required', 'mimes:pdf,jpeg,png,jpg', 'max:5120'],
         ];
 
         // NIK must be unique in profil_pemohon table (except for current profile)
@@ -61,9 +63,24 @@ class ProfilPemohonController extends Controller
 
         $validated = $request->validate($rules);
 
+        // Handle file uploads to Google Drive with structured subfolders
+        $folderName = $user->id . '_' . preg_replace('/[^a-zA-Z0-9]+/', '_', $user->name);
+        
+        $fotoKtpPath = $profil ? $profil->foto_ktp : null;
+        if ($request->hasFile('foto_ktp')) {
+            if ($fotoKtpPath) {
+                Storage::disk('google')->delete($fotoKtpPath);
+            }
+            $fotoKtpPath = $request->file('foto_ktp')->store("{$folderName}/foto_ktp", 'google');
+        }
 
-
-
+        $dokumenPendukungPath = $profil ? $profil->dokumen_pendukung : null;
+        if ($request->hasFile('dokumen_pendukung')) {
+            if ($dokumenPendukungPath) {
+                Storage::disk('google')->delete($dokumenPendukungPath);
+            }
+            $dokumenPendukungPath = $request->file('dokumen_pendukung')->store("{$folderName}/dokumen_pendukung", 'google');
+        }
 
         // Update or create profile
         $newProfil = ProfilPemohon::updateOrCreate(
@@ -76,6 +93,8 @@ class ProfilPemohonController extends Controller
                 'alamat' => $validated['alamat'],
                 'no_telepon' => $validated['no_telepon'],
                 'keperluan' => $validated['keperluan'],
+                'foto_ktp' => $fotoKtpPath,
+                'dokumen_pendukung' => $dokumenPendukungPath,
                 'status' => 'pending_verification', // set status to pending review
                 'rejected_reason' => null, // clear old rejection reason
                 'phone_verified_at' => now(), // automatically verified without OTP

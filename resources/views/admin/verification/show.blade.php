@@ -155,6 +155,74 @@
                     </div>
                 </div>
 
+                {{-- Dokumen Pemohon (KTP & Dokumen Pendukung) --}}
+                <div class="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 space-y-5">
+                    <h4 class="font-bold text-slate-800 text-base flex items-center mb-4">
+                        <svg class="w-5 h-5 mr-2 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path></svg>
+                        Berkas Dokumen Terlampir
+                    </h4>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {{-- KTP Card --}}
+                        <div class="border border-slate-200 rounded-xl p-4 flex flex-col justify-between h-full bg-slate-50">
+                            <div>
+                                <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Foto KTP (Opsional)</span>
+                                @if($requestData->foto_ktp)
+                                    <div class="flex items-center gap-2 mt-2">
+                                        <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                        </div>
+                                        <span class="text-sm font-bold text-slate-700">Terlampir</span>
+                                    </div>
+                                @else
+                                    <div class="flex items-center gap-2 mt-2">
+                                        <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-slate-500">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg>
+                                        </div>
+                                        <span class="text-sm font-bold text-slate-500">Tidak dilampirkan</span>
+                                    </div>
+                                @endif
+                            </div>
+                            
+                            @if($requestData->foto_ktp)
+                                <a href="{{ route('admin.verification.download', ['id' => $requestData->id, 'type' => 'ktp']) }}" target="_blank" class="mt-4 w-full py-2 bg-white border border-slate-300 text-slate-700 font-bold text-sm rounded-lg hover:bg-slate-50 transition-colors text-center inline-block flex items-center justify-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                    Lihat KTP
+                                </a>
+                            @endif
+                        </div>
+
+                        {{-- Dokumen Pendukung Card --}}
+                        <div class="border border-slate-200 rounded-xl p-4 flex flex-col justify-between h-full bg-slate-50">
+                            <div>
+                                <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Dokumen Pendukung</span>
+                                @if($requestData->dokumen_pendukung)
+                                    <div class="flex items-center gap-2 mt-2">
+                                        <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                        </div>
+                                        <span class="text-sm font-bold text-slate-700">Terlampir</span>
+                                    </div>
+                                @else
+                                    <div class="flex items-center gap-2 mt-2">
+                                        <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-600">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                        </div>
+                                        <span class="text-sm font-bold text-red-600">Belum dilampirkan</span>
+                                    </div>
+                                @endif
+                            </div>
+                            
+                            @if($requestData->dokumen_pendukung)
+                                <a href="{{ route('admin.verification.download', ['id' => $requestData->id, 'type' => 'dokumen']) }}" target="_blank" class="mt-4 w-full py-2 bg-white border border-slate-300 text-slate-700 font-bold text-sm rounded-lg hover:bg-slate-50 transition-colors text-center inline-block flex items-center justify-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                    Lihat Dokumen
+                                </a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
                 {{-- Action Panel --}}
                 @if($requestData->status === 'pending_verification')
                     <div class="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 space-y-5">

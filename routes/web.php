@@ -115,6 +115,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/admin/verifikasi-pemohon/{id}/approve', [AdminVerificationController::class, 'approve'])->name('admin.verification.approve');
         Route::post('/admin/verifikasi-pemohon/{id}/reject', [AdminVerificationController::class, 'reject'])->name('admin.verification.reject');
         Route::get('/admin/verifikasi-pemohon/{id}/cetak-pdf', [PdfController::class, 'exportProfilPemohon'])->name('admin.verification.cetak-pdf');
+        Route::get('/admin/verifikasi-pemohon/{id}/dokumen/{type}', [AdminVerificationController::class, 'download'])->name('admin.verification.download');
     });
 
 

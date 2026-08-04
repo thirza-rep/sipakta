@@ -136,7 +136,7 @@
                             </div>
                             <div class="w-full h-10 bg-slate-50 rounded-2xl overflow-hidden shadow-inner flex items-center p-2 group-hover/bar:bg-slate-100 transition-colors">
                                 <div class="h-full bg-teal-600 rounded-xl group-hover/bar:bg-teal-500 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-xl shadow-teal-500/20"
-                                     style="width: {{ ($data['jumlah'] / $maxCount) * 100 }}%">
+                                     @style(['width: ' . (($data['jumlah'] / $maxCount) * 100) . '%'])>
                                 </div>
                             </div>
                         </div>

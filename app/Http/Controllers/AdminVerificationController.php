@@ -85,4 +85,24 @@ class AdminVerificationController extends Controller
         return redirect()->route('admin.verification.index')
             ->with('success', 'Verifikasi Akun Pemohon atas nama "' . $profile->nama_lengkap . '" berhasil ditolak.');
     }
+
+    /**
+     * Download or view the uploaded document (KTP or Dokumen Pendukung)
+     */
+    public function download(int $id, string $type)
+    {
+        $profile = ProfilPemohon::findOrFail($id);
+        
+        $path = $type === 'ktp' ? $profile->foto_ktp : $profile->dokumen_pendukung;
+        
+        if (!$path) {
+            abort(404, 'Dokumen tidak ditemukan.');
+        }
+
+        try {
+            return \Illuminate\Support\Facades\Storage::disk('google')->response($path);
+        } catch (\Exception $e) {
+            abort(404, 'File tidak ditemukan di Google Drive atau terjadi kesalahan otorisasi.');
+        }
+    }
 }

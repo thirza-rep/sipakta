@@ -254,6 +254,38 @@
                         </div>
                     </div>
 
+                    {{-- Section: Upload Dokumen (Google Drive) --}}
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-800 border-b-2 border-amber-500 pb-3 mb-6 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                            Upload Dokumen Persyaratan
+                        </h3>
+                        <div class="space-y-6">
+                            <div>
+                                <label for="foto_ktp" class="block text-sm font-bold text-slate-700 mb-2">Unggah Foto KTP Asli (Opsional) <span class="text-xs text-slate-500 font-normal ml-1">Maks 2MB, JPG/PNG</span></label>
+                                <input type="file" name="foto_ktp" id="foto_ktp" accept="image/jpeg,image/png,image/jpg"
+                                       class="block w-full text-sm text-slate-500 file:mr-4 file:py-3 file:px-6 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-amber-50 file:text-amber-700 hover:file:bg-amber-100 cursor-pointer border-2 border-slate-200 rounded-xl"
+                                       {{ $isPending ? 'disabled' : '' }}>
+                                @if($profil && $profil->foto_ktp)
+                                    <p class="text-xs text-green-600 mt-2 font-semibold">✓ KTP sudah terunggah sebelumnya.</p>
+                                @endif
+                                @error('foto_ktp')<p class="mt-2 text-sm font-bold text-red-600">{{ $message }}</p>@enderror
+                            </div>
+
+                            <div>
+                                <label for="dokumen_pendukung" class="block text-sm font-bold text-slate-700 mb-2">Unggah Dokumen Pendukung (Wajib) <span class="text-xs text-slate-500 font-normal ml-1">Maks 5MB, PDF/JPG/PNG</span></label>
+                                <p class="text-xs text-slate-500 mb-3 leading-relaxed">Dokumen pendukung dapat berupa Surat Keterangan dari instansi, Surat Kuasa, atau dokumen lain yang memperkuat alasan pencarian arsip Anda.</p>
+                                <input type="file" name="dokumen_pendukung" id="dokumen_pendukung" accept="application/pdf,image/jpeg,image/png,image/jpg" {{ !$profil || !$profil->dokumen_pendukung ? 'required' : '' }}
+                                       class="block w-full text-sm text-slate-500 file:mr-4 file:py-3 file:px-6 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-amber-50 file:text-amber-700 hover:file:bg-amber-100 cursor-pointer border-2 border-slate-200 rounded-xl"
+                                       {{ $isPending ? 'disabled' : '' }}>
+                                @if($profil && $profil->dokumen_pendukung)
+                                    <p class="text-xs text-green-600 mt-2 font-semibold">✓ Dokumen Pendukung sudah terunggah sebelumnya.</p>
+                                @endif
+                                @error('dokumen_pendukung')<p class="mt-2 text-sm font-bold text-red-600">{{ $message }}</p>@enderror
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
                 {{-- Submit Area --}}

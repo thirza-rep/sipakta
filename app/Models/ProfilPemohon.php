@@ -22,6 +22,7 @@ class ProfilPemohon extends Model
         'no_telepon',
         'keperluan',
         'foto_ktp',
+        'dokumen_pendukung',
         'status',
         'rejected_reason',
         'phone_verified_at'

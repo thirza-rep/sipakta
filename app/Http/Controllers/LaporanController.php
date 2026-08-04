@@ -118,7 +118,7 @@ class LaporanController extends Controller
     /**
      * Download a saved report (Pengelola Data & Kepala KUA)
      */
-    public function downloadTersimpan($id)
+    public function downloadTersimpan(int $id)
     {
         $laporan = LaporanTersimpan::findOrFail($id);
 
@@ -126,7 +126,9 @@ class LaporanController extends Controller
             return back()->with('error', 'File PDF tidak ditemukan di sistem.');
         }
 
-        return Storage::disk('public')->download($laporan->file_path);
+        /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
+        $disk = Storage::disk('public');
+        return $disk->download($laporan->file_path);
     }
 
     /**

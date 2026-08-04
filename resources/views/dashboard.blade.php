@@ -73,7 +73,7 @@
                         <!-- Bar Track -->
                         <div class="w-full flex-1 flex items-end border-b-2 border-slate-100 pb-1">
                             <div class="w-full bg-teal-500 rounded-t-md transition-all duration-300 group-hover:bg-teal-400 group-hover:shadow-lg" 
-                                 style="height: {{ max($trend['persentase'], 2) }}%;">
+                                 @style(['height: ' . max($trend['persentase'], 2) . '%'])>
                             </div>
                         </div>
 

@@ -55,7 +55,7 @@ class ProfilPemohon extends Model
      */
     public function getTanggalLahirFormattedAttribute(): string
     {
-        return $this->tanggal_lahir ? $this->tanggal_lahir->format('d F Y') : '-';
+        return $this->tanggal_lahir ? \Carbon\Carbon::parse($this->tanggal_lahir)->format('d F Y') : '-';
     }
 
     /**

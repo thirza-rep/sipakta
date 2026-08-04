@@ -14,7 +14,7 @@ class PencarianController extends Controller
     public function index()
     {
         /** @var \App\Models\User $user */
-        $user = auth()->user();
+        $user = \Illuminate\Support\Facades\Auth::user();
 
         // Check if pemohon is verified
         if ($redirect = $this->checkVerification($user)) {
@@ -30,7 +30,7 @@ class PencarianController extends Controller
     public function search(Request $request)
     {
         /** @var \App\Models\User $user */
-        $user = auth()->user();
+        $user = \Illuminate\Support\Facades\Auth::user();
 
         // Check if pemohon is verified
         if ($redirect = $this->checkVerification($user)) {
@@ -59,7 +59,7 @@ class PencarianController extends Controller
     /**
      * Show detail of a specific arsip (read-only for pemohon)
      */
-    public function show($id)
+    public function show(int $id)
     {
         $arsip = AktaNikah::findOrFail($id);
         return view('pencarian.detail', compact('arsip'));
@@ -68,7 +68,7 @@ class PencarianController extends Controller
     /**
      * Helper to verify if pemohon is fully verified by KUA Admin
      */
-    private function checkVerification($user)
+    private function checkVerification(\App\Models\User $user)
     {
         if (!$user->isPemohon()) {
             return null; // non-pemohon roles are exempted

@@ -100,7 +100,9 @@ class AdminVerificationController extends Controller
         }
 
         try {
-            return \Illuminate\Support\Facades\Storage::disk('google')->response($path);
+            /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
+            $disk = \Illuminate\Support\Facades\Storage::disk('google');
+            return $disk->response($path);
         } catch (\Exception $e) {
             abort(404, 'File tidak ditemukan di Google Drive atau terjadi kesalahan otorisasi.');
         }

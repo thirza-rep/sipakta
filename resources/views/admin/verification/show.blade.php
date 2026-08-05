@@ -166,14 +166,16 @@
                         {{-- KTP Card --}}
                         <div class="border border-slate-200 rounded-xl p-4 flex flex-col justify-between h-full bg-slate-50">
                             <div>
-                                <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Foto KTP (Opsional)</span>
+                                <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Foto KTP (Opsional)</span>
                                 @if($requestData->foto_ktp)
-                                    <div class="flex items-center gap-2 mt-2">
-                                        <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                        </div>
-                                        <span class="text-sm font-bold text-slate-700">Terlampir</span>
+                                    <div class="border border-slate-200 rounded-lg overflow-hidden bg-white flex items-center justify-center shadow-sm">
+                                        <img src="{{ route('admin.verification.download', ['id' => $requestData->id, 'type' => 'ktp']) }}" alt="Foto KTP" class="max-h-48 w-full object-contain hover:scale-105 transition-transform duration-300">
                                     </div>
+                                    
+                                    <a href="{{ route('admin.verification.download', ['id' => $requestData->id, 'type' => 'ktp']) }}" target="_blank" class="mt-4 w-full py-2 bg-white border border-slate-300 text-slate-700 font-bold text-sm rounded-lg hover:bg-slate-50 transition-colors text-center flex items-center justify-center gap-2 shadow-sm">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                        Buka Ukuran Penuh
+                                    </a>
                                 @else
                                     <div class="flex items-center gap-2 mt-2">
                                         <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-slate-500">
@@ -183,26 +185,21 @@
                                     </div>
                                 @endif
                             </div>
-                            
-                            @if($requestData->foto_ktp)
-                                <a href="{{ route('admin.verification.download', ['id' => $requestData->id, 'type' => 'ktp']) }}" target="_blank" class="mt-4 w-full py-2 bg-white border border-slate-300 text-slate-700 font-bold text-sm rounded-lg hover:bg-slate-50 transition-colors text-center inline-block flex items-center justify-center gap-2">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                                    Lihat KTP
-                                </a>
-                            @endif
                         </div>
 
                         {{-- Dokumen Pendukung Card --}}
                         <div class="border border-slate-200 rounded-xl p-4 flex flex-col justify-between h-full bg-slate-50">
                             <div>
-                                <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Dokumen Pendukung</span>
+                                <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Dokumen Pendukung</span>
                                 @if($requestData->dokumen_pendukung)
-                                    <div class="flex items-center gap-2 mt-2">
-                                        <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                        </div>
-                                        <span class="text-sm font-bold text-slate-700">Terlampir</span>
+                                    <div class="border border-slate-200 rounded-lg overflow-hidden bg-white shadow-sm flex items-center justify-center" style="height: 192px;">
+                                        <iframe src="{{ route('admin.verification.download', ['id' => $requestData->id, 'type' => 'dokumen']) }}" class="w-full h-full border-0 bg-slate-100"></iframe>
                                     </div>
+                                    
+                                    <a href="{{ route('admin.verification.download', ['id' => $requestData->id, 'type' => 'dokumen']) }}" target="_blank" class="mt-4 w-full py-2 bg-white border border-slate-300 text-slate-700 font-bold text-sm rounded-lg hover:bg-slate-50 transition-colors text-center flex items-center justify-center gap-2 shadow-sm">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                        Buka Ukuran Penuh
+                                    </a>
                                 @else
                                     <div class="flex items-center gap-2 mt-2">
                                         <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-600">
@@ -212,13 +209,6 @@
                                     </div>
                                 @endif
                             </div>
-                            
-                            @if($requestData->dokumen_pendukung)
-                                <a href="{{ route('admin.verification.download', ['id' => $requestData->id, 'type' => 'dokumen']) }}" target="_blank" class="mt-4 w-full py-2 bg-white border border-slate-300 text-slate-700 font-bold text-sm rounded-lg hover:bg-slate-50 transition-colors text-center inline-block flex items-center justify-center gap-2">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                                    Lihat Dokumen
-                                </a>
-                            @endif
                         </div>
                     </div>
                 </div>

@@ -36,3 +36,7 @@ Thumbs.db
 
 # Postman Exports
 /storage/app/private/postman/
+
+# Cache & Reports
+.cache/
+/storage/app/public/laporan_arsip/

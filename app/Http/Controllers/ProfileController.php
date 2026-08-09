@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -39,7 +41,7 @@ class ProfileController extends Controller
             
             // Delete old photo if exists
             if ($user->foto_profil) {
-                Storage::disk('public')->delete($user->foto_profil);
+                Storage::disk('google')->delete($user->foto_profil);
             }
             
             // Decode base64
@@ -51,7 +53,7 @@ class ProfileController extends Controller
             $fileName = 'profile_photos/' . Str::uuid() . '.' . $image_type;
             
             // Store new photo
-            Storage::disk('public')->put($fileName, $image_base64);
+            Storage::disk('google')->put($fileName, $image_base64);
             $user->foto_profil = $fileName;
         }
 
@@ -79,5 +81,37 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    /**
+     * Stream profile photo from Google Drive with caching.
+     */
+    public function showPhoto($filename)
+    {
+        $path = 'profile_photos/' . $filename;
+        
+        // Cache the file content for 24 hours to reduce API calls
+        $cacheKey = 'profile_photo_' . $filename;
+        
+        $fileContent = Cache::remember($cacheKey, now()->addHours(24), function () use ($path) {
+            if (Storage::disk('google')->exists($path)) {
+                return Storage::disk('google')->get($path);
+            }
+            return null;
+        });
+
+        if (!$fileContent) {
+            abort(404);
+        }
+
+        $mimeType = 'image/jpeg';
+        if (str_ends_with($filename, '.png')) {
+            $mimeType = 'image/png';
+        }
+
+        return Response::make($fileContent, 200, [
+            'Content-Type' => $mimeType,
+            'Cache-Control' => 'public, max-age=86400',
+        ]);
     }
 }

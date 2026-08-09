@@ -196,7 +196,8 @@ class User extends Authenticatable
     public function getAvatarUrlAttribute(): string
     {
         if ($this->foto_profil) {
-            return asset('storage/' . $this->foto_profil);
+            // Because foto_profil is stored as 'profile_photos/uuid.ext', we extract just the basename.
+            return route('profile.photo', ['uuid' => basename($this->foto_profil)]);
         }
         
         // Default UI avatar based on name

@@ -1,10 +1,10 @@
-# 🏛️ Sipakta - Sistem Informasi Pengarsipan Akta Nikah
+# Sipakta - Sistem Informasi Pengarsipan Akta Nikah
 
 Sistem Informasi Pengarsipan Akta Nikah (Sipakta) adalah aplikasi berbasis web yang dikembangkan khusus untuk Kantor Urusan Agama (KUA). Sistem ini memfasilitasi pengarsipan, pencarian cerdas, pelaporan akta nikah, serta pendaftaran profil pemohon secara mandiri dengan verifikasi WhatsApp OTP otomatis.
 
 ---
 
-## 🚀 Fitur Utama
+## Fitur Utama
 
 - **Pencarian Cerdas (Full-text Search):** Integrasi *Search Engine* modern untuk pencarian arsip yang super cepat dan relevan.
 - **Verifikasi Real-time:** Pendaftaran mandiri dengan OTP via WhatsApp.
@@ -13,7 +13,7 @@ Sistem Informasi Pengarsipan Akta Nikah (Sipakta) adalah aplikasi berbasis web y
 
 ---
 
-## 🛠️ Teknologi yang Digunakan
+## Teknologi yang Digunakan
 
 Aplikasi ini dibangun dengan *stack* teknologi modern untuk memastikan performa, skalabilitas, dan keandalan tinggi:
 
@@ -26,7 +26,7 @@ Aplikasi ini dibangun dengan *stack* teknologi modern untuk memastikan performa,
 
 ---
 
-## 👥 Hak Akses (Role-Based Access Control)
+## Hak Akses (Role-Based Access Control)
 
 Sistem ini mendukung pembatasan akses berbasis peran (*Role*) untuk menjaga keamanan data:
 
@@ -39,7 +39,7 @@ Sistem ini mendukung pembatasan akses berbasis peran (*Role*) untuk menjaga keam
 
 ---
 
-## ⚙️ Panduan Instalasi (Development)
+## Panduan Instalasi (Development)
 
 Proyek ini telah dikonfigurasi sepenuhnya menggunakan Docker untuk mempermudah proses pengembangan lokal.
 
@@ -116,7 +116,7 @@ Proyek ini telah dikonfigurasi sepenuhnya menggunakan Docker untuk mempermudah p
 
 ---
 
-## 🧪 Kredensial Pengujian Dasar
+## Kredensial Pengujian Dasar
 
 Gunakan kredensial berikut untuk masuk sebagai pengguna percobaan (Seeder):
 
@@ -129,7 +129,7 @@ Gunakan kredensial berikut untuk masuk sebagai pengguna percobaan (Seeder):
 
 ---
 
-## 📁 Struktur Proyek Utama
+## Struktur Proyek Utama
 
 ```text
 sipakta/
@@ -151,7 +151,7 @@ sipakta/
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 <details>
 <summary><strong>1. Galat Koneksi Basis Data (Connection Refused)</strong></summary>
@@ -189,6 +189,6 @@ docker exec -it sipakta-app php artisan scout:import "App\Models\AktaNikah"
 
 ---
 
-## 📄 Lisensi
+## Lisensi
 
 Proyek ini menggunakan **lisensi eksklusif instansi**. Penggunaan dan modifikasi terbatas hanya untuk keperluan internal Kantor Urusan Agama (KUA).

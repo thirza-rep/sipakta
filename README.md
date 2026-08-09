@@ -8,7 +8,7 @@ Sistem Informasi Pengarsipan Akta Nikah (Sipakta) adalah aplikasi berbasis web y
 
 - **Pencarian Cerdas (Full-text Search):** Integrasi *Search Engine* modern untuk pencarian arsip yang super cepat dan relevan.
 - **Pendaftaran Mandiri:** Pendaftaran profil secara mandiri bagi pemohon baru.
-- **Manajemen Berkas:** Pengunggahan dokumen fisik (PDF/Gambar) dan pengambilan foto profil via WebRTC Camera.
+- **Manajemen Berkas:** Pengunggahan dokumen fisik (PDF/Gambar) dan foto profil.
 - **Pelaporan Otomatis:** Pembuatan laporan bulanan dan rekapitulasi tahunan dengan mudah.
 
 ---
@@ -31,7 +31,7 @@ Sistem ini mendukung pembatasan akses berbasis peran (*Role*) untuk menjaga keam
 
 | Peran | Deskripsi Hak Akses |
 |-------|---------------------|
-| **1. Pemohon** | Mendaftar, melengkapi data (KTP), dan foto profil via WebRTC. |
+| **1. Pemohon** | Mendaftar, melengkapi data (KTP), dan mengunggah foto profil. |
 | **2. Pengelola Data** | Mengelola (Input, Edit, Hapus) arsip, unggah dokumen fisik, verifikasi pendaftar, dan cetak laporan. |
 | **3. Kepala KUA** | Memantau arsip akta nikah (*Read-only*) dan mencetak laporan operasional. |
 | **4. Admin Sistem** | Mengelola akun pengguna (CRUD) dan aktivasi/deaktivasi pengguna. |

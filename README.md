@@ -1,13 +1,13 @@
 # Sipakta - Sistem Informasi Pengarsipan Akta Nikah
 
-Sistem Informasi Pengarsipan Akta Nikah (Sipakta) adalah aplikasi berbasis web yang dikembangkan khusus untuk Kantor Urusan Agama (KUA). Sistem ini memfasilitasi pengarsipan, pencarian cerdas, pelaporan akta nikah, serta pendaftaran profil pemohon secara mandiri dengan verifikasi WhatsApp OTP otomatis.
+Sistem Informasi Pengarsipan Akta Nikah (Sipakta) adalah aplikasi berbasis web yang dikembangkan khusus untuk Kantor Urusan Agama (KUA). Sistem ini memfasilitasi pengarsipan, pencarian cerdas, pelaporan akta nikah, serta pendaftaran profil pemohon secara mandiri.
 
 ---
 
 ## Fitur Utama
 
 - **Pencarian Cerdas (Full-text Search):** Integrasi *Search Engine* modern untuk pencarian arsip yang super cepat dan relevan.
-- **Verifikasi Real-time:** Pendaftaran mandiri dengan OTP via WhatsApp.
+- **Pendaftaran Mandiri:** Pendaftaran profil secara mandiri bagi pemohon baru.
 - **Manajemen Berkas:** Pengunggahan dokumen fisik (PDF/Gambar) dan pengambilan foto profil via WebRTC Camera.
 - **Pelaporan Otomatis:** Pembuatan laporan bulanan dan rekapitulasi tahunan dengan mudah.
 
@@ -21,7 +21,6 @@ Aplikasi ini dibangun dengan *stack* teknologi modern untuk memastikan performa,
 - **Frontend & Styling:** [Tailwind CSS](https://tailwindcss.com/) & [Alpine.js](https://alpinejs.dev/) (Build menggunakan Vite)
 - **Database:** [MySQL 8.0](https://www.mysql.com/)
 - **Search Engine:** [Meilisearch](https://www.meilisearch.com/) / Elasticsearch terintegrasi untuk pencarian tingkat lanjut
-- **Messaging/OTP:** [Node.js](https://nodejs.org/) (`whatsapp-web.js`) terintegrasi dengan Puppeteer
 - **Containerization:** [Docker & Docker Compose](https://www.docker.com/) (Nginx, PHP-FPM, MySQL, Meilisearch)
 
 ---
@@ -32,7 +31,7 @@ Sistem ini mendukung pembatasan akses berbasis peran (*Role*) untuk menjaga keam
 
 | Peran | Deskripsi Hak Akses |
 |-------|---------------------|
-| **1. Pemohon** | Mendaftar, verifikasi OTP via WhatsApp, melengkapi data (KTP), dan foto profil via WebRTC. |
+| **1. Pemohon** | Mendaftar, melengkapi data (KTP), dan foto profil via WebRTC. |
 | **2. Pengelola Data** | Mengelola (Input, Edit, Hapus) arsip, unggah dokumen fisik, verifikasi pendaftar, dan cetak laporan. |
 | **3. Kepala KUA** | Memantau arsip akta nikah (*Read-only*) dan mencetak laporan operasional. |
 | **4. Admin Sistem** | Mengelola akun pengguna (CRUD) dan aktivasi/deaktivasi pengguna. |
@@ -45,7 +44,6 @@ Proyek ini telah dikonfigurasi sepenuhnya menggunakan Docker untuk mempermudah p
 
 ### Prasyarat
 - **Docker Desktop** terinstal dan berjalan.
-- **Node.js** (Minimal v18 LTS) terinstal di mesin lokal (untuk modul WhatsApp).
 - **Composer** terinstal di mesin lokal.
 
 ### Langkah Instalasi
@@ -104,14 +102,7 @@ Proyek ini telah dikonfigurasi sepenuhnya menggunakan Docker untuk mempermudah p
    docker exec -it sipakta-app php artisan elastic:sync
    ```
 
-7. **Menjalankan Modul WhatsApp OTP**
-   Jalankan modul Node.js di terminal terpisah di mesin lokal.
-   ```bash
-   node scripts/whatsapp-helper.js
-   ```
-   *Catatan: Pindai kode QR yang muncul di terminal (atau melalui URL `/wa-qr.png`) untuk menghubungkan akun WhatsApp pengirim OTP.*
-
-8. **Akses Aplikasi**
+7. **Akses Aplikasi**
    Aplikasi dapat diakses melalui peramban di: [http://localhost:8000](http://localhost:8000)
 
 ---
@@ -143,8 +134,6 @@ sipakta/
 ├── docker-compose.yml      # Konfigurasi orkestrasi kontainer (App, DB, Webserver, Meilisearch)
 ├── resources/
 │   └── views/              # Berkas antarmuka Blade Templates
-├── scripts/
-│   └── whatsapp-helper.js  # Microservice Node.js untuk integrasi WhatsApp
 └── storage/
     └── app/public/         # Penyimpanan berkas publik (Arsip, KTP, Avatar)
 ```
@@ -160,17 +149,7 @@ Pastikan kontainer Docker berjalan dengan perintah `docker ps`. Jika belum, jala
 </details>
 
 <details>
-<summary><strong>2. QR Code WhatsApp Tidak Muncul / Sesi Usang</strong></summary>
-
-Jika sesi WhatsApp tidak valid, hentikan skrip Node.js, hapus folder sesi, dan jalankan kembali:
-```bash
-rm -rf .wwebjs_auth
-node scripts/whatsapp-helper.js
-```
-</details>
-
-<details>
-<summary><strong>3. Gambar KTP / Arsip PDF Tidak Muncul</strong></summary>
+<summary><strong>2. Gambar KTP / Arsip PDF Tidak Muncul</strong></summary>
 
 Pastikan *symlink* penyimpanan sudah terbuat di dalam kontainer:
 ```bash
@@ -179,7 +158,7 @@ docker exec -it sipakta-app php artisan storage:link
 </details>
 
 <details>
-<summary><strong>4. Pencarian Teks Tidak Berfungsi (Meilisearch)</strong></summary>
+<summary><strong>3. Pencarian Teks Tidak Berfungsi (Meilisearch)</strong></summary>
 
 Pastikan layanan Meilisearch berjalan (`docker ps | grep meilisearch`). Lakukan proses impor ulang data:
 ```bash

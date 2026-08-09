@@ -1,0 +1,140 @@
+2026/06/07-23:32:14.009 938a5e Creating DB /Users/macbookpro/Project/sipakta/scripts/.wwebjs_auth/session/Default/Local Storage/leveldb since it was missing.
+2026/06/07-23:32:14.040 938a5e Reusing MANIFEST /Users/macbookpro/Project/sipakta/scripts/.wwebjs_auth/session/Default/Local Storage/leveldb/MANIFEST-000001
+2026/06/08-03:43:22.011 938a60 Level-0 table #5: started
+2026/06/08-03:43:22.025 938a60 Level-0 table #5: 19329 bytes OK
+2026/06/08-03:43:22.030 938a60 Delete type=0 #3
+2026/06/08-12:50:16.918 938a60 Level-0 table #7: started
+2026/06/08-12:50:16.933 938a60 Level-0 table #7: 16588 bytes OK
+2026/06/08-12:50:16.936 938a60 Delete type=0 #4
+2026/06/08-18:47:37.496 938a60 Level-0 table #9: started
+2026/06/08-18:47:37.515 938a60 Level-0 table #9: 17594 bytes OK
+2026/06/08-18:47:37.518 938a60 Delete type=0 #6
+2026/06/08-22:06:53.856 938a60 Level-0 table #11: started
+2026/06/08-22:06:53.873 938a60 Level-0 table #11: 18057 bytes OK
+2026/06/08-22:06:53.876 938a60 Delete type=0 #8
+2026/06/08-23:45:29.702 938a60 Level-0 table #13: started
+2026/06/08-23:45:29.713 938a60 Level-0 table #13: 16649 bytes OK
+2026/06/08-23:45:29.716 938a60 Delete type=0 #10
+2026/06/09-04:31:39.080 938a60 Level-0 table #15: started
+2026/06/09-04:31:39.094 938a60 Level-0 table #15: 17058 bytes OK
+2026/06/09-04:31:39.098 938a60 Delete type=0 #12
+2026/06/09-04:31:39.099 938a60 Compacting 4@0 + 1@1 files
+2026/06/09-04:31:39.104 938a60 Generated table #16@0: 5 keys, 1620 bytes
+2026/06/09-04:31:39.105 938a60 Compacted 4@0 + 1@1 files => 1620 bytes
+2026/06/09-04:31:39.106 938a60 compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/06/09-04:31:39.106 938a60 Delete type=2 #15
+2026/06/09-04:31:39.106 938a60 Delete type=2 #7
+2026/06/09-04:31:39.106 938a60 Delete type=2 #13
+2026/06/09-04:31:39.106 938a60 Delete type=2 #11
+2026/06/09-04:31:39.106 938a60 Delete type=2 #9
+2026/06/09-11:31:40.738 938a60 Level-0 table #18: started
+2026/06/09-11:31:40.750 938a60 Level-0 table #18: 17181 bytes OK
+2026/06/09-11:31:40.755 938a60 Delete type=0 #14
+2026/06/09-13:53:03.454 938a60 Level-0 table #20: started
+2026/06/09-13:53:03.467 938a60 Level-0 table #20: 17905 bytes OK
+2026/06/09-13:53:03.471 938a60 Delete type=0 #17
+2026/06/09-18:33:37.314 938a60 Level-0 table #22: started
+2026/06/09-18:33:37.340 938a60 Level-0 table #22: 18034 bytes OK
+2026/06/09-18:33:37.344 938a60 Delete type=0 #19
+2026/06/09-22:09:03.600 938a60 Level-0 table #24: started
+2026/06/09-22:09:03.611 938a60 Level-0 table #24: 17964 bytes OK
+2026/06/09-22:09:03.614 938a60 Delete type=0 #21
+2026/06/09-22:09:03.615 938a60 Compacting 4@0 + 1@1 files
+2026/06/09-22:09:03.620 938a60 Generated table #25@0: 10 keys, 2484 bytes
+2026/06/09-22:09:03.620 938a60 Compacted 4@0 + 1@1 files => 2484 bytes
+2026/06/09-22:09:03.621 938a60 compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/06/09-22:09:03.622 938a60 Delete type=2 #16
+2026/06/09-22:09:03.622 938a60 Delete type=2 #20
+2026/06/09-22:09:03.622 938a60 Delete type=2 #22
+2026/06/09-22:09:03.622 938a60 Delete type=2 #18
+2026/06/09-22:09:03.622 938a60 Delete type=2 #24
+2026/06/10-00:11:06.076 938a60 Level-0 table #27: started
+2026/06/10-00:11:06.084 938a60 Level-0 table #27: 17841 bytes OK
+2026/06/10-00:11:06.088 938a60 Delete type=0 #23
+2026/06/10-03:43:47.817 938a60 Level-0 table #29: started
+2026/06/10-03:43:47.833 938a60 Level-0 table #29: 18086 bytes OK
+2026/06/10-03:43:47.837 938a60 Delete type=0 #26
+2026/06/10-06:47:41.461 938a60 Level-0 table #31: started
+2026/06/10-06:47:41.476 938a60 Level-0 table #31: 17948 bytes OK
+2026/06/10-06:47:41.479 938a60 Delete type=0 #28
+2026/06/10-12:53:46.089 938a60 Level-0 table #33: started
+2026/06/10-12:53:46.101 938a60 Level-0 table #33: 17995 bytes OK
+2026/06/10-12:53:46.107 938a60 Delete type=0 #30
+2026/06/10-12:53:46.107 938a5e Compacting 4@0 + 1@1 files
+2026/06/10-12:53:46.111 938a5e Generated table #34@0: 11 keys, 2519 bytes
+2026/06/10-12:53:46.111 938a5e Compacted 4@0 + 1@1 files => 2519 bytes
+2026/06/10-12:53:46.112 938a5e compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/06/10-12:53:46.112 938a5e Delete type=2 #29
+2026/06/10-12:53:46.112 938a5e Delete type=2 #33
+2026/06/10-12:53:46.112 938a5e Delete type=2 #27
+2026/06/10-12:53:46.112 938a5e Delete type=2 #31
+2026/06/10-12:53:46.112 938a5e Delete type=2 #25
+2026/06/10-16:57:53.779 938a60 Level-0 table #36: started
+2026/06/10-16:57:53.788 938a60 Level-0 table #36: 17514 bytes OK
+2026/06/10-16:57:53.793 938a60 Delete type=0 #32
+2026/06/10-19:32:05.477 938a60 Level-0 table #38: started
+2026/06/10-19:32:05.487 938a60 Level-0 table #38: 17885 bytes OK
+2026/06/10-19:32:05.492 938a60 Delete type=0 #35
+2026/06/10-23:03:47.670 938a60 Level-0 table #40: started
+2026/06/10-23:03:47.690 938a60 Level-0 table #40: 17984 bytes OK
+2026/06/10-23:03:47.693 938a60 Delete type=0 #37
+2026/06/11-02:38:14.880 938a60 Level-0 table #42: started
+2026/06/11-02:38:14.889 938a60 Level-0 table #42: 17998 bytes OK
+2026/06/11-02:38:14.894 938a60 Delete type=0 #39
+2026/06/11-02:38:14.894 938a60 Compacting 4@0 + 1@1 files
+2026/06/11-02:38:14.898 938a60 Generated table #43@0: 11 keys, 2517 bytes
+2026/06/11-02:38:14.898 938a60 Compacted 4@0 + 1@1 files => 2517 bytes
+2026/06/11-02:38:14.899 938a60 compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/06/11-02:38:14.900 938a60 Delete type=2 #38
+2026/06/11-02:38:14.900 938a60 Delete type=2 #34
+2026/06/11-02:38:14.900 938a60 Delete type=2 #36
+2026/06/11-02:38:14.900 938a60 Delete type=2 #42
+2026/06/11-02:38:14.900 938a60 Delete type=2 #40
+2026/06/11-06:25:54.957 938a60 Level-0 table #45: started
+2026/06/11-06:25:54.970 938a60 Level-0 table #45: 18028 bytes OK
+2026/06/11-06:25:54.973 938a60 Delete type=0 #41
+2026/06/11-09:33:36.655 938a60 Level-0 table #47: started
+2026/06/11-09:33:36.670 938a60 Level-0 table #47: 18112 bytes OK
+2026/06/11-09:33:36.672 938a60 Delete type=0 #44
+2026/06/11-10:24:54.054 938a60 Level-0 table #49: started
+2026/06/11-10:24:54.069 938a60 Level-0 table #49: 17750 bytes OK
+2026/06/11-10:24:54.073 938a60 Delete type=0 #46
+2026/06/11-11:51:30.171 938a60 Level-0 table #51: started
+2026/06/11-11:51:30.180 938a60 Level-0 table #51: 17807 bytes OK
+2026/06/11-11:51:30.184 938a60 Delete type=0 #48
+2026/06/11-11:51:30.185 938a60 Compacting 4@0 + 1@1 files
+2026/06/11-11:51:30.189 938a60 Generated table #52@0: 11 keys, 2518 bytes
+2026/06/11-11:51:30.189 938a60 Compacted 4@0 + 1@1 files => 2518 bytes
+2026/06/11-11:51:30.191 938a60 compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/06/11-11:51:30.191 938a60 Delete type=2 #49
+2026/06/11-11:51:30.191 938a60 Delete type=2 #43
+2026/06/11-11:51:30.191 938a60 Delete type=2 #45
+2026/06/11-11:51:30.191 938a60 Delete type=2 #51
+2026/06/11-11:51:30.191 938a60 Delete type=2 #47
+2026/06/11-13:07:39.451 938a60 Level-0 table #54: started
+2026/06/11-13:07:39.458 938a60 Level-0 table #54: 17782 bytes OK
+2026/06/11-13:07:39.462 938a60 Delete type=0 #50
+2026/06/11-14:10:19.871 938a60 Level-0 table #56: started
+2026/06/11-14:10:19.883 938a60 Level-0 table #56: 17767 bytes OK
+2026/06/11-14:10:19.886 938a60 Delete type=0 #53
+2026/06/11-15:28:27.682 938a60 Level-0 table #58: started
+2026/06/11-15:28:27.694 938a60 Level-0 table #58: 17765 bytes OK
+2026/06/11-15:28:27.698 938a60 Delete type=0 #55
+2026/06/11-17:25:12.708 938a60 Level-0 table #60: started
+2026/06/11-17:25:12.718 938a60 Level-0 table #60: 18528 bytes OK
+2026/06/11-17:25:12.722 938a60 Delete type=0 #57
+2026/06/11-17:25:12.724 938a60 Compacting 4@0 + 1@1 files
+2026/06/11-17:25:12.728 938a60 Generated table #61@0: 11 keys, 2504 bytes
+2026/06/11-17:25:12.728 938a60 Compacted 4@0 + 1@1 files => 2504 bytes
+2026/06/11-17:25:12.729 938a60 compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/06/11-17:25:12.729 938a60 Delete type=2 #60
+2026/06/11-17:25:12.729 938a60 Delete type=2 #58
+2026/06/11-17:25:12.730 938a60 Delete type=2 #56
+2026/06/11-17:25:12.730 938a60 Delete type=2 #54
+2026/06/11-17:25:12.730 938a60 Delete type=2 #52
+2026/06/11-19:41:34.246 938a60 Level-0 table #63: started
+2026/06/11-19:41:34.265 938a60 Level-0 table #63: 17822 bytes OK
+2026/06/11-19:41:34.269 938a60 Delete type=0 #59
+2026/06/11-21:51:44.210 938a60 Level-0 table #65: started
+2026/06/11-21:51:44.226 938a60 Level-0 table #65: 18014 bytes OK
+2026/06/11-21:51:44.229 938a60 Delete type=0 #62

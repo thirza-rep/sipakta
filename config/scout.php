@@ -140,9 +140,16 @@ return [
         'host' => env('MEILISEARCH_HOST', 'http://localhost:7700'),
         'key' => env('MEILISEARCH_KEY'),
         'index-settings' => [
-            // 'users' => [
-            //     'filterableAttributes'=> ['id', 'name', 'email'],
-            // ],
+            \App\Models\AktaNikah::class => [
+                'typoTolerance' => [
+                    'enabled' => true,
+                    'minWordSizeForTypos' => [
+                        'oneTypo' => 5, // minimum 5 letters for 1 typo
+                        'twoTypos' => 8, // minimum 8 letters for 2 typos
+                    ],
+                    // We can also disable typos on specific fields if needed
+                ],
+            ],
         ],
     ],
 

@@ -92,6 +92,9 @@ Route::middleware('auth')->group(function () {
             ->name('users.toggle-active');
         Route::post('/users/{user}/reset-password', [UserController::class, 'resetPassword'])
             ->name('users.reset-password');
+            
+        // Komparasi Pencarian
+        Route::get('/komparasi', [\App\Http\Controllers\KomparasiPencarianController::class, 'index'])->name('komparasi.index');
     });
 
     // ============================================

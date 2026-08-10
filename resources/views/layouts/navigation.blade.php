@@ -32,6 +32,7 @@
 
                     @if($isAdmin)
                         <x-nav-link-premium :href="route('users.index')" :active="request()->routeIs('users.*')" icon="users">Pengguna</x-nav-link-premium>
+                        <x-nav-link-premium :href="route('komparasi.index')" :active="request()->routeIs('komparasi.*')" icon="search">Komparasi</x-nav-link-premium>
                     @endif
 
                     @if($canVerify)
@@ -117,6 +118,7 @@
             
             @if($isAdmin)
                 <x-responsive-nav-link-premium :href="route('users.index')" :active="request()->routeIs('users.*')" icon="users">Kelola Pengguna</x-responsive-nav-link-premium>
+                <x-responsive-nav-link-premium :href="route('komparasi.index')" :active="request()->routeIs('komparasi.*')" icon="search">Komparasi Pencarian</x-responsive-nav-link-premium>
             @endif
 
             @if($canVerify)

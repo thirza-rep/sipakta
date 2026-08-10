@@ -41,7 +41,9 @@ class KomparasiPencarianController extends Controller
                         'query' => [
                             'multi_match' => [
                                 'query' => $keyword,
-                                'fields' => ['nama_suami', 'nama_istri', 'nomor_akta', 'lokasi_fisik']
+                                'fields' => ['nama_suami', 'nama_istri', 'nomor_akta', 'lokasi_fisik'],
+                                'fuzziness' => 'AUTO',
+                                'operator' => 'and'
                             ]
                         ],
                         'size' => 10

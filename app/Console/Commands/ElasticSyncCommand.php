@@ -39,9 +39,57 @@ class ElasticSyncCommand extends Command
             $client->indices()->delete($params);
         }
 
-        // Create index
+        // Create index with mapping and n-gram analyzer
         $this->info('Creating index...');
-        $client->indices()->create($params);
+        $createParams = [
+            'index' => 'akta_nikah',
+            'body' => [
+                'settings' => [
+                    'analysis' => [
+                        'analyzer' => [
+                            'ngram_analyzer' => [
+                                'type' => 'custom',
+                                'tokenizer' => 'ngram_tokenizer',
+                                'filter' => ['lowercase']
+                            ]
+                        ],
+                        'tokenizer' => [
+                            'ngram_tokenizer' => [
+                                'type' => 'edge_ngram',
+                                'min_gram' => 2,
+                                'max_gram' => 20,
+                                'token_chars' => ['letter', 'digit']
+                            ]
+                        ]
+                    ]
+                ],
+                'mappings' => [
+                    'properties' => [
+                        'nama_suami' => [
+                            'type' => 'text',
+                            'analyzer' => 'ngram_analyzer',
+                            'search_analyzer' => 'standard'
+                        ],
+                        'nama_istri' => [
+                            'type' => 'text',
+                            'analyzer' => 'ngram_analyzer',
+                            'search_analyzer' => 'standard'
+                        ],
+                        'nomor_akta' => [
+                            'type' => 'text',
+                            'analyzer' => 'ngram_analyzer',
+                            'search_analyzer' => 'standard'
+                        ],
+                        'lokasi_fisik' => [
+                            'type' => 'text',
+                            'analyzer' => 'ngram_analyzer',
+                            'search_analyzer' => 'standard'
+                        ]
+                    ]
+                ]
+            ]
+        ];
+        $client->indices()->create($createParams);
 
         // Fetch data
         $aktas = AktaNikah::all();

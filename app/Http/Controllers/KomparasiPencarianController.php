@@ -42,7 +42,7 @@ class KomparasiPencarianController extends Controller
                             'multi_match' => [
                                 'query' => $keyword,
                                 'fields' => ['nama_suami', 'nama_istri', 'nomor_akta', 'lokasi_fisik'],
-                                'fuzziness' => 'AUTO',
+                                'fuzziness' => 'AUTO:5,8', // 0 typo (<5), 1 typo (5-7), 2 typo (>=8)
                                 'operator' => 'and'
                             ]
                         ],

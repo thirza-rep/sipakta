@@ -26,42 +26,53 @@
     <div class="max-w-4xl mx-auto space-y-8 pb-32 mt-8">
 
         {{-- Kartu Identitas Pemohon --}}
-        <div class="bg-gradient-to-br from-teal-700 to-teal-900 rounded-2xl p-6 md:p-8 shadow-xl text-white">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                <div class="flex items-center gap-5">
-                    <div class="w-14 h-14 rounded-2xl bg-white/15 flex items-center justify-center flex-shrink-0">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <p class="text-teal-200 text-xs font-bold uppercase tracking-widest mb-1">Pemohon Terverifikasi</p>
-                        <h3 class="text-xl font-bold text-white leading-tight">
-                            {{ $profil?->nama_lengkap ?? Auth::user()->name }}
-                        </h3>
-                        @if($profil?->nik)
-                            <p class="text-teal-200 text-sm font-mono mt-0.5">NIK: {{ $profil->nik }}</p>
-                        @endif
-                    </div>
-                </div>
+        <div class="rounded-2xl shadow-xl text-white overflow-hidden" style="background: linear-gradient(135deg, #0f766e 0%, #134e4a 100%);">
+            <div class="p-5 md:p-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
 
-                <div class="flex flex-col sm:flex-row gap-3">
-                    @if($profil?->keperluan)
-                        <div class="bg-white/10 border border-white/20 rounded-xl px-4 py-3">
-                            <p class="text-teal-200 text-xs font-bold uppercase tracking-wider mb-1">Keperluan</p>
-                            <p class="text-white text-sm font-semibold leading-snug max-w-xs">{{ Str::limit($profil->keperluan, 80) }}</p>
+                    {{-- Kiri: Avatar + Nama --}}
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background: rgba(255,255,255,0.15);">
+                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
                         </div>
-                    @endif
-                    <div class="bg-green-500/20 border border-green-400/30 rounded-xl px-4 py-3 flex items-center gap-2">
-                        <span class="text-green-300 text-lg">✅</span>
                         <div>
-                            <p class="text-green-200 text-xs font-bold uppercase tracking-wider">Status</p>
-                            <p class="text-green-100 text-sm font-bold">Akun Terverifikasi</p>
+                            <p class="text-xs font-bold uppercase tracking-widest mb-0.5" style="color: #99f6e4;">Pemohon Terverifikasi</p>
+                            <h3 class="text-lg font-bold text-white leading-tight">
+                                {{ $profil?->nama_lengkap ?? Auth::user()->name }}
+                            </h3>
+                            @if($profil?->nik)
+                                <p class="text-xs font-mono mt-0.5" style="color: #99f6e4;">NIK: {{ $profil->nik }}</p>
+                            @endif
                         </div>
                     </div>
+
+                    {{-- Kanan: Keperluan + Status --}}
+                    <div class="flex flex-wrap gap-2 sm:flex-nowrap sm:gap-3">
+                        @if($profil?->keperluan)
+                            <div class="rounded-xl px-4 py-2.5 flex-1 sm:flex-none sm:max-w-xs" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
+                                <p class="text-xs font-bold uppercase tracking-wider mb-0.5" style="color: #99f6e4;">Keperluan</p>
+                                <p class="text-white text-sm font-medium leading-snug">{{ Str::limit($profil->keperluan, 60) }}</p>
+                            </div>
+                        @endif
+                        <div class="rounded-xl px-4 py-2.5 flex items-center gap-2.5 flex-shrink-0" style="background: rgba(34,197,94,0.2); border: 1px solid rgba(134,239,172,0.3);">
+                            <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0" style="background: rgba(34,197,94,0.3);">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="#86efac" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold uppercase tracking-wider" style="color: #86efac;">Status</p>
+                                <p class="text-white text-xs font-bold">Terverifikasi</p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
+
 
         {{-- Search Card --}}
         <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">

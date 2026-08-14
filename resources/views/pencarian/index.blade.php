@@ -104,101 +104,81 @@
 
                 {{-- Kata Kunci yang Bisa Digunakan --}}
                 <div class="bg-red-50 border-2 border-red-200 rounded-xl p-5">
-                    <div class="flex items-center gap-2 mb-4">
+                    <div class="flex items-center gap-2 mb-1">
                         <svg class="w-5 h-5 text-red-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
-                        <h4 class="font-bold text-red-700 text-base">Kata Kunci yang Dapat Digunakan untuk Pencarian</h4>
+                        <h4 class="font-bold text-red-700 text-base">Informasi yang Dapat Dijadikan Kata Kunci</h4>
                     </div>
+                    <p class="text-red-500 text-xs font-medium mb-4 ml-7">Gunakan salah satu informasi yang Anda ingat dari dokumen pernikahan.</p>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-5">
 
-                        {{-- Administrasi --}}
+                        {{-- Nama --}}
                         <div>
-                            <p class="text-xs font-bold text-red-500 uppercase tracking-widest mb-2">📋 Data Administrasi</p>
-                            <ul class="space-y-1.5">
+                            <p class="text-xs font-bold text-red-500 uppercase tracking-widest mb-2.5">👤 Nama Pasangan</p>
+                            <ul class="space-y-2">
                                 <li class="flex items-start gap-2">
-                                    <span class="text-red-500 font-bold mt-0.5">•</span>
-                                    <span class="text-red-700 text-sm font-medium"><strong>Nomor Akta</strong> — contoh: <em>001/KUA/2023</em></span>
+                                    <span class="text-red-400 font-bold mt-0.5 flex-shrink-0">•</span>
+                                    <span class="text-red-700 text-sm font-medium">
+                                        <strong>Nama Suami</strong>
+                                        <span class="text-red-400 font-normal"> — nama lengkap mempelai pria</span>
+                                    </span>
                                 </li>
                                 <li class="flex items-start gap-2">
-                                    <span class="text-red-500 font-bold mt-0.5">•</span>
-                                    <span class="text-red-700 text-sm font-medium"><strong>Nomor Buku</strong> — nomor buku register akta</span>
+                                    <span class="text-red-400 font-bold mt-0.5 flex-shrink-0">•</span>
+                                    <span class="text-red-700 text-sm font-medium">
+                                        <strong>Nama Istri</strong>
+                                        <span class="text-red-400 font-normal"> — nama lengkap mempelai wanita</span>
+                                    </span>
                                 </li>
                                 <li class="flex items-start gap-2">
-                                    <span class="text-red-500 font-bold mt-0.5">•</span>
-                                    <span class="text-red-700 text-sm font-medium"><strong>Tanggal Akad</strong> — contoh: <em>2023-07-15</em></span>
-                                </li>
-                                <li class="flex items-start gap-2">
-                                    <span class="text-red-500 font-bold mt-0.5">•</span>
-                                    <span class="text-red-700 text-sm font-medium"><strong>Lokasi Akad</strong> — tempat ijab kabul dilaksanakan</span>
-                                </li>
-                                <li class="flex items-start gap-2">
-                                    <span class="text-red-500 font-bold mt-0.5">•</span>
-                                    <span class="text-red-700 text-sm font-medium"><strong>Kategori Arsip</strong> — kategori pengelompokan dokumen</span>
-                                </li>
-                                <li class="flex items-start gap-2">
-                                    <span class="text-red-500 font-bold mt-0.5">•</span>
-                                    <span class="text-red-700 text-sm font-medium"><strong>Lokasi Fisik</strong> — lokasi penyimpanan berkas fisik</span>
+                                    <span class="text-red-400 font-bold mt-0.5 flex-shrink-0">•</span>
+                                    <span class="text-red-700 text-sm font-medium">
+                                        <strong>Nama Wali Nikah</strong>
+                                        <span class="text-red-400 font-normal"> — nama wali yang hadir saat akad</span>
+                                    </span>
                                 </li>
                             </ul>
                         </div>
 
-                        {{-- Data Suami & Istri --}}
+                        {{-- Akad --}}
                         <div>
-                            <p class="text-xs font-bold text-red-500 uppercase tracking-widest mb-2">👤 Data Suami & Istri</p>
-                            <ul class="space-y-1.5">
+                            <p class="text-xs font-bold text-red-500 uppercase tracking-widest mb-2.5">📅 Waktu & Tempat Akad</p>
+                            <ul class="space-y-2">
                                 <li class="flex items-start gap-2">
-                                    <span class="text-red-500 font-bold mt-0.5">•</span>
-                                    <span class="text-red-700 text-sm font-medium"><strong>Nama Suami</strong> — nama lengkap mempelai pria</span>
+                                    <span class="text-red-400 font-bold mt-0.5 flex-shrink-0">•</span>
+                                    <span class="text-red-700 text-sm font-medium">
+                                        <strong>Tanggal Akad Nikah</strong>
+                                        <span class="text-red-400 font-normal"> — contoh: <em>2023-07-15</em> atau <em>Juli 2023</em></span>
+                                    </span>
                                 </li>
                                 <li class="flex items-start gap-2">
-                                    <span class="text-red-500 font-bold mt-0.5">•</span>
-                                    <span class="text-red-700 text-sm font-medium"><strong>NIK Suami</strong> — 16 digit nomor KTP suami</span>
+                                    <span class="text-red-400 font-bold mt-0.5 flex-shrink-0">•</span>
+                                    <span class="text-red-700 text-sm font-medium">
+                                        <strong>Lokasi/Tempat Akad</strong>
+                                        <span class="text-red-400 font-normal"> — masjid, rumah, atau nama tempat akad</span>
+                                    </span>
                                 </li>
                                 <li class="flex items-start gap-2">
-                                    <span class="text-red-500 font-bold mt-0.5">•</span>
-                                    <span class="text-red-700 text-sm font-medium"><strong>Tempat Lahir Suami</strong> — kota/kabupaten kelahiran</span>
-                                </li>
-                                <li class="flex items-start gap-2">
-                                    <span class="text-red-500 font-bold mt-0.5">•</span>
-                                    <span class="text-red-700 text-sm font-medium"><strong>Alamat Suami</strong> — alamat domisili mempelai pria</span>
-                                </li>
-                                <li class="flex items-start gap-2">
-                                    <span class="text-red-500 font-bold mt-0.5">•</span>
-                                    <span class="text-red-700 text-sm font-medium"><strong>Nama Istri</strong> — nama lengkap mempelai wanita</span>
-                                </li>
-                                <li class="flex items-start gap-2">
-                                    <span class="text-red-500 font-bold mt-0.5">•</span>
-                                    <span class="text-red-700 text-sm font-medium"><strong>NIK Istri</strong> — 16 digit nomor KTP istri</span>
-                                </li>
-                                <li class="flex items-start gap-2">
-                                    <span class="text-red-500 font-bold mt-0.5">•</span>
-                                    <span class="text-red-700 text-sm font-medium"><strong>Tempat Lahir Istri</strong> — kota/kabupaten kelahiran</span>
-                                </li>
-                                <li class="flex items-start gap-2">
-                                    <span class="text-red-500 font-bold mt-0.5">•</span>
-                                    <span class="text-red-700 text-sm font-medium"><strong>Alamat Istri</strong> — alamat domisili mempelai wanita</span>
+                                    <span class="text-red-400 font-bold mt-0.5 flex-shrink-0">•</span>
+                                    <span class="text-red-700 text-sm font-medium">
+                                        <strong>Tempat Lahir Suami/Istri</strong>
+                                        <span class="text-red-400 font-normal"> — kota/kabupaten kelahiran</span>
+                                    </span>
                                 </li>
                             </ul>
                         </div>
 
-                        {{-- Wali, Penghulu, Lainnya --}}
-                        <div class="sm:col-span-2">
-                            <p class="text-xs font-bold text-red-500 uppercase tracking-widest mb-2">🕌 Wali, Penghulu & Lainnya</p>
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                                <div class="flex items-start gap-2">
-                                    <span class="text-red-500 font-bold mt-0.5">•</span>
-                                    <span class="text-red-700 text-sm font-medium"><strong>Nama Wali</strong> — nama wali nikah</span>
-                                </div>
-                                <div class="flex items-start gap-2">
-                                    <span class="text-red-500 font-bold mt-0.5">•</span>
-                                    <span class="text-red-700 text-sm font-medium"><strong>Nama Penghulu</strong> — petugas pencatat nikah</span>
-                                </div>
-                                <div class="flex items-start gap-2">
-                                    <span class="text-red-500 font-bold mt-0.5">•</span>
-                                    <span class="text-red-700 text-sm font-medium"><strong>Mas Kawin</strong> — mahar pernikahan</span>
-                                </div>
+                        {{-- Nomor Akta --}}
+                        <div class="sm:col-span-2 pt-3 border-t border-red-200">
+                            <p class="text-xs font-bold text-red-500 uppercase tracking-widest mb-2.5">📄 Nomor Dokumen (Jika Tersedia)</p>
+                            <div class="flex items-start gap-2">
+                                <span class="text-red-400 font-bold mt-0.5 flex-shrink-0">•</span>
+                                <span class="text-red-700 text-sm font-medium">
+                                    <strong>Nomor Akta Nikah</strong>
+                                    <span class="text-red-400 font-normal"> — tertera di lembar kutipan akta nikah Anda, contoh: <em>001/KUA/2023</em></span>
+                                </span>
                             </div>
                         </div>
 

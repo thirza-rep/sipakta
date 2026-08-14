@@ -47,12 +47,43 @@ class AktaNikah extends Model
     public function toSearchableArray()
     {
         return [
-            'id' => $this->id,
-            'nomor_akta' => $this->nomor_akta,
-            'nama_suami' => $this->nama_suami,
-            'nama_istri' => $this->nama_istri,
-            'lokasi_fisik' => $this->lokasi_fisik,
-            'tanggal_akad' => $this->tanggal_akad ? clone $this->tanggal_akad : null,
+            'id'                  => $this->id,
+
+            // Administrasi
+            'nomor_akta'          => $this->nomor_akta,
+            'nomor_buku'          => $this->nomor_buku,
+            'tanggal_akad'        => $this->tanggal_akad
+                                        ? $this->tanggal_akad->format('Y-m-d')
+                                        : null,
+            'lokasi_akad'         => $this->lokasi_akad,
+            'kategori'            => $this->kategori,
+            'lokasi_fisik'        => $this->lokasi_fisik,
+
+            // Data suami
+            'nama_suami'          => $this->nama_suami,
+            'nik_suami'           => $this->nik_suami,
+            'tempat_lahir_suami'  => $this->tempat_lahir_suami,
+            'tanggal_lahir_suami' => $this->tanggal_lahir_suami
+                                        ? $this->tanggal_lahir_suami->format('Y-m-d')
+                                        : null,
+            'alamat_suami'        => $this->alamat_suami,
+
+            // Data istri
+            'nama_istri'          => $this->nama_istri,
+            'nik_istri'           => $this->nik_istri,
+            'tempat_lahir_istri'  => $this->tempat_lahir_istri,
+            'tanggal_lahir_istri' => $this->tanggal_lahir_istri
+                                        ? $this->tanggal_lahir_istri->format('Y-m-d')
+                                        : null,
+            'alamat_istri'        => $this->alamat_istri,
+
+            // Wali & penghulu
+            'nama_wali'           => $this->nama_wali,
+            'penghulu'            => $this->penghulu,
+
+            // Lain-lain
+            'mas_kawin'           => $this->mas_kawin,
+            'keterangan'          => $this->keterangan,
         ];
     }
 }
